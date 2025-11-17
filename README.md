@@ -1,7 +1,7 @@
 # Max.Bot — C# библиотека для Max Messenger Bot API
 
 [![.NET](https://img.shields.io/badge/.NET-9.0-purple.svg)](https://dotnet.microsoft.com/)
-[![NuGet](https://img.shields.io/nuget/vpre/Max.Bot.svg)](https://www.nuget.org/packages/Max.Bot)
+[![NuGet](https://img.shields.io/nuget/vpre/MaxMessenger.Bot.svg)](https://www.nuget.org/packages/MaxMessenger.Bot)
 [![Build](https://img.shields.io/github/actions/workflow/status/MaxBotNet/MaxBotNet/ci.yml?label=CI)](https://github.com/MaxBotNet/MaxBotNet/actions)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
 
@@ -18,7 +18,7 @@
 ## ⚡ Быстрый старт
 
 ```powershell
-dotnet add package Max.Bot
+dotnet add package MaxMessenger.Bot
 ```
 
 ```csharp
@@ -89,7 +89,7 @@ await client.Messages.SendMessageAsync(
 1. Установите .NET 9 SDK.
 2. В проекте выполните:
    ```powershell
-   dotnet add package Max.Bot
+   dotnet add package MaxMessenger.Bot
    ```
 3. Создайте `MaxClient` вручную или зарегистрируйте через DI (например, в ASP.NET Core).
 4. Токен и webhook URL держите в Secret Manager/Key Vault. Добавьте `.env`/секретные файлы в `.gitignore`.
