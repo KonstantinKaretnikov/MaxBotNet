@@ -14,8 +14,11 @@ public class MaxBotClientOptions
     /// <summary>
     /// Gets or sets the timeout for HTTP requests.
     /// </summary>
-    /// <value>The timeout for requests. Default is 30 seconds.</value>
-    public TimeSpan Timeout { get; set; } = TimeSpan.FromSeconds(30);
+    /// <value>
+    /// The timeout for requests. Default is 100 seconds to accommodate long polling requests
+    /// (which can take up to 90 seconds) plus network delay buffer.
+    /// </value>
+    public TimeSpan Timeout { get; set; } = TimeSpan.FromSeconds(100);
 
     /// <summary>
     /// Gets or sets the number of retry attempts for failed requests.

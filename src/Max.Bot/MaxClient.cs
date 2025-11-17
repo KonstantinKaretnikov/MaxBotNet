@@ -88,10 +88,12 @@ public class MaxClient : IMaxBotApi, IUpdatePipeline
         var client = httpClient ?? new HttpClient();
 
         // Configure MaxBotClientOptions - token is passed via Authorization header, not in URL
+        // * HttpClient.Timeout must be greater than maximum long polling timeout (90s) + buffer for network delays
+        // This prevents HttpClient from timing out before long polling requests complete
         var clientOptions = new MaxBotClientOptions
         {
             BaseUrl = _options.BaseUrl,
-            Timeout = TimeSpan.FromSeconds(30),
+            Timeout = TimeSpan.FromSeconds(100), // 90s max polling + 10s buffer
             RetryCount = 3,
             EnableDetailedLogging = true // * Enable detailed logging for debugging
         };

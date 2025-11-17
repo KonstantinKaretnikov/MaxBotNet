@@ -136,7 +136,7 @@ public class MaxHttpClient : IMaxHttpClient
                 // Don't retry in this case - throw immediately
                 throw new MaxNetworkException("Response content was disposed unexpectedly. This may indicate a problem with the HTTP handler or test setup.", ex);
             }
-            catch (Exception ex) when (ShouldRetry(ex, attempt) || attempt == _options.RetryCount)
+            catch (Exception ex) when (ShouldRetry(ex, attempt, request) || attempt == _options.RetryCount)
             {
                 lastException = ex;
                 attempt++;
@@ -167,6 +167,124 @@ public class MaxHttpClient : IMaxHttpClient
         stopwatch.Stop();
 
         // If we get here, all retries failed
+        if (lastException != null)
+        {
+            _logger?.LogError(
+                lastException,
+                "All {RetryCount} retry attempts failed after {TotalElapsedMs}ms",
+                _options.RetryCount,
+                stopwatch.ElapsedMilliseconds);
+        }
+
+        throw lastException ?? new MaxNetworkException("Request failed after all retry attempts.");
+    }
+
+    /// <inheritdoc />
+    public async Task<string> SendAsyncRaw(
+        MaxApiRequest request,
+        CancellationToken cancellationToken = default)
+    {
+        ArgumentNullException.ThrowIfNull(request);
+
+        var attempt = 0;
+        Exception? lastException = null;
+        var stopwatch = Stopwatch.StartNew();
+
+        while (attempt <= _options.RetryCount)
+        {
+            try
+            {
+                var url = request.BuildUrl(_options.BaseUrl);
+                _logger?.LogDebug(
+                    "Sending {Method} request to {Url} (attempt {Attempt}/{TotalAttempts})",
+                    request.Method,
+                    url,
+                    attempt + 1,
+                    _options.RetryCount + 1);
+
+                // Log request body if detailed logging is enabled
+                if (_options.EnableDetailedLogging && request.Body != null)
+                {
+                    var requestBodyJson = MaxJsonSerializer.Serialize(request.Body);
+                    _logger?.LogTrace("Request body: {RequestBody}", requestBodyJson);
+                }
+
+                using var httpRequest = await BuildHttpRequestMessageAsync(request, cancellationToken).ConfigureAwait(false);
+
+                var requestStopwatch = Stopwatch.StartNew();
+                using var response = await _httpClient.SendAsync(httpRequest, cancellationToken).ConfigureAwait(false);
+                requestStopwatch.Stop();
+
+                // Read response content once
+                string? responseBody = null;
+                if (response.Content != null)
+                {
+                    try
+                    {
+                        responseBody = await response.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
+                    }
+                    catch (ObjectDisposedException ex)
+                    {
+                        throw new MaxNetworkException("Response content was disposed before reading.", ex);
+                    }
+                }
+
+                // Log response body if detailed logging is enabled
+                if (_options.EnableDetailedLogging && responseBody != null)
+                {
+                    _logger?.LogTrace("Response body: {ResponseBody}", responseBody);
+                }
+
+                // Handle response (check status code and throw exceptions if needed)
+                await HandleHttpResponseAsync(response, responseBody, cancellationToken).ConfigureAwait(false);
+
+                if (responseBody == null)
+                {
+                    throw new MaxNetworkException("Response content is null.");
+                }
+
+                stopwatch.Stop();
+                _logger?.LogDebug(
+                    "Request succeeded with status {StatusCode} in {ElapsedMs}ms",
+                    (int)response.StatusCode,
+                    requestStopwatch.ElapsedMilliseconds);
+
+                return responseBody;
+            }
+            catch (ObjectDisposedException ex)
+            {
+                throw new MaxNetworkException("Response content was disposed unexpectedly. This may indicate a problem with the HTTP handler or test setup.", ex);
+            }
+            catch (Exception ex) when (ShouldRetry(ex, attempt, request) || attempt == _options.RetryCount)
+            {
+                lastException = ex;
+                attempt++;
+
+                _logger?.LogWarning(
+                    ex,
+                    "Request failed (attempt {Attempt}/{TotalAttempts}): {ErrorMessage}",
+                    attempt,
+                    _options.RetryCount + 1,
+                    ex.Message);
+
+                if (attempt > _options.RetryCount)
+                {
+                    break;
+                }
+
+                var delay = CalculateRetryDelay(ex, attempt);
+                _logger?.LogInformation(
+                    "Retrying request after {DelayMs}ms (attempt {Attempt}/{TotalAttempts})",
+                    delay.TotalMilliseconds,
+                    attempt + 1,
+                    _options.RetryCount + 1);
+
+                await Task.Delay(delay, cancellationToken).ConfigureAwait(false);
+            }
+        }
+
+        stopwatch.Stop();
+
         if (lastException != null)
         {
             _logger?.LogError(
@@ -253,7 +371,7 @@ public class MaxHttpClient : IMaxHttpClient
                 // Don't retry in this case - throw immediately
                 throw new MaxNetworkException("Response content was disposed unexpectedly. This may indicate a problem with the HTTP handler or test setup.", ex);
             }
-            catch (Exception ex) when (ShouldRetry(ex, attempt) || attempt == _options.RetryCount)
+            catch (Exception ex) when (ShouldRetry(ex, attempt, request) || attempt == _options.RetryCount)
             {
                 lastException = ex;
                 attempt++;
@@ -470,8 +588,9 @@ public class MaxHttpClient : IMaxHttpClient
     /// </summary>
     /// <param name="exception">The exception that occurred.</param>
     /// <param name="attempt">The current attempt number (0-based).</param>
+    /// <param name="request">The API request that failed (optional, used to detect long polling requests).</param>
     /// <returns>True if the request should be retried; otherwise, false.</returns>
-    private bool ShouldRetry(Exception exception, int attempt)
+    private bool ShouldRetry(Exception exception, int attempt, MaxApiRequest? request = null)
     {
         // Don't retry if we've exceeded the retry count
         if (attempt >= _options.RetryCount)
@@ -479,7 +598,22 @@ public class MaxHttpClient : IMaxHttpClient
             return false;
         }
 
+        // * For long polling requests (/updates), timeouts are expected behavior when there are no updates
+        // The server keeps the connection open until timeout, so HttpClient timeouts should not trigger retries
+        // This prevents unnecessary retry attempts and log noise
+        var isLongPollingRequest = request != null && 
+            request.Method == HttpMethod.Get && 
+            request.Endpoint.Equals("/updates", StringComparison.OrdinalIgnoreCase);
+
         // Retry on network exceptions (timeouts, connection errors)
+        // But skip retry for long polling timeouts - they're expected when no updates are available
+        if (exception is TaskCanceledException && isLongPollingRequest)
+        {
+            // For long polling, TaskCanceledException due to timeout is expected - don't retry
+            // The UpdatePoller will make a new request anyway
+            return false;
+        }
+
         if (exception is MaxNetworkException || exception is HttpRequestException || exception is TaskCanceledException)
         {
             return true;

@@ -46,5 +46,21 @@ public class User
     /// <value>True if the user is a bot; otherwise, false.</value>
     [JsonPropertyName("is_bot")]
     public bool IsBot { get; set; }
+
+    /// <summary>
+    /// Gets or sets the last activity time of the user (Unix timestamp in milliseconds).
+    /// </summary>
+    /// <value>The timestamp of the user's last activity.</value>
+    [Range(0, long.MaxValue, ErrorMessage = "Last activity time cannot be negative.")]
+    [JsonPropertyName("last_activity_time")]
+    public long? LastActivityTime { get; set; }
+
+    /// <summary>
+    /// Gets or sets the full name of the user (first name + last name).
+    /// </summary>
+    /// <value>The full name of the user, or null if not available.</value>
+    [StringLength(128, ErrorMessage = "Name must not exceed 128 characters.")]
+    [JsonPropertyName("name")]
+    public string? Name { get; set; }
 }
 

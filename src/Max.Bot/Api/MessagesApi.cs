@@ -120,7 +120,7 @@ internal class MessagesApi : BaseApi, IMessagesApi
 
         var queryParams = new Dictionary<string, string?>
         {
-            { "chatId", chatId.ToString() }
+            { "chat_id", chatId.ToString() }
         };
 
         var request = CreateRequest(HttpMethod.Get, "/messages", null, queryParams);

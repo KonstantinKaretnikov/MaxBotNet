@@ -109,11 +109,60 @@ internal abstract class BaseApi
             return (T)(object)simpleResponse;
         }
 
-        // * Make ONE HTTP request and try different deserialization strategies
-        // Some endpoints (like /me) return data directly, others return Response<T>
-        // IMPORTANT: For POST/PUT/PATCH requests, we should only make ONE HTTP request to avoid duplicate actions
-        // For GET requests, we can try both deserialization strategies if needed
-        
+        // * For GET requests: use SendAsyncRaw to get the response body once, then try both deserialization strategies
+        // This prevents making multiple HTTP calls and losing updates (especially important for /updates endpoint)
+        // For POST/PUT/PATCH: use normal SendAsync to avoid duplicate actions
+        if (request.Method == HttpMethod.Get)
+        {
+            // Get raw response body once
+            var responseBody = await HttpClient.SendAsyncRaw(request, cancellationToken).ConfigureAwait(false);
+            
+            if (string.IsNullOrWhiteSpace(responseBody))
+            {
+                throw new MaxApiException(
+                    "API request returned empty response body.",
+                    null,
+                    HttpStatusCode.BadRequest);
+            }
+
+            // Try deserializing as Response<T> first
+            try
+            {
+                var wrappedResponse = MaxJsonSerializer.Deserialize<Response<T>>(responseBody);
+                if (wrappedResponse != null && wrappedResponse.Ok && wrappedResponse.Result != null)
+                {
+                    return wrappedResponse.Result;
+                }
+            }
+            catch
+            {
+                // Response<T> format doesn't match, try direct deserialization
+            }
+
+            // Try direct deserialization as T (for endpoints like /me, /updates that return data directly)
+            try
+            {
+                var directResponse = MaxJsonSerializer.Deserialize<T>(responseBody);
+                if (directResponse != null)
+                {
+                    return directResponse;
+                }
+            }
+            catch
+            {
+                throw new MaxApiException(
+                    $"API request failed. The response could not be deserialized as Response<T> or T. Response body: {responseBody}",
+                    null,
+                    HttpStatusCode.BadRequest);
+            }
+
+            throw new MaxApiException(
+                "API request failed. The response could not be deserialized as Response<T> or T.",
+                null,
+                HttpStatusCode.BadRequest);
+        }
+
+        // For POST/PUT/PATCH: use normal SendAsync (only one attempt to avoid duplicate actions)
         try
         {
             // First try: deserialize as Response<T>
@@ -123,42 +172,17 @@ internal abstract class BaseApi
                 return wrappedResponse.Result;
             }
             
-            // * If Response<T> deserialized but ok=false or result=null, this could mean:
-            // 1. API error - format is correct but request failed (for POST/PUT/PATCH - throw exception, don't retry)
-            // 2. Format mismatch - endpoint returns data directly (for GET - try direct deserialization)
-            
-            // * For GET requests only: try direct deserialization if Response<T> format doesn't match
-            // For POST/PUT/PATCH: if Response<T> deserialized successfully (even with ok=false), 
-            // this means the format is correct and it's an API error, not a format mismatch
-            // We should NOT make a second request to avoid duplicate actions
-            if (request.Method == HttpMethod.Get)
-            {
-                // * For GET requests: try direct deserialization as T (for endpoints like /me that return data directly)
-                try
-                {
-                    var directResponse = await HttpClient.SendAsync<T>(request, cancellationToken).ConfigureAwait(false);
-                    if (directResponse != null)
-                    {
-                        return directResponse;
-                    }
-                }
-                catch
-                {
-                    // If direct deserialization also fails, throw original error
-                }
-            }
-            
-            // If we get here, either it's a POST/PUT/PATCH with API error, or both deserializations failed for GET
+            // If Response<T> deserialized but ok=false or result=null, this is an API error
             throw new MaxApiException(
                 $"API request returned unsuccessful response. Ok={wrappedResponse.Ok}, Result is null.",
                 null,
                 HttpStatusCode.BadRequest);
         }
-        catch (Exceptions.MaxNetworkException ex) when (ex.Message.Contains("Failed to deserialize") && request.Method == HttpMethod.Get)
+        catch (Exceptions.MaxNetworkException ex) when (ex.Message.Contains("Failed to deserialize"))
         {
-            // * For GET requests only: if deserialization as Response<T> failed due to format mismatch,
-            // try direct deserialization as T (for endpoints like /me that return data directly)
-            // We only do this for GET requests to avoid duplicate actions on POST/PUT/PATCH
+            // For POST/PUT/PATCH, if Response<T> format doesn't match, try direct deserialization
+            // But only if we can extract the response body from the exception
+            // This is a fallback for endpoints that return data directly (like POST /messages)
             try
             {
                 var directResponse = await HttpClient.SendAsync<T>(request, cancellationToken).ConfigureAwait(false);
@@ -176,7 +200,6 @@ internal abstract class BaseApi
                     HttpStatusCode.BadRequest);
             }
             
-            // If we get here, directResponse was null
             throw new MaxApiException(
                 "API request failed. The response could not be deserialized as Response<T> or T.",
                 null,

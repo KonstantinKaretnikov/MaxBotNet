@@ -42,9 +42,9 @@ public class Message
     /// <summary>
     /// Gets or sets the recipient of the message. Can be a user or a chat.
     /// </summary>
-    /// <value>The recipient of the message (User or Chat), or null if not available.</value>
+    /// <value>The recipient of the message, or null if not available.</value>
     [JsonPropertyName("recipient")]
-    public object? Recipient { get; set; }
+    public MessageRecipient? Recipient { get; set; }
 
     /// <summary>
     /// Gets or sets the text content of the message.
@@ -112,6 +112,21 @@ public class Message
 /// </summary>
 public class MessageBody
 {
+    /// <summary>
+    /// Gets or sets the message ID.
+    /// </summary>
+    /// <value>The unique identifier of the message.</value>
+    [JsonPropertyName("mid")]
+    public string? Mid { get; set; }
+
+    /// <summary>
+    /// Gets or sets the sequence number of the message.
+    /// </summary>
+    /// <value>The sequence number for ordering messages.</value>
+    [Range(0, long.MaxValue, ErrorMessage = "Sequence number cannot be negative.")]
+    [JsonPropertyName("seq")]
+    public long? Seq { get; set; }
+
     /// <summary>
     /// Gets or sets the text content of the message.
     /// </summary>
