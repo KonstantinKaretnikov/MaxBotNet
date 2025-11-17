@@ -43,7 +43,7 @@ git push origin v0.3.0-alpha
 ```powershell
 dotnet new console -n MaxBotNet.ReleaseSmoke
 cd MaxBotNet.ReleaseSmoke
-dotnet add package Max.Bot --prerelease
+dotnet add package MaxMessenger.Bot --prerelease
 ```
 
 3. Create a GitHub Release that references the changelog entry and attaches any notable artifacts if necessary.
