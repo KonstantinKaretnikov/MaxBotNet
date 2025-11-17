@@ -30,9 +30,20 @@ internal class SubscriptionsApi : BaseApi, ISubscriptionsApi
     {
         // Response structure: { "subscriptions": [...] }
         // Different from standard Response<T> wrapper
-        var response = await HttpClient.SendAsync<SubscriptionsResponse>(
+        // Use SendAsyncRaw for GET requests to avoid duplicate HTTP calls
+        var responseBody = await HttpClient.SendAsyncRaw(
             CreateRequest(HttpMethod.Get, "/subscriptions", null),
             cancellationToken).ConfigureAwait(false);
+        
+        if (string.IsNullOrWhiteSpace(responseBody))
+        {
+            throw new Exceptions.MaxApiException(
+                "API request returned empty response body.",
+                null,
+                System.Net.HttpStatusCode.BadRequest);
+        }
+        
+        var response = MaxJsonSerializer.Deserialize<SubscriptionsResponse>(responseBody);
 
         if (response == null || response.Subscriptions == null)
         {

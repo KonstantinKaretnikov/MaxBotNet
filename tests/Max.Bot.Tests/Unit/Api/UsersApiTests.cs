@@ -45,13 +45,14 @@ public class UsersApiTests
             Result = expectedUser
         };
 
+        var responseJson = MaxJsonSerializer.Serialize(response);
         _mockHttpClient
-            .Setup(x => x.SendAsync<Response<User>>(
+            .Setup(x => x.SendAsyncRaw(
                 It.Is<MaxApiRequest>(req =>
                     req.Method == HttpMethod.Get &&
-                    req.Endpoint == $"/test-token-123/users/{userId}"),
+                    req.Endpoint == $"/users/{userId}"),
                 It.IsAny<CancellationToken>()))
-            .ReturnsAsync(response);
+            .ReturnsAsync(responseJson);
 
         var usersApi = new UsersApi(_mockHttpClient.Object, _options);
 

@@ -88,12 +88,16 @@ internal class ChatsApi : BaseApi, IChatsApi
         var request = CreateRequest(HttpMethod.Get, $"/chats/{chatId}/pin");
         var response = await HttpClient.SendAsync<Response<Message>>(request, cancellationToken).ConfigureAwait(false);
 
-        if (!response.Ok)
+        if (response == null || !response.Ok)
         {
-            throw new Exceptions.MaxApiException(
-                "API request failed. The response indicates an error.",
-                null,
-                System.Net.HttpStatusCode.BadRequest);
+            if (response != null && !response.Ok)
+            {
+                throw new Exceptions.MaxApiException(
+                    "API request failed. The response indicates an error.",
+                    null,
+                    System.Net.HttpStatusCode.BadRequest);
+            }
+            return null;
         }
 
         return response.Result;

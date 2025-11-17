@@ -45,13 +45,14 @@ public class ChatsApiTests
             Result = expectedChat
         };
 
+        var responseJson = MaxJsonSerializer.Serialize(response);
         _mockHttpClient
-            .Setup(x => x.SendAsync<Response<Chat>>(
+            .Setup(x => x.SendAsyncRaw(
                 It.Is<MaxApiRequest>(req =>
                     req.Method == HttpMethod.Get &&
-                    req.Endpoint == $"/test-token-123/chats/{chatId}"),
+                    req.Endpoint == $"/chats/{chatId}"),
                 It.IsAny<CancellationToken>()))
-            .ReturnsAsync(response);
+            .ReturnsAsync(responseJson);
 
         var chatsApi = new ChatsApi(_mockHttpClient.Object, _options);
 
@@ -97,13 +98,14 @@ public class ChatsApiTests
             Result = expectedChats
         };
 
+        var responseJson = MaxJsonSerializer.Serialize(response);
         _mockHttpClient
-            .Setup(x => x.SendAsync<Response<Chat[]>>(
+            .Setup(x => x.SendAsyncRaw(
                 It.Is<MaxApiRequest>(req =>
                     req.Method == HttpMethod.Get &&
-                    req.Endpoint == "/test-token-123/chats"),
+                    req.Endpoint == "/chats"),
                 It.IsAny<CancellationToken>()))
-            .ReturnsAsync(response);
+            .ReturnsAsync(responseJson);
 
         var chatsApi = new ChatsApi(_mockHttpClient.Object, _options);
 
@@ -137,13 +139,14 @@ public class ChatsApiTests
             Result = expectedChat
         };
 
+        var responseJson = MaxJsonSerializer.Serialize(response);
         _mockHttpClient
-            .Setup(x => x.SendAsync<Response<Chat>>(
+            .Setup(x => x.SendAsyncRaw(
                 It.Is<MaxApiRequest>(req =>
                     req.Method == HttpMethod.Get &&
-                    req.Endpoint == $"/test-token-123/chats/%40test_chat"),
+                    req.Endpoint == $"/chats/%40test_chat"),
                 It.IsAny<CancellationToken>()))
-            .ReturnsAsync(response);
+            .ReturnsAsync(responseJson);
 
         var chatsApi = new ChatsApi(_mockHttpClient.Object, _options);
 
@@ -177,16 +180,19 @@ public class ChatsApiTests
     public async Task GetChatByLinkAsync_ShouldThrowMaxApiException_WhenApiReturnsError()
     {
         // Arrange
+        var chatLink = "@invalid_chat";
         _mockHttpClient
-            .Setup(x => x.SendAsync<Response<Chat>>(
-                It.IsAny<MaxApiRequest>(),
+            .Setup(x => x.SendAsyncRaw(
+                It.Is<MaxApiRequest>(req =>
+                    req.Method == HttpMethod.Get &&
+                    req.Endpoint == $"/chats/%40invalid_chat"),
                 It.IsAny<CancellationToken>()))
-            .ThrowsAsync(new MaxApiException("Chat not found", "CHAT_NOT_FOUND", System.Net.HttpStatusCode.NotFound));
+            .ReturnsAsync(""); // Empty response body to trigger error
 
         var chatsApi = new ChatsApi(_mockHttpClient.Object, _options);
 
         // Act
-        var act = async () => await chatsApi.GetChatByLinkAsync("@test_chat");
+        var act = async () => await chatsApi.GetChatByLinkAsync(chatLink);
 
         // Assert
         await act.Should().ThrowAsync<MaxApiException>()
@@ -225,7 +231,7 @@ public class ChatsApiTests
             .Setup(x => x.SendAsync<Response<Chat>>(
                 It.Is<MaxApiRequest>(req =>
                     req.Method == HttpMethod.Patch &&
-                    req.Endpoint == $"/test-token-123/chats/{chatId}" &&
+                    req.Endpoint == $"/chats/{chatId}" &&
                     req.Body != null),
                 It.IsAny<CancellationToken>()))
             .ReturnsAsync(response);
@@ -287,7 +293,7 @@ public class ChatsApiTests
             .Setup(x => x.SendAsync<Response>(
                 It.Is<MaxApiRequest>(req =>
                     req.Method == HttpMethod.Delete &&
-                    req.Endpoint == $"/test-token-123/chats/{chatId}"),
+                    req.Endpoint == $"/chats/{chatId}"),
                 It.IsAny<CancellationToken>()))
             .ReturnsAsync(expectedResponse);
 
@@ -334,7 +340,7 @@ public class ChatsApiTests
             .Setup(x => x.SendAsync<Response>(
                 It.Is<MaxApiRequest>(req =>
                     req.Method == HttpMethod.Post &&
-                    req.Endpoint == $"/test-token-123/chats/{chatId}/actions" &&
+                    req.Endpoint == $"/chats/{chatId}/actions" &&
                     req.Body != null),
                 It.IsAny<CancellationToken>()))
             .ReturnsAsync(expectedResponse);
@@ -406,7 +412,7 @@ public class ChatsApiTests
             .Setup(x => x.SendAsync<Response<Message>>(
                 It.Is<MaxApiRequest>(req =>
                     req.Method == HttpMethod.Get &&
-                    req.Endpoint == $"/test-token-123/chats/{chatId}/pin"),
+                    req.Endpoint == $"/chats/{chatId}/pin"),
                 It.IsAny<CancellationToken>()))
             .ReturnsAsync(response);
 
@@ -437,7 +443,7 @@ public class ChatsApiTests
             .Setup(x => x.SendAsync<Response<Message>>(
                 It.Is<MaxApiRequest>(req =>
                     req.Method == HttpMethod.Get &&
-                    req.Endpoint == $"/test-token-123/chats/{chatId}/pin"),
+                    req.Endpoint == $"/chats/{chatId}/pin"),
                 It.IsAny<CancellationToken>()))
             .ReturnsAsync(response);
 
@@ -482,7 +488,7 @@ public class ChatsApiTests
             .Setup(x => x.SendAsync<Response>(
                 It.Is<MaxApiRequest>(req =>
                     req.Method == HttpMethod.Put &&
-                    req.Endpoint == $"/test-token-123/chats/{chatId}/pin" &&
+                    req.Endpoint == $"/chats/{chatId}/pin" &&
                     req.Body != null),
                 It.IsAny<CancellationToken>()))
             .ReturnsAsync(expectedResponse);
@@ -543,7 +549,7 @@ public class ChatsApiTests
             .Setup(x => x.SendAsync<Response>(
                 It.Is<MaxApiRequest>(req =>
                     req.Method == HttpMethod.Delete &&
-                    req.Endpoint == $"/test-token-123/chats/{chatId}/pin"),
+                    req.Endpoint == $"/chats/{chatId}/pin"),
                 It.IsAny<CancellationToken>()))
             .ReturnsAsync(expectedResponse);
 
@@ -595,13 +601,14 @@ public class ChatsApiTests
             Result = expectedChat
         };
 
+        var responseJson = MaxJsonSerializer.Serialize(response);
         _mockHttpClient
-            .Setup(x => x.SendAsync<Response<Chat>>(
+            .Setup(x => x.SendAsyncRaw(
                 It.Is<MaxApiRequest>(req =>
                     req.Method == HttpMethod.Get &&
-                    req.Endpoint == $"/test-token-123/chats/{chatId}/members/me"),
+                    req.Endpoint == $"/chats/{chatId}/members/me"),
                 It.IsAny<CancellationToken>()))
-            .ReturnsAsync(response);
+            .ReturnsAsync(responseJson);
 
         var chatsApi = new ChatsApi(_mockHttpClient.Object, _options);
 
@@ -645,7 +652,7 @@ public class ChatsApiTests
             .Setup(x => x.SendAsync<Response>(
                 It.Is<MaxApiRequest>(req =>
                     req.Method == HttpMethod.Delete &&
-                    req.Endpoint == $"/test-token-123/chats/{chatId}/members/me"),
+                    req.Endpoint == $"/chats/{chatId}/members/me"),
                 It.IsAny<CancellationToken>()))
             .ReturnsAsync(expectedResponse);
 
@@ -697,13 +704,14 @@ public class ChatsApiTests
             Result = expectedAdmins
         };
 
+        var responseJson = MaxJsonSerializer.Serialize(response);
         _mockHttpClient
-            .Setup(x => x.SendAsync<Response<User[]>>(
+            .Setup(x => x.SendAsyncRaw(
                 It.Is<MaxApiRequest>(req =>
                     req.Method == HttpMethod.Get &&
-                    req.Endpoint == $"/test-token-123/chats/{chatId}/members/admins"),
+                    req.Endpoint == $"/chats/{chatId}/members/admins"),
                 It.IsAny<CancellationToken>()))
-            .ReturnsAsync(response);
+            .ReturnsAsync(responseJson);
 
         var chatsApi = new ChatsApi(_mockHttpClient.Object, _options);
 
@@ -749,7 +757,7 @@ public class ChatsApiTests
             .Setup(x => x.SendAsync<Response>(
                 It.Is<MaxApiRequest>(req =>
                     req.Method == HttpMethod.Post &&
-                    req.Endpoint == $"/test-token-123/chats/{chatId}/members/admins" &&
+                    req.Endpoint == $"/chats/{chatId}/members/admins" &&
                     req.Body != null),
                 It.IsAny<CancellationToken>()))
             .ReturnsAsync(expectedResponse);
@@ -811,7 +819,7 @@ public class ChatsApiTests
             .Setup(x => x.SendAsync<Response>(
                 It.Is<MaxApiRequest>(req =>
                     req.Method == HttpMethod.Delete &&
-                    req.Endpoint == $"/test-token-123/chats/{chatId}/members/admins/{userId}"),
+                    req.Endpoint == $"/chats/{chatId}/members/admins/{userId}"),
                 It.IsAny<CancellationToken>()))
             .ReturnsAsync(expectedResponse);
 
@@ -878,14 +886,15 @@ public class ChatsApiTests
             Result = expectedMembers
         };
 
+        var responseJson = MaxJsonSerializer.Serialize(response);
         _mockHttpClient
-            .Setup(x => x.SendAsync<Response<User[]>>(
+            .Setup(x => x.SendAsyncRaw(
                 It.Is<MaxApiRequest>(req =>
                     req.Method == HttpMethod.Get &&
-                    req.Endpoint == $"/test-token-123/chats/{chatId}/members" &&
+                    req.Endpoint == $"/chats/{chatId}/members" &&
                     req.QueryParameters == null),
                 It.IsAny<CancellationToken>()))
-            .ReturnsAsync(response);
+            .ReturnsAsync(responseJson);
 
         var chatsApi = new ChatsApi(_mockHttpClient.Object, _options);
 
@@ -917,18 +926,19 @@ public class ChatsApiTests
             Result = expectedMembers
         };
 
+        var responseJson = MaxJsonSerializer.Serialize(response);
         _mockHttpClient
-            .Setup(x => x.SendAsync<Response<User[]>>(
+            .Setup(x => x.SendAsyncRaw(
                 It.Is<MaxApiRequest>(req =>
                     req.Method == HttpMethod.Get &&
-                    req.Endpoint == $"/test-token-123/chats/{chatId}/members" &&
+                    req.Endpoint == $"/chats/{chatId}/members" &&
                     req.QueryParameters != null &&
                     req.QueryParameters.ContainsKey("offset") &&
                     req.QueryParameters["offset"] == "10" &&
                     req.QueryParameters.ContainsKey("limit") &&
                     req.QueryParameters["limit"] == "20"),
                 It.IsAny<CancellationToken>()))
-            .ReturnsAsync(response);
+            .ReturnsAsync(responseJson);
 
         var chatsApi = new ChatsApi(_mockHttpClient.Object, _options);
 
@@ -972,7 +982,7 @@ public class ChatsApiTests
             .Setup(x => x.SendAsync<Response>(
                 It.Is<MaxApiRequest>(req =>
                     req.Method == HttpMethod.Post &&
-                    req.Endpoint == $"/test-token-123/chats/{chatId}/members" &&
+                    req.Endpoint == $"/chats/{chatId}/members" &&
                     req.Body != null),
                 It.IsAny<CancellationToken>()))
             .ReturnsAsync(expectedResponse);
@@ -1034,7 +1044,7 @@ public class ChatsApiTests
             .Setup(x => x.SendAsync<Response>(
                 It.Is<MaxApiRequest>(req =>
                     req.Method == HttpMethod.Delete &&
-                    req.Endpoint == $"/test-token-123/chats/{chatId}/members" &&
+                    req.Endpoint == $"/chats/{chatId}/members" &&
                     req.QueryParameters != null &&
                     req.QueryParameters.ContainsKey("user_id") &&
                     req.QueryParameters["user_id"] == "789"),

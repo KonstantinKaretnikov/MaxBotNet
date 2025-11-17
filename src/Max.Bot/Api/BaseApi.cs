@@ -167,6 +167,13 @@ internal abstract class BaseApi
         {
             // First try: deserialize as Response<T>
             var wrappedResponse = await HttpClient.SendAsync<Response<T>>(request, cancellationToken).ConfigureAwait(false);
+            if (wrappedResponse == null)
+            {
+                throw new MaxApiException(
+                    "API request returned null response.",
+                    null,
+                    HttpStatusCode.BadRequest);
+            }
             if (wrappedResponse.Ok && wrappedResponse.Result != null)
             {
                 return wrappedResponse.Result;

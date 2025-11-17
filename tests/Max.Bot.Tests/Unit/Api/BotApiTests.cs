@@ -45,16 +45,17 @@ public class BotApiTests
             Result = expectedUser
         };
 
+        var responseJson = MaxJsonSerializer.Serialize(response);
         _mockHttpClient
-            .Setup(x => x.SendAsync<Response<User>>(
+            .Setup(x => x.SendAsyncRaw(
                 It.Is<MaxApiRequest>(req =>
                     req.Method == HttpMethod.Get &&
-                    req.Endpoint == "/test-token-123/me" &&
+                    req.Endpoint == "/me" &&
                     req.Headers != null &&
                     req.Headers.ContainsKey("Authorization") &&
-                    req.Headers["Authorization"] == "Bearer test-token-123"),
+                    req.Headers["Authorization"] == "test-token-123"),
                 It.IsAny<CancellationToken>()))
-            .ReturnsAsync(response);
+            .ReturnsAsync(responseJson);
 
         var botApi = new BotApi(_mockHttpClient.Object, _options);
 
@@ -118,16 +119,17 @@ public class BotApiTests
             Result = expectedUser
         };
 
+        var responseJson = MaxJsonSerializer.Serialize(response);
         _mockHttpClient
-            .Setup(x => x.SendAsync<Response<User>>(
+            .Setup(x => x.SendAsyncRaw(
                 It.Is<MaxApiRequest>(req =>
                     req.Method == HttpMethod.Get &&
-                    req.Endpoint == "/test-token-123/bot/info" &&
+                    req.Endpoint == "/bot/info" &&
                     req.Headers != null &&
                     req.Headers.ContainsKey("Authorization") &&
-                    req.Headers["Authorization"] == "Bearer test-token-123"),
+                    req.Headers["Authorization"] == "test-token-123"),
                 It.IsAny<CancellationToken>()))
-            .ReturnsAsync(response);
+            .ReturnsAsync(responseJson);
 
         var botApi = new BotApi(_mockHttpClient.Object, _options);
 

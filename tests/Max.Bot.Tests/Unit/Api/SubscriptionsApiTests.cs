@@ -43,13 +43,14 @@ public class SubscriptionsApiTests
             Subscriptions = expectedSubscriptions
         };
 
+        var responseJson = MaxJsonSerializer.Serialize(subscriptionsResponse);
         _mockHttpClient
-            .Setup(x => x.SendAsync<SubscriptionsResponse>(
+            .Setup(x => x.SendAsyncRaw(
                 It.Is<MaxApiRequest>(req =>
                     req.Method == HttpMethod.Get &&
-                    req.Endpoint == "/test-token-123/subscriptions"),
+                    req.Endpoint == "/subscriptions"),
                 It.IsAny<CancellationToken>()))
-            .ReturnsAsync(subscriptionsResponse);
+            .ReturnsAsync(responseJson);
 
         var subscriptionsApi = new SubscriptionsApi(_mockHttpClient.Object, _options);
 
@@ -103,7 +104,7 @@ public class SubscriptionsApiTests
             .Setup(x => x.SendAsync<Response>(
                 It.Is<MaxApiRequest>(req =>
                     req.Method == HttpMethod.Post &&
-                    req.Endpoint == "/test-token-123/subscriptions" &&
+                    req.Endpoint == "/subscriptions" &&
                     req.Body != null &&
                     req.Body.GetType() == typeof(SetWebhookRequest)),
                 It.IsAny<CancellationToken>()))
@@ -271,11 +272,12 @@ public class SubscriptionsApiTests
             Result = expectedResponse
         };
 
+        var responseJson = MaxJsonSerializer.Serialize(wrappedResponse);
         _mockHttpClient
-            .Setup(x => x.SendAsync<Response<GetUpdatesResponse>>(
+            .Setup(x => x.SendAsyncRaw(
                 It.Is<MaxApiRequest>(req =>
                     req.Method == HttpMethod.Get &&
-                    req.Endpoint == "/test-token-123/updates" &&
+                    req.Endpoint == "/updates" &&
                     req.QueryParameters != null &&
                     req.QueryParameters.ContainsKey("limit") &&
                     req.QueryParameters["limit"] == "50" &&
@@ -286,7 +288,7 @@ public class SubscriptionsApiTests
                     req.QueryParameters.ContainsKey("types") &&
                     req.QueryParameters["types"] == "message_created,message_callback"),
                 It.IsAny<CancellationToken>()))
-            .ReturnsAsync(wrappedResponse);
+            .ReturnsAsync(responseJson);
 
         var subscriptionsApi = new SubscriptionsApi(_mockHttpClient.Object, _options);
 
@@ -338,12 +340,15 @@ public class SubscriptionsApiTests
             Result = expectedResponse
         };
 
+        var responseJson = MaxJsonSerializer.Serialize(wrappedResponse);
         _mockHttpClient
-            .Setup(x => x.SendAsync<Response<GetUpdatesResponse>>(
+            .Setup(x => x.SendAsyncRaw(
                 It.Is<MaxApiRequest>(req =>
-                    req.QueryParameters == null || req.QueryParameters.Count == 0),
+                    req.Method == HttpMethod.Get &&
+                    req.Endpoint == "/updates" &&
+                    (req.QueryParameters == null || req.QueryParameters.Count == 0)),
                 It.IsAny<CancellationToken>()))
-            .ReturnsAsync(wrappedResponse);
+            .ReturnsAsync(responseJson);
 
         var subscriptionsApi = new SubscriptionsApi(_mockHttpClient.Object, _options);
 
@@ -351,7 +356,7 @@ public class SubscriptionsApiTests
         await subscriptionsApi.GetUpdatesAsync(request);
 
         // Assert
-        _mockHttpClient.Verify(x => x.SendAsync<Response<GetUpdatesResponse>>(
+        _mockHttpClient.Verify(x => x.SendAsyncRaw(
             It.IsAny<MaxApiRequest>(),
             It.IsAny<CancellationToken>()), Times.Once);
     }
