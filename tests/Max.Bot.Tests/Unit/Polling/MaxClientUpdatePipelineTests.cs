@@ -46,7 +46,7 @@ public class MaxClientUpdatePipelineTests
         await client.ProcessWebhookAsync(update, handlerMock.Object, null, CancellationToken.None);
 
         // Assert
-        handlerMock.Verify(h => h.HandleUpdateAsync(It.IsAny<UpdateContext>(), It.IsAny<CancellationToken>()), Times.Once);
+        handlerMock.Verify(h => h.HandleMessageAsync(It.IsAny<UpdateContext>(), It.IsAny<CancellationToken>()), Times.Once);
     }
 
     [Fact]

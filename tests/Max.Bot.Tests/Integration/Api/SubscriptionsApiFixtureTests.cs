@@ -20,7 +20,7 @@ public class SubscriptionsApiFixtureTests
         var api = FixtureHttpClientFactory.CreateSubscriptionsApi(
             "subscriptions/get_subscriptions_success.json",
             HttpMethod.Get,
-            "/bot/TEST_TOKEN/subscriptions");
+            "/bot/subscriptions");
 
         var subscriptions = await api.GetSubscriptionsAsync();
 
@@ -34,7 +34,7 @@ public class SubscriptionsApiFixtureTests
         var api = FixtureHttpClientFactory.CreateSubscriptionsApi(
             "updates/get_updates_success.json",
             HttpMethod.Get,
-            "/bot/TEST_TOKEN/updates?limit=25&timeout=30&marker=9001&types=Message%2CCallbackQuery");
+            "/bot/updates?limit=25&timeout=30&marker=9001&types=Message%2CCallbackQuery");
 
         var request = new GetUpdatesRequest
         {

@@ -4,7 +4,7 @@
     "updates": [
       {
         "update_id": 128,
-        "type": "message",
+        "update_type": "message_created",
         "message": {
           "id": 9876,
           "chat": {

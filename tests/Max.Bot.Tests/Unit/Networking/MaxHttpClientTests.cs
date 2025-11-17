@@ -414,8 +414,10 @@ public class MaxHttpClientTests
 
         // Assert
         // HttpClient returns empty stream when Content is null, which causes JsonException
+        // MaxHttpClient wraps JsonException in MaxNetworkException
         // This test verifies that we handle the error appropriately
-        await act.Should().ThrowAsync<System.Text.Json.JsonException>();
+        await act.Should().ThrowAsync<Max.Bot.Exceptions.MaxNetworkException>()
+            .Where(ex => ex.InnerException is System.Text.Json.JsonException);
     }
 
     [Fact]
