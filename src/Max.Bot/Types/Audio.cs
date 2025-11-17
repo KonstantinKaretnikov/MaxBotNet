@@ -1,7 +1,7 @@
-// 📁 [Audio] - Модель аудио в Max Messenger
-// 🎯 Core function: Представляет информацию об аудио
-// 🔗 Key dependencies: System.Text.Json.Serialization, System.ComponentModel.DataAnnotations
-// 💡 Usage: Используется в Message для представления аудио вложений
+// рџ“Ѓ [Audio] - РњРѕРґРµР»СЊ Р°СѓРґРёРѕ РІ Max Messenger
+// рџЋЇ Core function: РџСЂРµРґСЃС‚Р°РІР»СЏРµС‚ РёРЅС„РѕСЂРјР°С†РёСЋ РѕР± Р°СѓРґРёРѕ
+// рџ”— Key dependencies: System.Text.Json.Serialization, System.ComponentModel.DataAnnotations
+// рџ’Ў Usage: РСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РІ Message РґР»СЏ РїСЂРµРґСЃС‚Р°РІР»РµРЅРёСЏ Р°СѓРґРёРѕ РІР»РѕР¶РµРЅРёР№
 
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;

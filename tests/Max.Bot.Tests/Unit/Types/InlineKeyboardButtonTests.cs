@@ -1,7 +1,7 @@
-// 📁 [InlineKeyboardButtonTests] - Тесты для модели InlineKeyboardButton
-// 🎯 Core function: Тестирование сериализации/десериализации InlineKeyboardButton
-// 🔗 Key dependencies: Max.Bot.Types, Max.Bot.Networking, FluentAssertions, xUnit
-// 💡 Usage: Unit тесты для проверки корректности работы модели InlineKeyboardButton
+// рџ“Ѓ [InlineKeyboardButtonTests] - РўРµСЃС‚С‹ РґР»СЏ РјРѕРґРµР»Рё InlineKeyboardButton
+// рџЋЇ Core function: РўРµСЃС‚РёСЂРѕРІР°РЅРёРµ СЃРµСЂРёР°Р»РёР·Р°С†РёРё/РґРµСЃРµСЂРёР°Р»РёР·Р°С†РёРё InlineKeyboardButton
+// рџ”— Key dependencies: Max.Bot.Types, Max.Bot.Networking, FluentAssertions, xUnit
+// рџ’Ў Usage: Unit С‚РµСЃС‚С‹ РґР»СЏ РїСЂРѕРІРµСЂРєРё РєРѕСЂСЂРµРєС‚РЅРѕСЃС‚Рё СЂР°Р±РѕС‚С‹ РјРѕРґРµР»Рё InlineKeyboardButton
 
 using FluentAssertions;
 using Max.Bot.Networking;

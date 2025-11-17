@@ -1,7 +1,7 @@
-// 📁 [Photo] - Модель фото в Max Messenger
-// 🎯 Core function: Представляет информацию о фото
-// 🔗 Key dependencies: System.Text.Json.Serialization, System.ComponentModel.DataAnnotations
-// 💡 Usage: Используется в Message для представления фото вложений
+// рџ“Ѓ [Photo] - РњРѕРґРµР»СЊ С„РѕС‚Рѕ РІ Max Messenger
+// рџЋЇ Core function: РџСЂРµРґСЃС‚Р°РІР»СЏРµС‚ РёРЅС„РѕСЂРјР°С†РёСЋ Рѕ С„РѕС‚Рѕ
+// рџ”— Key dependencies: System.Text.Json.Serialization, System.ComponentModel.DataAnnotations
+// рџ’Ў Usage: РСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РІ Message РґР»СЏ РїСЂРµРґСЃС‚Р°РІР»РµРЅРёСЏ С„РѕС‚Рѕ РІР»РѕР¶РµРЅРёР№
 
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;

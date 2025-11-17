@@ -1,7 +1,7 @@
-// 📁 [Error] - Модель ошибки Max Bot API
-// 🎯 Core function: Представляет информацию об ошибке API
-// 🔗 Key dependencies: System.Text.Json.Serialization, System.ComponentModel.DataAnnotations
-// 💡 Usage: Используется в ErrorResponse для представления ошибок API
+// рџ“Ѓ [Error] - РњРѕРґРµР»СЊ РѕС€РёР±РєРё Max Bot API
+// рџЋЇ Core function: РџСЂРµРґСЃС‚Р°РІР»СЏРµС‚ РёРЅС„РѕСЂРјР°С†РёСЋ РѕР± РѕС€РёР±РєРµ API
+// рџ”— Key dependencies: System.Text.Json.Serialization, System.ComponentModel.DataAnnotations
+// рџ’Ў Usage: РСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РІ ErrorResponse РґР»СЏ РїСЂРµРґСЃС‚Р°РІР»РµРЅРёСЏ РѕС€РёР±РѕРє API
 
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;

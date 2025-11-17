@@ -1,7 +1,7 @@
-// 📁 [SendMessageRequest] - Запрос на отправку сообщения
-// 🎯 Core function: Представляет запрос для отправки сообщения с полной поддержкой всех параметров
-// 🔗 Key dependencies: System.Text.Json.Serialization, System.ComponentModel.DataAnnotations, Max.Bot.Types.Enums
-// 💡 Usage: Используется в MessagesApi.SendMessageAsync для отправки сообщений с вложениями и дополнительными параметрами
+// рџ“Ѓ [SendMessageRequest] - Р—Р°РїСЂРѕСЃ РЅР° РѕС‚РїСЂР°РІРєСѓ СЃРѕРѕР±С‰РµРЅРёСЏ
+// рџЋЇ Core function: РџСЂРµРґСЃС‚Р°РІР»СЏРµС‚ Р·Р°РїСЂРѕСЃ РґР»СЏ РѕС‚РїСЂР°РІРєРё СЃРѕРѕР±С‰РµРЅРёСЏ СЃ РїРѕР»РЅРѕР№ РїРѕРґРґРµСЂР¶РєРѕР№ РІСЃРµС… РїР°СЂР°РјРµС‚СЂРѕРІ
+// рџ”— Key dependencies: System.Text.Json.Serialization, System.ComponentModel.DataAnnotations, Max.Bot.Types.Enums
+// рџ’Ў Usage: РСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РІ MessagesApi.SendMessageAsync РґР»СЏ РѕС‚РїСЂР°РІРєРё СЃРѕРѕР±С‰РµРЅРёР№ СЃ РІР»РѕР¶РµРЅРёСЏРјРё Рё РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹РјРё РїР°СЂР°РјРµС‚СЂР°РјРё
 
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;

@@ -1,7 +1,7 @@
-// 📁 [EditMessageRequest] - Запрос на редактирование сообщения
-// 🎯 Core function: Представляет запрос для редактирования сообщения
-// 🔗 Key dependencies: System.Text.Json.Serialization, System.ComponentModel.DataAnnotations, Max.Bot.Types, Max.Bot.Types.Enums
-// 💡 Usage: Используется в MessagesApi.EditMessageAsync для редактирования сообщения
+// рџ“Ѓ [EditMessageRequest] - Р—Р°РїСЂРѕСЃ РЅР° СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ СЃРѕРѕР±С‰РµРЅРёСЏ
+// рџЋЇ Core function: РџСЂРµРґСЃС‚Р°РІР»СЏРµС‚ Р·Р°РїСЂРѕСЃ РґР»СЏ СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёСЏ СЃРѕРѕР±С‰РµРЅРёСЏ
+// рџ”— Key dependencies: System.Text.Json.Serialization, System.ComponentModel.DataAnnotations, Max.Bot.Types, Max.Bot.Types.Enums
+// рџ’Ў Usage: РСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РІ MessagesApi.EditMessageAsync РґР»СЏ СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёСЏ СЃРѕРѕР±С‰РµРЅРёСЏ
 
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;

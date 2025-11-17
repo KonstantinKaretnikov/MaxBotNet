@@ -1,7 +1,7 @@
-// 📁 [MaxJsonSerializer] - JSON сериализация/десериализация
-// 🎯 Core function: Предоставляет методы для сериализации и десериализации JSON
-// 🔗 Key dependencies: System.Text.Json
-// 💡 Usage: Используется MaxHttpClient для преобразования объектов в/из JSON
+// рџ“Ѓ [MaxJsonSerializer] - JSON СЃРµСЂРёР°Р»РёР·Р°С†РёСЏ/РґРµСЃРµСЂРёР°Р»РёР·Р°С†РёСЏ
+// рџЋЇ Core function: РџСЂРµРґРѕСЃС‚Р°РІР»СЏРµС‚ РјРµС‚РѕРґС‹ РґР»СЏ СЃРµСЂРёР°Р»РёР·Р°С†РёРё Рё РґРµСЃРµСЂРёР°Р»РёР·Р°С†РёРё JSON
+// рџ”— Key dependencies: System.Text.Json
+// рџ’Ў Usage: РСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ MaxHttpClient РґР»СЏ РїСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёСЏ РѕР±СЉРµРєС‚РѕРІ РІ/РёР· JSON
 
 using System.IO;
 using System.Text;

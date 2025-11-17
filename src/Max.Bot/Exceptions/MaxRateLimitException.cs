@@ -1,7 +1,7 @@
-// 📁 [MaxRateLimitException] - Исключение для rate limiting
-// 🎯 Core function: Представляет ошибку rate limiting (HTTP 429)
-// 🔗 Key dependencies: Max.Bot.Exceptions
-// 💡 Usage: Выбрасывается при превышении лимита запросов к API
+// рџ“Ѓ [MaxRateLimitException] - РСЃРєР»СЋС‡РµРЅРёРµ РґР»СЏ rate limiting
+// рџЋЇ Core function: РџСЂРµРґСЃС‚Р°РІР»СЏРµС‚ РѕС€РёР±РєСѓ rate limiting (HTTP 429)
+// рџ”— Key dependencies: Max.Bot.Exceptions
+// рџ’Ў Usage: Р’С‹Р±СЂР°СЃС‹РІР°РµС‚СЃСЏ РїСЂРё РїСЂРµРІС‹С€РµРЅРёРё Р»РёРјРёС‚Р° Р·Р°РїСЂРѕСЃРѕРІ Рє API
 
 using System.Net;
 

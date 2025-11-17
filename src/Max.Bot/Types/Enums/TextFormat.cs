@@ -1,4 +1,4 @@
-﻿// рџ“Ѓ [TextFormat] - Р¤РѕСЂРјР°С‚ С‚РµРєСЃС‚Р° РІ Max Messenger
+// рџ“Ѓ [TextFormat] - Р¤РѕСЂРјР°С‚ С‚РµРєСЃС‚Р° РІ Max Messenger
 // рџЋЇ Core function: РџРµСЂРµС‡РёСЃР»РµРЅРёРµ С„РѕСЂРјР°С‚РѕРІ С‚РµРєСЃС‚Р° (markdown, html)
 // рџ”— Key dependencies: System.Text.Json.Serialization
 // рџ’Ў Usage: РСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РІ РјРѕРґРµР»СЏС… Р·Р°РїСЂРѕСЃРѕРІ РґР»СЏ С„РѕСЂРјР°С‚РёСЂРѕРІР°РЅРёСЏ С‚РµРєСЃС‚Р°

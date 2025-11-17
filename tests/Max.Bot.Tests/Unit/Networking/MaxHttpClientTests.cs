@@ -1,7 +1,7 @@
-// 📁 [MaxHttpClientTests] - Тесты для HTTP клиента
-// 🎯 Core function: Тестирование отправки запросов, обработки ответов и ошибок в MaxHttpClient
-// 🔗 Key dependencies: Max.Bot.Networking, Max.Bot.Configuration, Max.Bot.Exceptions, FluentAssertions, xUnit
-// 💡 Usage: Unit тесты для проверки корректности работы MaxHttpClient
+// рџ“Ѓ [MaxHttpClientTests] - РўРµСЃС‚С‹ РґР»СЏ HTTP РєР»РёРµРЅС‚Р°
+// рџЋЇ Core function: РўРµСЃС‚РёСЂРѕРІР°РЅРёРµ РѕС‚РїСЂР°РІРєРё Р·Р°РїСЂРѕСЃРѕРІ, РѕР±СЂР°Р±РѕС‚РєРё РѕС‚РІРµС‚РѕРІ Рё РѕС€РёР±РѕРє РІ MaxHttpClient
+// рџ”— Key dependencies: Max.Bot.Networking, Max.Bot.Configuration, Max.Bot.Exceptions, FluentAssertions, xUnit
+// рџ’Ў Usage: Unit С‚РµСЃС‚С‹ РґР»СЏ РїСЂРѕРІРµСЂРєРё РєРѕСЂСЂРµРєС‚РЅРѕСЃС‚Рё СЂР°Р±РѕС‚С‹ MaxHttpClient
 
 using System.Net;
 using System.Net.Http;

@@ -1,4 +1,4 @@
-﻿// СЂСџвЂњРѓ [SampleSettings] - Configuration loader for sample bots
+// СЂСџвЂњРѓ [SampleSettings] - Configuration loader for sample bots
 // СЂСџР‹Р‡ Core function: Reads environment variables for examples
 // СЂСџвЂќвЂ” Key dependencies: System
 // СЂСџвЂ™РЋ Usage: Provides tokens/chat ids for running sample bots

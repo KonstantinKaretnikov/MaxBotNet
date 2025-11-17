@@ -1,7 +1,7 @@
-// 📁 [MaxJsonSerializerTests] - Тесты для JSON сериализации
-// 🎯 Core function: Тестирование сериализации и десериализации JSON
-// 🔗 Key dependencies: Max.Bot.Networking, FluentAssertions, xUnit
-// 💡 Usage: Unit тесты для проверки корректности работы MaxJsonSerializer
+// рџ“Ѓ [MaxJsonSerializerTests] - РўРµСЃС‚С‹ РґР»СЏ JSON СЃРµСЂРёР°Р»РёР·Р°С†РёРё
+// рџЋЇ Core function: РўРµСЃС‚РёСЂРѕРІР°РЅРёРµ СЃРµСЂРёР°Р»РёР·Р°С†РёРё Рё РґРµСЃРµСЂРёР°Р»РёР·Р°С†РёРё JSON
+// рџ”— Key dependencies: Max.Bot.Networking, FluentAssertions, xUnit
+// рџ’Ў Usage: Unit С‚РµСЃС‚С‹ РґР»СЏ РїСЂРѕРІРµСЂРєРё РєРѕСЂСЂРµРєС‚РЅРѕСЃС‚Рё СЂР°Р±РѕС‚С‹ MaxJsonSerializer
 
 using System.IO;
 using System.Text;

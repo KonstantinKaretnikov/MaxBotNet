@@ -1,7 +1,7 @@
-// 📁 [Update] - Модель обновления Max Messenger
-// 🎯 Core function: Представляет обновление от Max Messenger
-// 🔗 Key dependencies: System.Text.Json.Serialization, System.ComponentModel.DataAnnotations, Max.Bot.Types, Max.Bot.Types.Enums
-// 💡 Usage: Используется для получения обновлений от Max Messenger API
+// рџ“Ѓ [Update] - РњРѕРґРµР»СЊ РѕР±РЅРѕРІР»РµРЅРёСЏ Max Messenger
+// рџЋЇ Core function: РџСЂРµРґСЃС‚Р°РІР»СЏРµС‚ РѕР±РЅРѕРІР»РµРЅРёРµ РѕС‚ Max Messenger
+// рџ”— Key dependencies: System.Text.Json.Serialization, System.ComponentModel.DataAnnotations, Max.Bot.Types, Max.Bot.Types.Enums
+// рџ’Ў Usage: РСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РґР»СЏ РїРѕР»СѓС‡РµРЅРёСЏ РѕР±РЅРѕРІР»РµРЅРёР№ РѕС‚ Max Messenger API
 
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;

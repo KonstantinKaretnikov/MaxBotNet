@@ -1,7 +1,7 @@
-// 📁 [IMaxHttpClient] - Интерфейс HTTP клиента
-// 🎯 Core function: Определяет контракт для HTTP клиента, обеспечивая тестируемость через моки
-// 🔗 Key dependencies: Max.Bot.Networking
-// 💡 Usage: Используется для dependency injection и создания моков в тестах
+// рџ“Ѓ [IMaxHttpClient] - РРЅС‚РµСЂС„РµР№СЃ HTTP РєР»РёРµРЅС‚Р°
+// рџЋЇ Core function: РћРїСЂРµРґРµР»СЏРµС‚ РєРѕРЅС‚СЂР°РєС‚ РґР»СЏ HTTP РєР»РёРµРЅС‚Р°, РѕР±РµСЃРїРµС‡РёРІР°СЏ С‚РµСЃС‚РёСЂСѓРµРјРѕСЃС‚СЊ С‡РµСЂРµР· РјРѕРєРё
+// рџ”— Key dependencies: Max.Bot.Networking
+// рџ’Ў Usage: РСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РґР»СЏ dependency injection Рё СЃРѕР·РґР°РЅРёСЏ РјРѕРєРѕРІ РІ С‚РµСЃС‚Р°С…
 
 namespace Max.Bot.Networking;
 

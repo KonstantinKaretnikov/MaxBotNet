@@ -1,7 +1,7 @@
-// 📁 [UpdateTests] - Тесты для Update модели
-// 🎯 Core function: Тестирование сериализации/десериализации Update
-// 🔗 Key dependencies: Max.Bot.Types, Max.Bot.Networking, Max.Bot.Types.Enums, FluentAssertions, xUnit
-// 💡 Usage: Unit тесты для проверки корректности работы Update
+// рџ“Ѓ [UpdateTests] - РўРµСЃС‚С‹ РґР»СЏ Update РјРѕРґРµР»Рё
+// рџЋЇ Core function: РўРµСЃС‚РёСЂРѕРІР°РЅРёРµ СЃРµСЂРёР°Р»РёР·Р°С†РёРё/РґРµСЃРµСЂРёР°Р»РёР·Р°С†РёРё Update
+// рџ”— Key dependencies: Max.Bot.Types, Max.Bot.Networking, Max.Bot.Types.Enums, FluentAssertions, xUnit
+// рџ’Ў Usage: Unit С‚РµСЃС‚С‹ РґР»СЏ РїСЂРѕРІРµСЂРєРё РєРѕСЂСЂРµРєС‚РЅРѕСЃС‚Рё СЂР°Р±РѕС‚С‹ Update
 
 using FluentAssertions;
 using Max.Bot.Networking;

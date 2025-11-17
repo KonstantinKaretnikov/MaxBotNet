@@ -1,7 +1,7 @@
-// 📁 [BotApiTests] - Тесты для BotApi
-// 🎯 Core function: Тестирование методов BotApi (GetMeAsync, GetBotInfoAsync)
-// 🔗 Key dependencies: Max.Bot.Api, Max.Bot.Configuration, Max.Bot.Networking, Max.Bot.Types, Moq, FluentAssertions, xUnit
-// 💡 Usage: Unit тесты для проверки корректности работы BotApi
+// рџ“Ѓ [BotApiTests] - РўРµСЃС‚С‹ РґР»СЏ BotApi
+// рџЋЇ Core function: РўРµСЃС‚РёСЂРѕРІР°РЅРёРµ РјРµС‚РѕРґРѕРІ BotApi (GetMeAsync, GetBotInfoAsync)
+// рџ”— Key dependencies: Max.Bot.Api, Max.Bot.Configuration, Max.Bot.Networking, Max.Bot.Types, Moq, FluentAssertions, xUnit
+// рџ’Ў Usage: Unit С‚РµСЃС‚С‹ РґР»СЏ РїСЂРѕРІРµСЂРєРё РєРѕСЂСЂРµРєС‚РЅРѕСЃС‚Рё СЂР°Р±РѕС‚С‹ BotApi
 
 using FluentAssertions;
 using Max.Bot.Api;

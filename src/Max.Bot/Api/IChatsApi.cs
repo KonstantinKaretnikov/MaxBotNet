@@ -1,7 +1,7 @@
-// 📁 [IChatsApi] - Интерфейс для методов работы с чатами
-// 🎯 Core function: Определяет контракт для API методов работы с чатами
-// 🔗 Key dependencies: Max.Bot.Types
-// 💡 Usage: Используется для dependency injection и создания моков в тестах
+// рџ“Ѓ [IChatsApi] - РРЅС‚РµСЂС„РµР№СЃ РґР»СЏ РјРµС‚РѕРґРѕРІ СЂР°Р±РѕС‚С‹ СЃ С‡Р°С‚Р°РјРё
+// рџЋЇ Core function: РћРїСЂРµРґРµР»СЏРµС‚ РєРѕРЅС‚СЂР°РєС‚ РґР»СЏ API РјРµС‚РѕРґРѕРІ СЂР°Р±РѕС‚С‹ СЃ С‡Р°С‚Р°РјРё
+// рџ”— Key dependencies: Max.Bot.Types
+// рџ’Ў Usage: РСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РґР»СЏ dependency injection Рё СЃРѕР·РґР°РЅРёСЏ РјРѕРєРѕРІ РІ С‚РµСЃС‚Р°С…
 
 using Max.Bot.Types;
 using Max.Bot.Types.Requests;

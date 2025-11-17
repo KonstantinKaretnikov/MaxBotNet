@@ -1,7 +1,7 @@
-// 📁 [Chat] - Модель чата Max Messenger
-// 🎯 Core function: Представляет информацию о чате
-// 🔗 Key dependencies: System.Text.Json.Serialization, System.ComponentModel.DataAnnotations, Max.Bot.Types.Enums
-// 💡 Usage: Используется в Message для представления чата, в котором было отправлено сообщение
+// рџ“Ѓ [Chat] - РњРѕРґРµР»СЊ С‡Р°С‚Р° Max Messenger
+// рџЋЇ Core function: РџСЂРµРґСЃС‚Р°РІР»СЏРµС‚ РёРЅС„РѕСЂРјР°С†РёСЋ Рѕ С‡Р°С‚Рµ
+// рџ”— Key dependencies: System.Text.Json.Serialization, System.ComponentModel.DataAnnotations, Max.Bot.Types.Enums
+// рџ’Ў Usage: РСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РІ Message РґР»СЏ РїСЂРµРґСЃС‚Р°РІР»РµРЅРёСЏ С‡Р°С‚Р°, РІ РєРѕС‚РѕСЂРѕРј Р±С‹Р»Рѕ РѕС‚РїСЂР°РІР»РµРЅРѕ СЃРѕРѕР±С‰РµРЅРёРµ
 
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;

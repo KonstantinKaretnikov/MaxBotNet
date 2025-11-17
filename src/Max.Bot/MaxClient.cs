@@ -1,4 +1,4 @@
-﻿// рџ“Ѓ [MaxClient] - Р“Р»Р°РІРЅС‹Р№ РєР»РёРµРЅС‚ Р±РёР±Р»РёРѕС‚РµРєРё Max Messenger Bot API
+// рџ“Ѓ [MaxClient] - Р“Р»Р°РІРЅС‹Р№ РєР»РёРµРЅС‚ Р±РёР±Р»РёРѕС‚РµРєРё Max Messenger Bot API
 // рџЋЇ Core function: РўРѕС‡РєР° РІС…РѕРґР° РґР»СЏ РІР·Р°РёРјРѕРґРµР№СЃС‚РІРёСЏ СЃ Max Messenger Bot API
 // рџ”— Key dependencies: Max.Bot.Api, Max.Bot.Configuration, Max.Bot.Networking, Max.Bot.Polling
 // рџ’Ў Usage: РћСЃРЅРѕРІРЅРѕР№ РєР»Р°СЃСЃ РґР»СЏ СЂР°Р±РѕС‚С‹ СЃ Max Messenger Bot API

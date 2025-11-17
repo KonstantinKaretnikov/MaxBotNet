@@ -1,7 +1,7 @@
-// 📁 [AttachmentRequest] - Запрос на создание вложения
-// 🎯 Core function: Представляет запрос для создания вложения при отправке сообщения
-// 🔗 Key dependencies: System.Text.Json.Serialization, System.ComponentModel.DataAnnotations
-// 💡 Usage: Используется в SendMessageRequest для создания вложений сообщения
+// рџ“Ѓ [AttachmentRequest] - Р—Р°РїСЂРѕСЃ РЅР° СЃРѕР·РґР°РЅРёРµ РІР»РѕР¶РµРЅРёСЏ
+// рџЋЇ Core function: РџСЂРµРґСЃС‚Р°РІР»СЏРµС‚ Р·Р°РїСЂРѕСЃ РґР»СЏ СЃРѕР·РґР°РЅРёСЏ РІР»РѕР¶РµРЅРёСЏ РїСЂРё РѕС‚РїСЂР°РІРєРµ СЃРѕРѕР±С‰РµРЅРёСЏ
+// рџ”— Key dependencies: System.Text.Json.Serialization, System.ComponentModel.DataAnnotations
+// рџ’Ў Usage: РСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РІ SendMessageRequest РґР»СЏ СЃРѕР·РґР°РЅРёСЏ РІР»РѕР¶РµРЅРёР№ СЃРѕРѕР±С‰РµРЅРёСЏ
 
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;

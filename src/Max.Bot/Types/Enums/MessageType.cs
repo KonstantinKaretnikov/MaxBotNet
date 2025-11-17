@@ -1,7 +1,7 @@
-// 📁 [MessageType] - Тип сообщения в Max Messenger
-// 🎯 Core function: Перечисление типов сообщений (text, image, file)
-// 🔗 Key dependencies: System.Text.Json.Serialization
-// 💡 Usage: Используется в модели Message для определения типа сообщения
+// рџ“Ѓ [MessageType] - РўРёРї СЃРѕРѕР±С‰РµРЅРёСЏ РІ Max Messenger
+// рџЋЇ Core function: РџРµСЂРµС‡РёСЃР»РµРЅРёРµ С‚РёРїРѕРІ СЃРѕРѕР±С‰РµРЅРёР№ (text, image, file)
+// рџ”— Key dependencies: System.Text.Json.Serialization
+// рџ’Ў Usage: РСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РІ РјРѕРґРµР»Рё Message РґР»СЏ РѕРїСЂРµРґРµР»РµРЅРёСЏ С‚РёРїР° СЃРѕРѕР±С‰РµРЅРёСЏ
 
 using System.Text.Json.Serialization;
 

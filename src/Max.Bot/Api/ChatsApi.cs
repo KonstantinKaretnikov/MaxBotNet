@@ -1,7 +1,7 @@
-// 📁 [ChatsApi] - Реализация методов работы с чатами
-// 🎯 Core function: Реализация методов IChatsApi (GetChatAsync, GetChatsAsync)
-// 🔗 Key dependencies: Max.Bot.Api, Max.Bot.Configuration, Max.Bot.Networking, Max.Bot.Types
-// 💡 Usage: Используется в MaxClient для предоставления методов работы с чатами
+// рџ“Ѓ [ChatsApi] - Р РµР°Р»РёР·Р°С†РёСЏ РјРµС‚РѕРґРѕРІ СЂР°Р±РѕС‚С‹ СЃ С‡Р°С‚Р°РјРё
+// рџЋЇ Core function: Р РµР°Р»РёР·Р°С†РёСЏ РјРµС‚РѕРґРѕРІ IChatsApi (GetChatAsync, GetChatsAsync)
+// рџ”— Key dependencies: Max.Bot.Api, Max.Bot.Configuration, Max.Bot.Networking, Max.Bot.Types
+// рџ’Ў Usage: РСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РІ MaxClient РґР»СЏ РїСЂРµРґРѕСЃС‚Р°РІР»РµРЅРёСЏ РјРµС‚РѕРґРѕРІ СЂР°Р±РѕС‚С‹ СЃ С‡Р°С‚Р°РјРё
 
 using System.Collections.Generic;
 using System.Net.Http;

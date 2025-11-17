@@ -1,7 +1,7 @@
-// 📁 [MaxUnauthorizedException] - Исключение для ошибок авторизации
-// 🎯 Core function: Представляет ошибки авторизации (HTTP 401/403)
-// 🔗 Key dependencies: Max.Bot.Exceptions
-// 💡 Usage: Выбрасывается при неавторизованном доступе к API
+// рџ“Ѓ [MaxUnauthorizedException] - РСЃРєР»СЋС‡РµРЅРёРµ РґР»СЏ РѕС€РёР±РѕРє Р°РІС‚РѕСЂРёР·Р°С†РёРё
+// рџЋЇ Core function: РџСЂРµРґСЃС‚Р°РІР»СЏРµС‚ РѕС€РёР±РєРё Р°РІС‚РѕСЂРёР·Р°С†РёРё (HTTP 401/403)
+// рџ”— Key dependencies: Max.Bot.Exceptions
+// рџ’Ў Usage: Р’С‹Р±СЂР°СЃС‹РІР°РµС‚СЃСЏ РїСЂРё РЅРµР°РІС‚РѕСЂРёР·РѕРІР°РЅРЅРѕРј РґРѕСЃС‚СѓРїРµ Рє API
 
 using System.Net;
 

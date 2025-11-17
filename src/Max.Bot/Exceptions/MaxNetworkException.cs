@@ -1,7 +1,7 @@
-// 📁 [MaxNetworkException] - Исключение для сетевых ошибок
-// 🎯 Core function: Представляет ошибки сетевого уровня (timeout, connection errors)
-// 🔗 Key dependencies: Max.Bot.Exceptions
-// 💡 Usage: Выбрасывается при сетевых проблемах при взаимодействии с API
+// рџ“Ѓ [MaxNetworkException] - РСЃРєР»СЋС‡РµРЅРёРµ РґР»СЏ СЃРµС‚РµРІС‹С… РѕС€РёР±РѕРє
+// рџЋЇ Core function: РџСЂРµРґСЃС‚Р°РІР»СЏРµС‚ РѕС€РёР±РєРё СЃРµС‚РµРІРѕРіРѕ СѓСЂРѕРІРЅСЏ (timeout, connection errors)
+// рџ”— Key dependencies: Max.Bot.Exceptions
+// рџ’Ў Usage: Р’С‹Р±СЂР°СЃС‹РІР°РµС‚СЃСЏ РїСЂРё СЃРµС‚РµРІС‹С… РїСЂРѕР±Р»РµРјР°С… РїСЂРё РІР·Р°РёРјРѕРґРµР№СЃС‚РІРёРё СЃ API
 
 using System.Net;
 

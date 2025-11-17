@@ -1,7 +1,7 @@
-// 📁 [MaxHttpClientRetryTests] - Тесты для retry механизма HTTP клиента
-// 🎯 Core function: Тестирование retry механизма с exponential backoff в MaxHttpClient
-// 🔗 Key dependencies: Max.Bot.Networking, Max.Bot.Configuration, Max.Bot.Exceptions, FluentAssertions, xUnit
-// 💡 Usage: Unit тесты для проверки корректности работы retry механизма
+// рџ“Ѓ [MaxHttpClientRetryTests] - РўРµСЃС‚С‹ РґР»СЏ retry РјРµС…Р°РЅРёР·РјР° HTTP РєР»РёРµРЅС‚Р°
+// рџЋЇ Core function: РўРµСЃС‚РёСЂРѕРІР°РЅРёРµ retry РјРµС…Р°РЅРёР·РјР° СЃ exponential backoff РІ MaxHttpClient
+// рџ”— Key dependencies: Max.Bot.Networking, Max.Bot.Configuration, Max.Bot.Exceptions, FluentAssertions, xUnit
+// рџ’Ў Usage: Unit С‚РµСЃС‚С‹ РґР»СЏ РїСЂРѕРІРµСЂРєРё РєРѕСЂСЂРµРєС‚РЅРѕСЃС‚Рё СЂР°Р±РѕС‚С‹ retry РјРµС…Р°РЅРёР·РјР°
 
 using System.Diagnostics;
 using System.Net;

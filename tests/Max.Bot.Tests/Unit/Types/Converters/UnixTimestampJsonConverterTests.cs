@@ -1,7 +1,7 @@
-// 📁 [UnixTimestampJsonConverterTests] - Тесты для UnixTimestampJsonConverter
-// 🎯 Core function: Тестирование преобразования Unix timestamp в DateTime и обратно
-// 🔗 Key dependencies: Max.Bot.Types.Converters, FluentAssertions, xUnit
-// 💡 Usage: Unit тесты для проверки корректности работы UnixTimestampJsonConverter
+// рџ“Ѓ [UnixTimestampJsonConverterTests] - РўРµСЃС‚С‹ РґР»СЏ UnixTimestampJsonConverter
+// рџЋЇ Core function: РўРµСЃС‚РёСЂРѕРІР°РЅРёРµ РїСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёСЏ Unix timestamp РІ DateTime Рё РѕР±СЂР°С‚РЅРѕ
+// рџ”— Key dependencies: Max.Bot.Types.Converters, FluentAssertions, xUnit
+// рџ’Ў Usage: Unit С‚РµСЃС‚С‹ РґР»СЏ РїСЂРѕРІРµСЂРєРё РєРѕСЂСЂРµРєС‚РЅРѕСЃС‚Рё СЂР°Р±РѕС‚С‹ UnixTimestampJsonConverter
 
 using FluentAssertions;
 using Max.Bot.Networking;

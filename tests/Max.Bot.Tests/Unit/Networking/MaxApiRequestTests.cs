@@ -1,7 +1,7 @@
-// 📁 [MaxApiRequestTests] - Тесты для модели запроса к API
-// 🎯 Core function: Тестирование построения URL и query string из MaxApiRequest
-// 🔗 Key dependencies: Max.Bot.Networking, FluentAssertions, xUnit
-// 💡 Usage: Unit тесты для проверки корректности работы MaxApiRequest
+// рџ“Ѓ [MaxApiRequestTests] - РўРµСЃС‚С‹ РґР»СЏ РјРѕРґРµР»Рё Р·Р°РїСЂРѕСЃР° Рє API
+// рџЋЇ Core function: РўРµСЃС‚РёСЂРѕРІР°РЅРёРµ РїРѕСЃС‚СЂРѕРµРЅРёСЏ URL Рё query string РёР· MaxApiRequest
+// рџ”— Key dependencies: Max.Bot.Networking, FluentAssertions, xUnit
+// рџ’Ў Usage: Unit С‚РµСЃС‚С‹ РґР»СЏ РїСЂРѕРІРµСЂРєРё РєРѕСЂСЂРµРєС‚РЅРѕСЃС‚Рё СЂР°Р±РѕС‚С‹ MaxApiRequest
 
 using System.Net.Http;
 using FluentAssertions;

@@ -1,7 +1,7 @@
-// 📁 [ChatTypeTests] - Тесты для ChatType enum
-// 🎯 Core function: Тестирование сериализации/десериализации ChatType enum
-// 🔗 Key dependencies: Max.Bot.Types.Enums, FluentAssertions, xUnit
-// 💡 Usage: Unit тесты для проверки корректности работы ChatType enum
+// рџ“Ѓ [ChatTypeTests] - РўРµСЃС‚С‹ РґР»СЏ ChatType enum
+// рџЋЇ Core function: РўРµСЃС‚РёСЂРѕРІР°РЅРёРµ СЃРµСЂРёР°Р»РёР·Р°С†РёРё/РґРµСЃРµСЂРёР°Р»РёР·Р°С†РёРё ChatType enum
+// рџ”— Key dependencies: Max.Bot.Types.Enums, FluentAssertions, xUnit
+// рџ’Ў Usage: Unit С‚РµСЃС‚С‹ РґР»СЏ РїСЂРѕРІРµСЂРєРё РєРѕСЂСЂРµРєС‚РЅРѕСЃС‚Рё СЂР°Р±РѕС‚С‹ ChatType enum
 
 using FluentAssertions;
 using Max.Bot.Types.Enums;

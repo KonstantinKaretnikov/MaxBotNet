@@ -1,7 +1,7 @@
-// 📁 [UnixTimestampJsonConverter] - JSON конвертер для Unix timestamp
-// 🎯 Core function: Преобразование Unix timestamp (число) в DateTime и обратно
-// 🔗 Key dependencies: System.Text.Json.Serialization
-// 💡 Usage: Используется в MaxJsonSerializer.Options для автоматического преобразования Unix timestamp в DateTime
+// рџ“Ѓ [UnixTimestampJsonConverter] - JSON РєРѕРЅРІРµСЂС‚РµСЂ РґР»СЏ Unix timestamp
+// рџЋЇ Core function: РџСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёРµ Unix timestamp (С‡РёСЃР»Рѕ) РІ DateTime Рё РѕР±СЂР°С‚РЅРѕ
+// рџ”— Key dependencies: System.Text.Json.Serialization
+// рџ’Ў Usage: РСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РІ MaxJsonSerializer.Options РґР»СЏ Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРѕРіРѕ РїСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёСЏ Unix timestamp РІ DateTime
 
 using System.Text.Json;
 using System.Text.Json.Serialization;

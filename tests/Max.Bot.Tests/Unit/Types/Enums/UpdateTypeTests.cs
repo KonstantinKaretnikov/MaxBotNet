@@ -1,7 +1,7 @@
-// 📁 [UpdateTypeTests] - Тесты для UpdateType enum
-// 🎯 Core function: Тестирование сериализации/десериализации UpdateType enum
-// 🔗 Key dependencies: Max.Bot.Types.Enums, FluentAssertions, xUnit
-// 💡 Usage: Unit тесты для проверки корректности работы UpdateType enum
+// рџ“Ѓ [UpdateTypeTests] - РўРµСЃС‚С‹ РґР»СЏ UpdateType enum
+// рџЋЇ Core function: РўРµСЃС‚РёСЂРѕРІР°РЅРёРµ СЃРµСЂРёР°Р»РёР·Р°С†РёРё/РґРµСЃРµСЂРёР°Р»РёР·Р°С†РёРё UpdateType enum
+// рџ”— Key dependencies: Max.Bot.Types.Enums, FluentAssertions, xUnit
+// рџ’Ў Usage: Unit С‚РµСЃС‚С‹ РґР»СЏ РїСЂРѕРІРµСЂРєРё РєРѕСЂСЂРµРєС‚РЅРѕСЃС‚Рё СЂР°Р±РѕС‚С‹ UpdateType enum
 
 using FluentAssertions;
 using Max.Bot.Types.Enums;

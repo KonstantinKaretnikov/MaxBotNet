@@ -1,7 +1,7 @@
-// 📁 [ExceptionTests] - Тесты для кастомных исключений
-// 🎯 Core function: Тестирование создания и поведения кастомных исключений API
-// 🔗 Key dependencies: Max.Bot.Exceptions, FluentAssertions, xUnit
-// 💡 Usage: Unit тесты для проверки корректности работы исключений
+// рџ“Ѓ [ExceptionTests] - РўРµСЃС‚С‹ РґР»СЏ РєР°СЃС‚РѕРјРЅС‹С… РёСЃРєР»СЋС‡РµРЅРёР№
+// рџЋЇ Core function: РўРµСЃС‚РёСЂРѕРІР°РЅРёРµ СЃРѕР·РґР°РЅРёСЏ Рё РїРѕРІРµРґРµРЅРёСЏ РєР°СЃС‚РѕРјРЅС‹С… РёСЃРєР»СЋС‡РµРЅРёР№ API
+// рџ”— Key dependencies: Max.Bot.Exceptions, FluentAssertions, xUnit
+// рџ’Ў Usage: Unit С‚РµСЃС‚С‹ РґР»СЏ РїСЂРѕРІРµСЂРєРё РєРѕСЂСЂРµРєС‚РЅРѕСЃС‚Рё СЂР°Р±РѕС‚С‹ РёСЃРєР»СЋС‡РµРЅРёР№
 
 using System.Net;
 using FluentAssertions;

@@ -1,4 +1,4 @@
-﻿// рџ“Ѓ [MaxPollingOptions] - РќР°СЃС‚СЂРѕР№РєРё long polling РґР»СЏ Max API updates
+// рџ“Ѓ [MaxPollingOptions] - РќР°СЃС‚СЂРѕР№РєРё long polling РґР»СЏ Max API updates
 // рџЋЇ Core function: РћРїРёСЃС‹РІР°РµС‚ РїР°СЂР°РјРµС‚СЂС‹ GET /updates (marker, timeout, limit)
 // рџ”— Key dependencies: System, Max.Bot.Types.Enums
 // рџ’Ў Usage: РљРѕРЅС„РёРіСѓСЂРёСЂСѓРµС‚ UpdatePoller Рё MaxClient long polling РїРѕРІРµРґРµРЅРёРµ

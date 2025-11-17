@@ -1,7 +1,7 @@
-// 📁 [IMaxBotApi] - Главный интерфейс API Max Messenger Bot
-// 🎯 Core function: Объединяет все группы API методов в единый интерфейс
-// 🔗 Key dependencies: Max.Bot.Api
-// 💡 Usage: Используется как главный интерфейс для работы с Max Bot API
+// рџ“Ѓ [IMaxBotApi] - Р“Р»Р°РІРЅС‹Р№ РёРЅС‚РµСЂС„РµР№СЃ API Max Messenger Bot
+// рџЋЇ Core function: РћР±СЉРµРґРёРЅСЏРµС‚ РІСЃРµ РіСЂСѓРїРїС‹ API РјРµС‚РѕРґРѕРІ РІ РµРґРёРЅС‹Р№ РёРЅС‚РµСЂС„РµР№СЃ
+// рџ”— Key dependencies: Max.Bot.Api
+// рџ’Ў Usage: РСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РєР°Рє РіР»Р°РІРЅС‹Р№ РёРЅС‚РµСЂС„РµР№СЃ РґР»СЏ СЂР°Р±РѕС‚С‹ СЃ Max Bot API
 
 namespace Max.Bot.Api;
 

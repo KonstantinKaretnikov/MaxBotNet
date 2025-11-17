@@ -1,7 +1,7 @@
-// 📁 [Response] - Модель успешного ответа от Max Bot API
-// 🎯 Core function: Обертка для успешного ответа API с данными
-// 🔗 Key dependencies: System.Text.Json.Serialization
-// 💡 Usage: Используется для десериализации успешных ответов от Max Bot API
+// рџ“Ѓ [Response] - РњРѕРґРµР»СЊ СѓСЃРїРµС€РЅРѕРіРѕ РѕС‚РІРµС‚Р° РѕС‚ Max Bot API
+// рџЋЇ Core function: РћР±РµСЂС‚РєР° РґР»СЏ СѓСЃРїРµС€РЅРѕРіРѕ РѕС‚РІРµС‚Р° API СЃ РґР°РЅРЅС‹РјРё
+// рџ”— Key dependencies: System.Text.Json.Serialization
+// рџ’Ў Usage: РСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РґР»СЏ РґРµСЃРµСЂРёР°Р»РёР·Р°С†РёРё СѓСЃРїРµС€РЅС‹С… РѕС‚РІРµС‚РѕРІ РѕС‚ Max Bot API
 
 using System.Text.Json.Serialization;
 

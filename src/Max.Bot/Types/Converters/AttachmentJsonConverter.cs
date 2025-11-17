@@ -1,7 +1,7 @@
-// 📁 [AttachmentJsonConverter] - JSON конвертер для полиморфных вложений
-// 🎯 Core function: Десериализует Attachment по типу из поля "type"
-// 🔗 Key dependencies: System.Text.Json, Max.Bot.Types, Max.Bot.Types.Enums
-// 💡 Usage: Используется MaxJsonSerializer для десериализации полиморфных вложений
+// рџ“Ѓ [AttachmentJsonConverter] - JSON РєРѕРЅРІРµСЂС‚РµСЂ РґР»СЏ РїРѕР»РёРјРѕСЂС„РЅС‹С… РІР»РѕР¶РµРЅРёР№
+// рџЋЇ Core function: Р”РµСЃРµСЂРёР°Р»РёР·СѓРµС‚ Attachment РїРѕ С‚РёРїСѓ РёР· РїРѕР»СЏ "type"
+// рџ”— Key dependencies: System.Text.Json, Max.Bot.Types, Max.Bot.Types.Enums
+// рџ’Ў Usage: РСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ MaxJsonSerializer РґР»СЏ РґРµСЃРµСЂРёР°Р»РёР·Р°С†РёРё РїРѕР»РёРјРѕСЂС„РЅС‹С… РІР»РѕР¶РµРЅРёР№
 
 using System.Text.Json;
 using System.Text.Json.Serialization;

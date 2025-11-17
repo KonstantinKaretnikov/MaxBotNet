@@ -1,4 +1,4 @@
-﻿namespace Max.Bot.Tests;
+namespace Max.Bot.Tests;
 
 public class UnitTest1
 {

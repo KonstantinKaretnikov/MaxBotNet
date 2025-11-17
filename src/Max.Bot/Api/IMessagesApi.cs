@@ -1,7 +1,7 @@
-// 📁 [IMessagesApi] - Интерфейс для методов работы с сообщениями
-// 🎯 Core function: Определяет контракт для API методов работы с сообщениями
-// 🔗 Key dependencies: Max.Bot.Types, Max.Bot.Types.Requests
-// 💡 Usage: Используется для dependency injection и создания моков в тестах
+// рџ“Ѓ [IMessagesApi] - РРЅС‚РµСЂС„РµР№СЃ РґР»СЏ РјРµС‚РѕРґРѕРІ СЂР°Р±РѕС‚С‹ СЃ СЃРѕРѕР±С‰РµРЅРёСЏРјРё
+// рџЋЇ Core function: РћРїСЂРµРґРµР»СЏРµС‚ РєРѕРЅС‚СЂР°РєС‚ РґР»СЏ API РјРµС‚РѕРґРѕРІ СЂР°Р±РѕС‚С‹ СЃ СЃРѕРѕР±С‰РµРЅРёСЏРјРё
+// рџ”— Key dependencies: Max.Bot.Types, Max.Bot.Types.Requests
+// рџ’Ў Usage: РСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РґР»СЏ dependency injection Рё СЃРѕР·РґР°РЅРёСЏ РјРѕРєРѕРІ РІ С‚РµСЃС‚Р°С…
 
 using Max.Bot.Types;
 using Max.Bot.Types.Enums;

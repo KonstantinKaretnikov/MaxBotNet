@@ -1,7 +1,7 @@
-// 📁 [MaxBotClientOptions] - Опции для HTTP клиента
-// 🎯 Core function: Конфигурация HTTP клиента (retry policy, таймауты, логирование)
-// 🔗 Key dependencies: System
-// 💡 Usage: Настройка поведения MaxHttpClient через MaxBotClientOptions
+// рџ“Ѓ [MaxBotClientOptions] - РћРїС†РёРё РґР»СЏ HTTP РєР»РёРµРЅС‚Р°
+// рџЋЇ Core function: РљРѕРЅС„РёРіСѓСЂР°С†РёСЏ HTTP РєР»РёРµРЅС‚Р° (retry policy, С‚Р°Р№РјР°СѓС‚С‹, Р»РѕРіРёСЂРѕРІР°РЅРёРµ)
+// рџ”— Key dependencies: System
+// рџ’Ў Usage: РќР°СЃС‚СЂРѕР№РєР° РїРѕРІРµРґРµРЅРёСЏ MaxHttpClient С‡РµСЂРµР· MaxBotClientOptions
 
 namespace Max.Bot.Configuration;
 

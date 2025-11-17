@@ -6,6 +6,9 @@
     <Nullable>enable</Nullable>
     <IsPackable>false</IsPackable>
     <NoWarn>$(NoWarn);CS1591</NoWarn>
+    <CollectCoverage>true</CollectCoverage>
+    <CoverletOutput>$(MSBuildProjectDirectory)\TestResults\Coverage\coverage</CoverletOutput>
+    <CoverletOutputFormat>cobertura</CoverletOutputFormat>
   </PropertyGroup>
 
   <ItemGroup>

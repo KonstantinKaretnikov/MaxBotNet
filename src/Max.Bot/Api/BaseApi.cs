@@ -1,7 +1,7 @@
-// 📁 [BaseApi] - Базовый класс для API классов
-// 🎯 Core function: Общая логика для всех API классов (построение URL, заголовки, обработка Response<T>)
-// 🔗 Key dependencies: Max.Bot.Networking, Max.Bot.Configuration, Max.Bot.Types, Max.Bot.Exceptions
-// 💡 Usage: Базовый класс для BotApi, MessagesApi, ChatsApi, UsersApi
+// рџ“Ѓ [BaseApi] - Р‘Р°Р·РѕРІС‹Р№ РєР»Р°СЃСЃ РґР»СЏ API РєР»Р°СЃСЃРѕРІ
+// рџЋЇ Core function: РћР±С‰Р°СЏ Р»РѕРіРёРєР° РґР»СЏ РІСЃРµС… API РєР»Р°СЃСЃРѕРІ (РїРѕСЃС‚СЂРѕРµРЅРёРµ URL, Р·Р°РіРѕР»РѕРІРєРё, РѕР±СЂР°Р±РѕС‚РєР° Response<T>)
+// рџ”— Key dependencies: Max.Bot.Networking, Max.Bot.Configuration, Max.Bot.Types, Max.Bot.Exceptions
+// рџ’Ў Usage: Р‘Р°Р·РѕРІС‹Р№ РєР»Р°СЃСЃ РґР»СЏ BotApi, MessagesApi, ChatsApi, UsersApi
 
 using System.Net;
 using System.Net.Http;

@@ -1,4 +1,4 @@
-﻿using System.Threading;
+using System.Threading;
 using System.Threading.Tasks;
 using Max.Bot.Types;
 using Max.Bot.Types.Requests;

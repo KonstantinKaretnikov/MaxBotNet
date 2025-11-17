@@ -1,7 +1,7 @@
-// 📁 [ErrorResponse] - Модель ответа с ошибкой от Max Bot API
-// 🎯 Core function: Представляет ответ API с ошибкой
-// 🔗 Key dependencies: System.Text.Json.Serialization, Max.Bot.Types
-// 💡 Usage: Используется для десериализации ответов с ошибками от Max Bot API
+// рџ“Ѓ [ErrorResponse] - РњРѕРґРµР»СЊ РѕС‚РІРµС‚Р° СЃ РѕС€РёР±РєРѕР№ РѕС‚ Max Bot API
+// рџЋЇ Core function: РџСЂРµРґСЃС‚Р°РІР»СЏРµС‚ РѕС‚РІРµС‚ API СЃ РѕС€РёР±РєРѕР№
+// рџ”— Key dependencies: System.Text.Json.Serialization, Max.Bot.Types
+// рџ’Ў Usage: РСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РґР»СЏ РґРµСЃРµСЂРёР°Р»РёР·Р°С†РёРё РѕС‚РІРµС‚РѕРІ СЃ РѕС€РёР±РєР°РјРё РѕС‚ Max Bot API
 
 using System.Text.Json.Serialization;
 

@@ -1,4 +1,4 @@
-﻿// рџ“Ѓ [MaxClientUpdatePipelineTests] - Tests for MaxClient update pipeline helpers
+// рџ“Ѓ [MaxClientUpdatePipelineTests] - Tests for MaxClient update pipeline helpers
 // рџЋЇ Core function: Verifies ProcessWebhookAsync applies filters and dispatches handlers
 // рџ”— Key dependencies: Max.Bot, Max.Bot.Configuration, Max.Bot.Polling, Max.Bot.Types, Moq, FluentAssertions, xUnit
 // рџ’Ў Usage: Ensures webhook processing respects username/type filters

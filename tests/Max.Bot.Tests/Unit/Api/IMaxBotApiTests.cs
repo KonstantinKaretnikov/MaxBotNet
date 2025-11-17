@@ -1,7 +1,7 @@
-// 📁 [IMaxBotApiTests] - Тесты для главного интерфейса API
-// 🎯 Core function: Тестирование структуры интерфейса IMaxBotApi
-// 🔗 Key dependencies: Max.Bot.Api, FluentAssertions, xUnit
-// 💡 Usage: Unit тесты для проверки корректности интерфейса IMaxBotApi
+// рџ“Ѓ [IMaxBotApiTests] - РўРµСЃС‚С‹ РґР»СЏ РіР»Р°РІРЅРѕРіРѕ РёРЅС‚РµСЂС„РµР№СЃР° API
+// рџЋЇ Core function: РўРµСЃС‚РёСЂРѕРІР°РЅРёРµ СЃС‚СЂСѓРєС‚СѓСЂС‹ РёРЅС‚РµСЂС„РµР№СЃР° IMaxBotApi
+// рџ”— Key dependencies: Max.Bot.Api, FluentAssertions, xUnit
+// рџ’Ў Usage: Unit С‚РµСЃС‚С‹ РґР»СЏ РїСЂРѕРІРµСЂРєРё РєРѕСЂСЂРµРєС‚РЅРѕСЃС‚Рё РёРЅС‚РµСЂС„РµР№СЃР° IMaxBotApi
 
 using FluentAssertions;
 using Max.Bot.Api;

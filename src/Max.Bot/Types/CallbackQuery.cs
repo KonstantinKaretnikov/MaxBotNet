@@ -1,7 +1,7 @@
-// 📁 [CallbackQuery] - Модель callback query в Max Messenger
-// 🎯 Core function: Представляет callback query от inline кнопки
-// 🔗 Key dependencies: System.Text.Json.Serialization, System.ComponentModel.DataAnnotations
-// 💡 Usage: Используется в Update для представления callback query
+// рџ“Ѓ [CallbackQuery] - РњРѕРґРµР»СЊ callback query РІ Max Messenger
+// рџЋЇ Core function: РџСЂРµРґСЃС‚Р°РІР»СЏРµС‚ callback query РѕС‚ inline РєРЅРѕРїРєРё
+// рџ”— Key dependencies: System.Text.Json.Serialization, System.ComponentModel.DataAnnotations
+// рџ’Ў Usage: РСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РІ Update РґР»СЏ РїСЂРµРґСЃС‚Р°РІР»РµРЅРёСЏ callback query
 
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;

@@ -1,7 +1,7 @@
-// 📁 [AttachmentTests] - Тесты для модели Attachment
-// 🎯 Core function: Тестирование сериализации/десериализации полиморфных вложений
-// 🔗 Key dependencies: Max.Bot.Types, Max.Bot.Networking, Max.Bot.Types.Enums, FluentAssertions, xUnit
-// 💡 Usage: Unit тесты для проверки корректности работы полиморфной десериализации Attachment
+// рџ“Ѓ [AttachmentTests] - РўРµСЃС‚С‹ РґР»СЏ РјРѕРґРµР»Рё Attachment
+// рџЋЇ Core function: РўРµСЃС‚РёСЂРѕРІР°РЅРёРµ СЃРµСЂРёР°Р»РёР·Р°С†РёРё/РґРµСЃРµСЂРёР°Р»РёР·Р°С†РёРё РїРѕР»РёРјРѕСЂС„РЅС‹С… РІР»РѕР¶РµРЅРёР№
+// рџ”— Key dependencies: Max.Bot.Types, Max.Bot.Networking, Max.Bot.Types.Enums, FluentAssertions, xUnit
+// рџ’Ў Usage: Unit С‚РµСЃС‚С‹ РґР»СЏ РїСЂРѕРІРµСЂРєРё РєРѕСЂСЂРµРєС‚РЅРѕСЃС‚Рё СЂР°Р±РѕС‚С‹ РїРѕР»РёРјРѕСЂС„РЅРѕР№ РґРµСЃРµСЂРёР°Р»РёР·Р°С†РёРё Attachment
 
 using FluentAssertions;
 using Max.Bot.Networking;

@@ -1,7 +1,7 @@
-// 📁 [NewMessageLink] - Ссылка на сообщение для пересылки/ответа
-// 🎯 Core function: Представляет ссылку на сообщение при отправке нового сообщения
-// 🔗 Key dependencies: System.Text.Json.Serialization, System.ComponentModel.DataAnnotations
-// 💡 Usage: Используется в SendMessageRequest для пересылки или ответа на сообщение
+// рџ“Ѓ [NewMessageLink] - РЎСЃС‹Р»РєР° РЅР° СЃРѕРѕР±С‰РµРЅРёРµ РґР»СЏ РїРµСЂРµСЃС‹Р»РєРё/РѕС‚РІРµС‚Р°
+// рџЋЇ Core function: РџСЂРµРґСЃС‚Р°РІР»СЏРµС‚ СЃСЃС‹Р»РєСѓ РЅР° СЃРѕРѕР±С‰РµРЅРёРµ РїСЂРё РѕС‚РїСЂР°РІРєРµ РЅРѕРІРѕРіРѕ СЃРѕРѕР±С‰РµРЅРёСЏ
+// рџ”— Key dependencies: System.Text.Json.Serialization, System.ComponentModel.DataAnnotations
+// рџ’Ў Usage: РСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РІ SendMessageRequest РґР»СЏ РїРµСЂРµСЃС‹Р»РєРё РёР»Рё РѕС‚РІРµС‚Р° РЅР° СЃРѕРѕР±С‰РµРЅРёРµ
 
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;

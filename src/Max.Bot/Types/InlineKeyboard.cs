@@ -1,7 +1,7 @@
-// 📁 [InlineKeyboard] - Модель inline клавиатуры в Max Messenger
-// 🎯 Core function: Представляет inline клавиатуру с кнопками
-// 🔗 Key dependencies: System.Text.Json.Serialization, System.ComponentModel.DataAnnotations
-// 💡 Usage: Используется в Message для представления inline клавиатуры
+// рџ“Ѓ [InlineKeyboard] - РњРѕРґРµР»СЊ inline РєР»Р°РІРёР°С‚СѓСЂС‹ РІ Max Messenger
+// рџЋЇ Core function: РџСЂРµРґСЃС‚Р°РІР»СЏРµС‚ inline РєР»Р°РІРёР°С‚СѓСЂСѓ СЃ РєРЅРѕРїРєР°РјРё
+// рџ”— Key dependencies: System.Text.Json.Serialization, System.ComponentModel.DataAnnotations
+// рџ’Ў Usage: РСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РІ Message РґР»СЏ РїСЂРµРґСЃС‚Р°РІР»РµРЅРёСЏ inline РєР»Р°РІРёР°С‚СѓСЂС‹
 
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;

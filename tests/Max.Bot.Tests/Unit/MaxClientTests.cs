@@ -1,7 +1,7 @@
-// 📁 [MaxClientTests] - Тесты для MaxClient
-// 🎯 Core function: Тестирование создания MaxClient и его API свойств
-// 🔗 Key dependencies: Max.Bot, Max.Bot.Configuration, FluentAssertions, xUnit
-// 💡 Usage: Unit тесты для проверки корректности работы MaxClient
+// рџ“Ѓ [MaxClientTests] - РўРµСЃС‚С‹ РґР»СЏ MaxClient
+// рџЋЇ Core function: РўРµСЃС‚РёСЂРѕРІР°РЅРёРµ СЃРѕР·РґР°РЅРёСЏ MaxClient Рё РµРіРѕ API СЃРІРѕР№СЃС‚РІ
+// рџ”— Key dependencies: Max.Bot, Max.Bot.Configuration, FluentAssertions, xUnit
+// рџ’Ў Usage: Unit С‚РµСЃС‚С‹ РґР»СЏ РїСЂРѕРІРµСЂРєРё РєРѕСЂСЂРµРєС‚РЅРѕСЃС‚Рё СЂР°Р±РѕС‚С‹ MaxClient
 
 using FluentAssertions;
 using Max.Bot;

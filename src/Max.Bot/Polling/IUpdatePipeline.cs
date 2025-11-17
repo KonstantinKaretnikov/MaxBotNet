@@ -1,4 +1,4 @@
-﻿// рџ“Ѓ [IUpdatePipeline] - РљРѕРЅС‚СЂР°РєС‚ РѕР±СЂР°Р±РѕС‚РєРё webhook Рё polling РѕР±РЅРѕРІР»РµРЅРёР№
+// рџ“Ѓ [IUpdatePipeline] - РљРѕРЅС‚СЂР°РєС‚ РѕР±СЂР°Р±РѕС‚РєРё webhook Рё polling РѕР±РЅРѕРІР»РµРЅРёР№
 // рџЋЇ Core function: РЈРЅРёС„РёС†РёСЂСѓРµС‚ API РѕР±СЂР°Р±РѕС‚РєРё РѕР±РЅРѕРІР»РµРЅРёР№ РґР»СЏ РєРѕРЅС‚СЂРѕР»Р»РµСЂР° Рё poller
 // рџ”— Key dependencies: System.Threading.Tasks, Max.Bot.Types
 // рџ’Ў Usage: Р РµР°Р»РёР·СѓРµС‚СЃСЏ MaxClient РґР»СЏ РїСЂРѕРєСЃРёСЂРѕРІР°РЅРёСЏ РѕР±РЅРѕРІР»РµРЅРёР№ РІ IUpdateHandler

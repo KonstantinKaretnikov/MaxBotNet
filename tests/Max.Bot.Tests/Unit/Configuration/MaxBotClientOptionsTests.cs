@@ -1,7 +1,7 @@
-// 📁 [MaxBotClientOptionsTests] - Тесты для конфигурации HTTP клиента
-// 🎯 Core function: Тестирование валидации и создания MaxBotClientOptions
-// 🔗 Key dependencies: Max.Bot.Configuration, FluentAssertions, xUnit
-// 💡 Usage: Unit тесты для проверки корректности работы MaxBotClientOptions
+// рџ“Ѓ [MaxBotClientOptionsTests] - РўРµСЃС‚С‹ РґР»СЏ РєРѕРЅС„РёРіСѓСЂР°С†РёРё HTTP РєР»РёРµРЅС‚Р°
+// рџЋЇ Core function: РўРµСЃС‚РёСЂРѕРІР°РЅРёРµ РІР°Р»РёРґР°С†РёРё Рё СЃРѕР·РґР°РЅРёСЏ MaxBotClientOptions
+// рџ”— Key dependencies: Max.Bot.Configuration, FluentAssertions, xUnit
+// рџ’Ў Usage: Unit С‚РµСЃС‚С‹ РґР»СЏ РїСЂРѕРІРµСЂРєРё РєРѕСЂСЂРµРєС‚РЅРѕСЃС‚Рё СЂР°Р±РѕС‚С‹ MaxBotClientOptions
 
 using FluentAssertions;
 using Max.Bot.Configuration;

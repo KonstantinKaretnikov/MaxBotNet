@@ -1,7 +1,7 @@
-// 📁 [ChatTests] - Тесты для Chat модели
-// 🎯 Core function: Тестирование сериализации/десериализации Chat
-// 🔗 Key dependencies: Max.Bot.Types, Max.Bot.Networking, Max.Bot.Types.Enums, FluentAssertions, xUnit
-// 💡 Usage: Unit тесты для проверки корректности работы Chat
+// рџ“Ѓ [ChatTests] - РўРµСЃС‚С‹ РґР»СЏ Chat РјРѕРґРµР»Рё
+// рџЋЇ Core function: РўРµСЃС‚РёСЂРѕРІР°РЅРёРµ СЃРµСЂРёР°Р»РёР·Р°С†РёРё/РґРµСЃРµСЂРёР°Р»РёР·Р°С†РёРё Chat
+// рџ”— Key dependencies: Max.Bot.Types, Max.Bot.Networking, Max.Bot.Types.Enums, FluentAssertions, xUnit
+// рџ’Ў Usage: Unit С‚РµСЃС‚С‹ РґР»СЏ РїСЂРѕРІРµСЂРєРё РєРѕСЂСЂРµРєС‚РЅРѕСЃС‚Рё СЂР°Р±РѕС‚С‹ Chat
 
 using FluentAssertions;
 using Max.Bot.Networking;

@@ -1,7 +1,7 @@
-// 📁 [MaxHttpClientLoggingTests] - Тесты для логирования HTTP клиента
-// 🎯 Core function: Тестирование логирования событий в MaxHttpClient
-// 🔗 Key dependencies: Max.Bot.Networking, Max.Bot.Configuration, Microsoft.Extensions.Logging, FluentAssertions, xUnit, Moq
-// 💡 Usage: Unit тесты для проверки корректности логирования
+// рџ“Ѓ [MaxHttpClientLoggingTests] - РўРµСЃС‚С‹ РґР»СЏ Р»РѕРіРёСЂРѕРІР°РЅРёСЏ HTTP РєР»РёРµРЅС‚Р°
+// рџЋЇ Core function: РўРµСЃС‚РёСЂРѕРІР°РЅРёРµ Р»РѕРіРёСЂРѕРІР°РЅРёСЏ СЃРѕР±С‹С‚РёР№ РІ MaxHttpClient
+// рџ”— Key dependencies: Max.Bot.Networking, Max.Bot.Configuration, Microsoft.Extensions.Logging, FluentAssertions, xUnit, Moq
+// рџ’Ў Usage: Unit С‚РµСЃС‚С‹ РґР»СЏ РїСЂРѕРІРµСЂРєРё РєРѕСЂСЂРµРєС‚РЅРѕСЃС‚Рё Р»РѕРіРёСЂРѕРІР°РЅРёСЏ
 
 using System.Net;
 using System.Net.Http;

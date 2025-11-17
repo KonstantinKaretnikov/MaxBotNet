@@ -1,7 +1,7 @@
-// 📁 [ResponseTests] - Тесты для Response<T> модели
-// 🎯 Core function: Тестирование сериализации/десериализации Response<T>
-// 🔗 Key dependencies: Max.Bot.Types, Max.Bot.Networking, FluentAssertions, xUnit
-// 💡 Usage: Unit тесты для проверки корректности работы Response<T>
+// рџ“Ѓ [ResponseTests] - РўРµСЃС‚С‹ РґР»СЏ Response<T> РјРѕРґРµР»Рё
+// рџЋЇ Core function: РўРµСЃС‚РёСЂРѕРІР°РЅРёРµ СЃРµСЂРёР°Р»РёР·Р°С†РёРё/РґРµСЃРµСЂРёР°Р»РёР·Р°С†РёРё Response<T>
+// рџ”— Key dependencies: Max.Bot.Types, Max.Bot.Networking, FluentAssertions, xUnit
+// рџ’Ў Usage: Unit С‚РµСЃС‚С‹ РґР»СЏ РїСЂРѕРІРµСЂРєРё РєРѕСЂСЂРµРєС‚РЅРѕСЃС‚Рё СЂР°Р±РѕС‚С‹ Response<T>
 
 using FluentAssertions;
 using Max.Bot.Networking;

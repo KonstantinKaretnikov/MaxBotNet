@@ -1,7 +1,7 @@
-// 📁 [Attachment] - Модель вложения в Max Messenger
-// 🎯 Core function: Представляет вложение сообщения (полиморфная модель)
-// 🔗 Key dependencies: System.Text.Json.Serialization, System.ComponentModel.DataAnnotations, Max.Bot.Types.Enums
-// 💡 Usage: Используется в Message для представления вложений сообщения
+// рџ“Ѓ [Attachment] - РњРѕРґРµР»СЊ РІР»РѕР¶РµРЅРёСЏ РІ Max Messenger
+// рџЋЇ Core function: РџСЂРµРґСЃС‚Р°РІР»СЏРµС‚ РІР»РѕР¶РµРЅРёРµ СЃРѕРѕР±С‰РµРЅРёСЏ (РїРѕР»РёРјРѕСЂС„РЅР°СЏ РјРѕРґРµР»СЊ)
+// рџ”— Key dependencies: System.Text.Json.Serialization, System.ComponentModel.DataAnnotations, Max.Bot.Types.Enums
+// рџ’Ў Usage: РСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РІ Message РґР»СЏ РїСЂРµРґСЃС‚Р°РІР»РµРЅРёСЏ РІР»РѕР¶РµРЅРёР№ СЃРѕРѕР±С‰РµРЅРёСЏ
 
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;

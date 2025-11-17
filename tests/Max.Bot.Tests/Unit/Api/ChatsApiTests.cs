@@ -1,7 +1,7 @@
-// 📁 [ChatsApiTests] - Тесты для ChatsApi
-// 🎯 Core function: Тестирование методов ChatsApi (GetChatAsync, GetChatsAsync)
-// 🔗 Key dependencies: Max.Bot.Api, Max.Bot.Configuration, Max.Bot.Networking, Max.Bot.Types, Moq, FluentAssertions, xUnit
-// 💡 Usage: Unit тесты для проверки корректности работы ChatsApi
+// рџ“Ѓ [ChatsApiTests] - РўРµСЃС‚С‹ РґР»СЏ ChatsApi
+// рџЋЇ Core function: РўРµСЃС‚РёСЂРѕРІР°РЅРёРµ РјРµС‚РѕРґРѕРІ ChatsApi (GetChatAsync, GetChatsAsync)
+// рџ”— Key dependencies: Max.Bot.Api, Max.Bot.Configuration, Max.Bot.Networking, Max.Bot.Types, Moq, FluentAssertions, xUnit
+// рџ’Ў Usage: Unit С‚РµСЃС‚С‹ РґР»СЏ РїСЂРѕРІРµСЂРєРё РєРѕСЂСЂРµРєС‚РЅРѕСЃС‚Рё СЂР°Р±РѕС‚С‹ ChatsApi
 
 using FluentAssertions;
 using Max.Bot.Api;

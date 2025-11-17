@@ -1,7 +1,7 @@
-// 📁 [NewMessageLinkTests] - Тесты для NewMessageLink
-// 🎯 Core function: Проверка валидации и сериализации NewMessageLink
-// 🔗 Key dependencies: xUnit, FluentAssertions, Max.Bot.Types.Requests
-// 💡 Usage: Unit тесты для типа NewMessageLink
+// рџ“Ѓ [NewMessageLinkTests] - РўРµСЃС‚С‹ РґР»СЏ NewMessageLink
+// рџЋЇ Core function: РџСЂРѕРІРµСЂРєР° РІР°Р»РёРґР°С†РёРё Рё СЃРµСЂРёР°Р»РёР·Р°С†РёРё NewMessageLink
+// рџ”— Key dependencies: xUnit, FluentAssertions, Max.Bot.Types.Requests
+// рџ’Ў Usage: Unit С‚РµСЃС‚С‹ РґР»СЏ С‚РёРїР° NewMessageLink
 
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json;

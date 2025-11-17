@@ -1,7 +1,7 @@
-// 📁 [ChatStatus] - Статус чата в Max Messenger
-// 🎯 Core function: Перечисление статусов чата (active, removed, left, closed)
-// 🔗 Key dependencies: System.Text.Json.Serialization
-// 💡 Usage: Используется в модели Chat для определения статуса чата
+// рџ“Ѓ [ChatStatus] - РЎС‚Р°С‚СѓСЃ С‡Р°С‚Р° РІ Max Messenger
+// рџЋЇ Core function: РџРµСЂРµС‡РёСЃР»РµРЅРёРµ СЃС‚Р°С‚СѓСЃРѕРІ С‡Р°С‚Р° (active, removed, left, closed)
+// рџ”— Key dependencies: System.Text.Json.Serialization
+// рџ’Ў Usage: РСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РІ РјРѕРґРµР»Рё Chat РґР»СЏ РѕРїСЂРµРґРµР»РµРЅРёСЏ СЃС‚Р°С‚СѓСЃР° С‡Р°С‚Р°
 
 using System.Text.Json.Serialization;
 

@@ -1,7 +1,7 @@
-// 📁 [CallbackQueryTests] - Тесты для модели CallbackQuery
-// 🎯 Core function: Тестирование сериализации/десериализации CallbackQuery
-// 🔗 Key dependencies: Max.Bot.Types, Max.Bot.Networking, FluentAssertions, xUnit
-// 💡 Usage: Unit тесты для проверки корректности работы модели CallbackQuery
+// рџ“Ѓ [CallbackQueryTests] - РўРµСЃС‚С‹ РґР»СЏ РјРѕРґРµР»Рё CallbackQuery
+// рџЋЇ Core function: РўРµСЃС‚РёСЂРѕРІР°РЅРёРµ СЃРµСЂРёР°Р»РёР·Р°С†РёРё/РґРµСЃРµСЂРёР°Р»РёР·Р°С†РёРё CallbackQuery
+// рџ”— Key dependencies: Max.Bot.Types, Max.Bot.Networking, FluentAssertions, xUnit
+// рџ’Ў Usage: Unit С‚РµСЃС‚С‹ РґР»СЏ РїСЂРѕРІРµСЂРєРё РєРѕСЂСЂРµРєС‚РЅРѕСЃС‚Рё СЂР°Р±РѕС‚С‹ РјРѕРґРµР»Рё CallbackQuery
 
 using FluentAssertions;
 using Max.Bot.Networking;

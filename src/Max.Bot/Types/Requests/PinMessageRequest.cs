@@ -1,4 +1,4 @@
-﻿// рџ“Ѓ [PinMessageRequest] - Р—Р°РїСЂРѕСЃ РЅР° Р·Р°РєСЂРµРїР»РµРЅРёРµ СЃРѕРѕР±С‰РµРЅРёСЏ
+// рџ“Ѓ [PinMessageRequest] - Р—Р°РїСЂРѕСЃ РЅР° Р·Р°РєСЂРµРїР»РµРЅРёРµ СЃРѕРѕР±С‰РµРЅРёСЏ
 // рџЋЇ Core function: РџСЂРµРґСЃС‚Р°РІР»СЏРµС‚ Р·Р°РїСЂРѕСЃ РґР»СЏ Р·Р°РєСЂРµРїР»РµРЅРёСЏ СЃРѕРѕР±С‰РµРЅРёСЏ РІ С‡Р°С‚Рµ
 // рџ”— Key dependencies: System.Text.Json.Serialization, System.ComponentModel.DataAnnotations
 // рџ’Ў Usage: РСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РІ ChatsApi.PinMessageAsync РґР»СЏ Р·Р°РєСЂРµРїР»РµРЅРёСЏ СЃРѕРѕР±С‰РµРЅРёСЏ

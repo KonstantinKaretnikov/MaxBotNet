@@ -1,7 +1,7 @@
-// 📁 [IMaxHttpClientTests] - Тесты для интерфейса HTTP клиента
-// 🎯 Core function: Проверка сигнатур методов интерфейса и возможность создания моков
-// 🔗 Key dependencies: Max.Bot.Networking, Moq, FluentAssertions, xUnit
-// 💡 Usage: Unit тесты для проверки корректности интерфейса IMaxHttpClient
+// рџ“Ѓ [IMaxHttpClientTests] - РўРµСЃС‚С‹ РґР»СЏ РёРЅС‚РµСЂС„РµР№СЃР° HTTP РєР»РёРµРЅС‚Р°
+// рџЋЇ Core function: РџСЂРѕРІРµСЂРєР° СЃРёРіРЅР°С‚СѓСЂ РјРµС‚РѕРґРѕРІ РёРЅС‚РµСЂС„РµР№СЃР° Рё РІРѕР·РјРѕР¶РЅРѕСЃС‚СЊ СЃРѕР·РґР°РЅРёСЏ РјРѕРєРѕРІ
+// рџ”— Key dependencies: Max.Bot.Networking, Moq, FluentAssertions, xUnit
+// рџ’Ў Usage: Unit С‚РµСЃС‚С‹ РґР»СЏ РїСЂРѕРІРµСЂРєРё РєРѕСЂСЂРµРєС‚РЅРѕСЃС‚Рё РёРЅС‚РµСЂС„РµР№СЃР° IMaxHttpClient
 
 using System.Net.Http;
 using FluentAssertions;

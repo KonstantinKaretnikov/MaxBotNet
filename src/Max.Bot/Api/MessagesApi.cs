@@ -1,7 +1,7 @@
-// 📁 [MessagesApi] - Реализация методов работы с сообщениями
-// 🎯 Core function: Реализация методов IMessagesApi (SendMessageAsync, GetMessagesAsync, EditMessageAsync, DeleteMessageAsync, GetMessageAsync, GetVideoAsync, AnswerCallbackQueryAsync)
-// 🔗 Key dependencies: Max.Bot.Api, Max.Bot.Configuration, Max.Bot.Networking, Max.Bot.Types, Max.Bot.Types.Requests
-// 💡 Usage: Используется в MaxClient для предоставления методов работы с сообщениями
+// рџ“Ѓ [MessagesApi] - Р РµР°Р»РёР·Р°С†РёСЏ РјРµС‚РѕРґРѕРІ СЂР°Р±РѕС‚С‹ СЃ СЃРѕРѕР±С‰РµРЅРёСЏРјРё
+// рџЋЇ Core function: Р РµР°Р»РёР·Р°С†РёСЏ РјРµС‚РѕРґРѕРІ IMessagesApi (SendMessageAsync, GetMessagesAsync, EditMessageAsync, DeleteMessageAsync, GetMessageAsync, GetVideoAsync, AnswerCallbackQueryAsync)
+// рџ”— Key dependencies: Max.Bot.Api, Max.Bot.Configuration, Max.Bot.Networking, Max.Bot.Types, Max.Bot.Types.Requests
+// рџ’Ў Usage: РСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РІ MaxClient РґР»СЏ РїСЂРµРґРѕСЃС‚Р°РІР»РµРЅРёСЏ РјРµС‚РѕРґРѕРІ СЂР°Р±РѕС‚С‹ СЃ СЃРѕРѕР±С‰РµРЅРёСЏРјРё
 
 using System.Net.Http;
 using Max.Bot.Configuration;

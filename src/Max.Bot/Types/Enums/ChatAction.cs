@@ -1,7 +1,7 @@
-// 📁 [ChatAction] - Enum для действий бота в чате
-// 🎯 Core function: Определяет возможные действия бота в чате
-// 🔗 Key dependencies: System.Text.Json.Serialization
-// 💡 Usage: Используется в SendChatActionRequest для отправки действий
+// рџ“Ѓ [ChatAction] - Enum РґР»СЏ РґРµР№СЃС‚РІРёР№ Р±РѕС‚Р° РІ С‡Р°С‚Рµ
+// рџЋЇ Core function: РћРїСЂРµРґРµР»СЏРµС‚ РІРѕР·РјРѕР¶РЅС‹Рµ РґРµР№СЃС‚РІРёСЏ Р±РѕС‚Р° РІ С‡Р°С‚Рµ
+// рџ”— Key dependencies: System.Text.Json.Serialization
+// рџ’Ў Usage: РСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РІ SendChatActionRequest РґР»СЏ РѕС‚РїСЂР°РІРєРё РґРµР№СЃС‚РІРёР№
 
 using System.Text.Json.Serialization;
 

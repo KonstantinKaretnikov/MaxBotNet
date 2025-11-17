@@ -1,7 +1,7 @@
-// 📁 [UsersApiTests] - Тесты для UsersApi
-// 🎯 Core function: Тестирование методов UsersApi (GetUserAsync)
-// 🔗 Key dependencies: Max.Bot.Api, Max.Bot.Configuration, Max.Bot.Networking, Max.Bot.Types, Moq, FluentAssertions, xUnit
-// 💡 Usage: Unit тесты для проверки корректности работы UsersApi
+// рџ“Ѓ [UsersApiTests] - РўРµСЃС‚С‹ РґР»СЏ UsersApi
+// рџЋЇ Core function: РўРµСЃС‚РёСЂРѕРІР°РЅРёРµ РјРµС‚РѕРґРѕРІ UsersApi (GetUserAsync)
+// рџ”— Key dependencies: Max.Bot.Api, Max.Bot.Configuration, Max.Bot.Networking, Max.Bot.Types, Moq, FluentAssertions, xUnit
+// рџ’Ў Usage: Unit С‚РµСЃС‚С‹ РґР»СЏ РїСЂРѕРІРµСЂРєРё РєРѕСЂСЂРµРєС‚РЅРѕСЃС‚Рё СЂР°Р±РѕС‚С‹ UsersApi
 
 using FluentAssertions;
 using Max.Bot.Api;

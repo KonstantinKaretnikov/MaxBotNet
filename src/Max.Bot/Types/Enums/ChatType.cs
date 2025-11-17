@@ -1,7 +1,7 @@
-// 📁 [ChatType] - Тип чата в Max Messenger
-// 🎯 Core function: Перечисление типов чатов (private, group, channel)
-// 🔗 Key dependencies: System.Text.Json.Serialization
-// 💡 Usage: Используется в модели Chat для определения типа чата
+// рџ“Ѓ [ChatType] - РўРёРї С‡Р°С‚Р° РІ Max Messenger
+// рџЋЇ Core function: РџРµСЂРµС‡РёСЃР»РµРЅРёРµ С‚РёРїРѕРІ С‡Р°С‚РѕРІ (private, group, channel)
+// рџ”— Key dependencies: System.Text.Json.Serialization
+// рџ’Ў Usage: РСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РІ РјРѕРґРµР»Рё Chat РґР»СЏ РѕРїСЂРµРґРµР»РµРЅРёСЏ С‚РёРїР° С‡Р°С‚Р°
 
 using System.Text.Json.Serialization;
 

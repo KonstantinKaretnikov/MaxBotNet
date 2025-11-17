@@ -1,4 +1,4 @@
-﻿// рџ“Ѓ [UpdatePoller] - Long polling РїРµС‚Р»СЏ Max API
+// рџ“Ѓ [UpdatePoller] - Long polling РїРµС‚Р»СЏ Max API
 // рџЋЇ Core function: РџРѕР»СѓС‡Р°РµС‚ РѕР±РЅРѕРІР»РµРЅРёСЏ С‡РµСЂРµР· GET /updates Рё РґРёСЃРїРµС‚С‡РµСЂРёР·СѓРµС‚ РёС…
 // рџ”— Key dependencies: System.Threading.Tasks, Microsoft.Extensions.Logging, Max.Bot.Api, Max.Bot.Configuration
 // рџ’Ў Usage: Р’СЃС‚СЂР°РёРІР°РµС‚СЃСЏ РІ MaxClient.StartPollingAsync РґР»СЏ С„РѕРЅРѕРІРѕР№ РѕР±СЂР°Р±РѕС‚РєРё СЃРѕР±С‹С‚РёР№
@@ -9,13 +9,13 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
 using Max.Bot.Api;
 using Max.Bot.Configuration;
 using Max.Bot.Exceptions;
 using Max.Bot.Types;
 using Max.Bot.Types.Enums;
 using Max.Bot.Types.Requests;
+using Microsoft.Extensions.Logging;
 
 namespace Max.Bot.Polling;
 

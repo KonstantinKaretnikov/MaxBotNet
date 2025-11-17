@@ -1,7 +1,7 @@
-// 📁 [Video] - Модель видео в Max Messenger
-// 🎯 Core function: Представляет информацию о видео
-// 🔗 Key dependencies: System.Text.Json.Serialization, System.ComponentModel.DataAnnotations
-// 💡 Usage: Используется в Message для представления видео вложений
+// рџ“Ѓ [Video] - РњРѕРґРµР»СЊ РІРёРґРµРѕ РІ Max Messenger
+// рџЋЇ Core function: РџСЂРµРґСЃС‚Р°РІР»СЏРµС‚ РёРЅС„РѕСЂРјР°С†РёСЋ Рѕ РІРёРґРµРѕ
+// рџ”— Key dependencies: System.Text.Json.Serialization, System.ComponentModel.DataAnnotations
+// рџ’Ў Usage: РСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РІ Message РґР»СЏ РїСЂРµРґСЃС‚Р°РІР»РµРЅРёСЏ РІРёРґРµРѕ РІР»РѕР¶РµРЅРёР№
 
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;

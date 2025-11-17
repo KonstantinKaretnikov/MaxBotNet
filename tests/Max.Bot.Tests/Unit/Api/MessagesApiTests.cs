@@ -1,7 +1,7 @@
-// 📁 [MessagesApiTests] - Тесты для MessagesApi
-// 🎯 Core function: Тестирование методов MessagesApi (SendMessageAsync, GetMessagesAsync)
-// 🔗 Key dependencies: Max.Bot.Api, Max.Bot.Configuration, Max.Bot.Networking, Max.Bot.Types, Moq, FluentAssertions, xUnit
-// 💡 Usage: Unit тесты для проверки корректности работы MessagesApi
+// рџ“Ѓ [MessagesApiTests] - РўРµСЃС‚С‹ РґР»СЏ MessagesApi
+// рџЋЇ Core function: РўРµСЃС‚РёСЂРѕРІР°РЅРёРµ РјРµС‚РѕРґРѕРІ MessagesApi (SendMessageAsync, GetMessagesAsync)
+// рџ”— Key dependencies: Max.Bot.Api, Max.Bot.Configuration, Max.Bot.Networking, Max.Bot.Types, Moq, FluentAssertions, xUnit
+// рџ’Ў Usage: Unit С‚РµСЃС‚С‹ РґР»СЏ РїСЂРѕРІРµСЂРєРё РєРѕСЂСЂРµРєС‚РЅРѕСЃС‚Рё СЂР°Р±РѕС‚С‹ MessagesApi
 
 using FluentAssertions;
 using Max.Bot.Api;

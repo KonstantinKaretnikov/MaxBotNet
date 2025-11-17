@@ -1,7 +1,7 @@
-// 📁 [BotApi] - Реализация методов работы с ботом
-// 🎯 Core function: Реализация методов IBotApi (GetMeAsync, GetBotInfoAsync)
-// 🔗 Key dependencies: Max.Bot.Api, Max.Bot.Configuration, Max.Bot.Networking, Max.Bot.Types
-// 💡 Usage: Используется в MaxClient для предоставления методов работы с ботом
+// рџ“Ѓ [BotApi] - Р РµР°Р»РёР·Р°С†РёСЏ РјРµС‚РѕРґРѕРІ СЂР°Р±РѕС‚С‹ СЃ Р±РѕС‚РѕРј
+// рџЋЇ Core function: Р РµР°Р»РёР·Р°С†РёСЏ РјРµС‚РѕРґРѕРІ IBotApi (GetMeAsync, GetBotInfoAsync)
+// рџ”— Key dependencies: Max.Bot.Api, Max.Bot.Configuration, Max.Bot.Networking, Max.Bot.Types
+// рџ’Ў Usage: РСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РІ MaxClient РґР»СЏ РїСЂРµРґРѕСЃС‚Р°РІР»РµРЅРёСЏ РјРµС‚РѕРґРѕРІ СЂР°Р±РѕС‚С‹ СЃ Р±РѕС‚РѕРј
 
 using Max.Bot.Configuration;
 using Max.Bot.Networking;

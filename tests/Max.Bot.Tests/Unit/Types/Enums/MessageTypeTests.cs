@@ -1,7 +1,7 @@
-// 📁 [MessageTypeTests] - Тесты для MessageType enum
-// 🎯 Core function: Тестирование сериализации/десериализации MessageType enum
-// 🔗 Key dependencies: Max.Bot.Types.Enums, FluentAssertions, xUnit
-// 💡 Usage: Unit тесты для проверки корректности работы MessageType enum
+// рџ“Ѓ [MessageTypeTests] - РўРµСЃС‚С‹ РґР»СЏ MessageType enum
+// рџЋЇ Core function: РўРµСЃС‚РёСЂРѕРІР°РЅРёРµ СЃРµСЂРёР°Р»РёР·Р°С†РёРё/РґРµСЃРµСЂРёР°Р»РёР·Р°С†РёРё MessageType enum
+// рџ”— Key dependencies: Max.Bot.Types.Enums, FluentAssertions, xUnit
+// рџ’Ў Usage: Unit С‚РµСЃС‚С‹ РґР»СЏ РїСЂРѕРІРµСЂРєРё РєРѕСЂСЂРµРєС‚РЅРѕСЃС‚Рё СЂР°Р±РѕС‚С‹ MessageType enum
 
 using FluentAssertions;
 using Max.Bot.Types.Enums;

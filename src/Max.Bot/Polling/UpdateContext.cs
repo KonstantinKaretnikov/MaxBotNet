@@ -1,4 +1,4 @@
-﻿// рџ“Ѓ [UpdateContext] - РљРѕРЅС‚РµРєСЃС‚ РїРµСЂРµРґР°С‡Рё РѕР±РЅРѕРІР»РµРЅРёСЏ РѕР±СЂР°Р±РѕС‚С‡РёРєСѓ
+// рџ“Ѓ [UpdateContext] - РљРѕРЅС‚РµРєСЃС‚ РїРµСЂРµРґР°С‡Рё РѕР±РЅРѕРІР»РµРЅРёСЏ РѕР±СЂР°Р±РѕС‚С‡РёРєСѓ
 // рџЋЇ Core function: РРЅРєР°РїСЃСѓР»РёСЂСѓРµС‚ Update, API, РѕРїС†РёРё Рё СЃРµСЂРІРёСЃС‹
 // рџ”— Key dependencies: System, System.Collections.Generic, Microsoft.Extensions.Logging, Max.Bot.Api, Max.Bot.Configuration, Max.Bot.Types
 // рџ’Ў Usage: РџРµСЂРµРґР°РµС‚СЃСЏ РІ IUpdateHandler РґР»СЏ РѕР±СЂР°Р±РѕС‚РєРё СЃРѕР±С‹С‚РёР№

@@ -1,7 +1,7 @@
-// 📁 [MaxHttpClientIntegrationTests] - Интеграционные тесты для HTTP клиента
-// 🎯 Core function: Тестирование полного цикла работы MaxHttpClient
-// 🔗 Key dependencies: Max.Bot.Networking, Max.Bot.Configuration, Max.Bot.Exceptions, FluentAssertions, xUnit
-// 💡 Usage: Интеграционные тесты для проверки полного цикла работы HTTP клиента
+// рџ“Ѓ [MaxHttpClientIntegrationTests] - РРЅС‚РµРіСЂР°С†РёРѕРЅРЅС‹Рµ С‚РµСЃС‚С‹ РґР»СЏ HTTP РєР»РёРµРЅС‚Р°
+// рџЋЇ Core function: РўРµСЃС‚РёСЂРѕРІР°РЅРёРµ РїРѕР»РЅРѕРіРѕ С†РёРєР»Р° СЂР°Р±РѕС‚С‹ MaxHttpClient
+// рџ”— Key dependencies: Max.Bot.Networking, Max.Bot.Configuration, Max.Bot.Exceptions, FluentAssertions, xUnit
+// рџ’Ў Usage: РРЅС‚РµРіСЂР°С†РёРѕРЅРЅС‹Рµ С‚РµСЃС‚С‹ РґР»СЏ РїСЂРѕРІРµСЂРєРё РїРѕР»РЅРѕРіРѕ С†РёРєР»Р° СЂР°Р±РѕС‚С‹ HTTP РєР»РёРµРЅС‚Р°
 
 using System.Net;
 using System.Net.Http;

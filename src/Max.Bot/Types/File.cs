@@ -1,7 +1,7 @@
-// 📁 [File] - Модель файла в Max Messenger
-// 🎯 Core function: Представляет информацию о файле
-// 🔗 Key dependencies: System.Text.Json.Serialization, System.ComponentModel.DataAnnotations
-// 💡 Usage: Используется для работы с файлами в Max Messenger API
+// рџ“Ѓ [File] - РњРѕРґРµР»СЊ С„Р°Р№Р»Р° РІ Max Messenger
+// рџЋЇ Core function: РџСЂРµРґСЃС‚Р°РІР»СЏРµС‚ РёРЅС„РѕСЂРјР°С†РёСЋ Рѕ С„Р°Р№Р»Рµ
+// рџ”— Key dependencies: System.Text.Json.Serialization, System.ComponentModel.DataAnnotations
+// рџ’Ў Usage: РСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РґР»СЏ СЂР°Р±РѕС‚С‹ СЃ С„Р°Р№Р»Р°РјРё РІ Max Messenger API
 
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;

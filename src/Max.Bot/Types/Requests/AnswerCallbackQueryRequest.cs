@@ -1,7 +1,7 @@
-// 📁 [AnswerCallbackQueryRequest] - Запрос на ответ на callback query
-// 🎯 Core function: Представляет запрос для ответа на callback query
-// 🔗 Key dependencies: System.Text.Json.Serialization, System.ComponentModel.DataAnnotations, Max.Bot.Types, Max.Bot.Types.Enums
-// 💡 Usage: Используется в MessagesApi.AnswerCallbackQueryAsync для ответа на callback query
+// рџ“Ѓ [AnswerCallbackQueryRequest] - Р—Р°РїСЂРѕСЃ РЅР° РѕС‚РІРµС‚ РЅР° callback query
+// рџЋЇ Core function: РџСЂРµРґСЃС‚Р°РІР»СЏРµС‚ Р·Р°РїСЂРѕСЃ РґР»СЏ РѕС‚РІРµС‚Р° РЅР° callback query
+// рџ”— Key dependencies: System.Text.Json.Serialization, System.ComponentModel.DataAnnotations, Max.Bot.Types, Max.Bot.Types.Enums
+// рџ’Ў Usage: РСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РІ MessagesApi.AnswerCallbackQueryAsync РґР»СЏ РѕС‚РІРµС‚Р° РЅР° callback query
 
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;

@@ -1,4 +1,4 @@
-﻿// рџ“Ѓ [UpdateHandlerExecutor] - Р’СЃРїРѕРјРѕРіР°С‚РµР»СЊРЅС‹Р№ РёСЃРїРѕР»РЅРёС‚РµР»СЊ РѕР±СЂР°Р±РѕС‚С‡РёРєРѕРІ
+// рџ“Ѓ [UpdateHandlerExecutor] - Р’СЃРїРѕРјРѕРіР°С‚РµР»СЊРЅС‹Р№ РёСЃРїРѕР»РЅРёС‚РµР»СЊ РѕР±СЂР°Р±РѕС‚С‡РёРєРѕРІ
 // рџЋЇ Core function: РРЅРєР°РїСЃСѓР»РёСЂСѓРµС‚ РІС‹Р·РѕРІ IUpdateHandler СЃ С‚Р°Р№РјР°СѓС‚РѕРј Рё Р»РѕРіРёСЂРѕРІР°РЅРёРµРј
 // рџ”— Key dependencies: System.Threading.Tasks, Microsoft.Extensions.Logging, Max.Bot.Api, Max.Bot.Configuration, Max.Bot.Types, Max.Bot.Types.Enums
 // рџ’Ў Usage: РСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ UpdatePoller Рё WebhookController РґР»СЏ РµРґРёРЅРѕРѕР±СЂР°Р·РЅРѕР№ РѕР±СЂР°Р±РѕС‚РєРё
@@ -6,11 +6,11 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
 using Max.Bot.Api;
 using Max.Bot.Configuration;
 using Max.Bot.Types;
 using Max.Bot.Types.Enums;
+using Microsoft.Extensions.Logging;
 
 namespace Max.Bot.Polling;
 

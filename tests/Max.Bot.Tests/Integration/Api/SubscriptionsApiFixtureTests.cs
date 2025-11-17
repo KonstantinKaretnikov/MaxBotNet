@@ -1,4 +1,4 @@
-﻿// рџ“Ѓ [SubscriptionsApiFixtureTests] - Validates subscriptions API via recorded fixtures
+// рџ“Ѓ [SubscriptionsApiFixtureTests] - Validates subscriptions API via recorded fixtures
 // рџЋЇ Core function: Ensures SubscriptionsApi handles webhook/update flows deterministically
 // рџ”— Key dependencies: Max.Bot.Api, Max.Bot.Types, FixtureHttpClientFactory
 // рџ’Ў Usage: Prevents regressions in webhook/setup logic without real HTTP calls

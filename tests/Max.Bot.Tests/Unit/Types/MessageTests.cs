@@ -1,7 +1,7 @@
-// 📁 [MessageTests] - Тесты для Message модели
-// 🎯 Core function: Тестирование сериализации/десериализации Message
-// 🔗 Key dependencies: Max.Bot.Types, Max.Bot.Networking, Max.Bot.Types.Enums, FluentAssertions, xUnit
-// 💡 Usage: Unit тесты для проверки корректности работы Message
+// рџ“Ѓ [MessageTests] - РўРµСЃС‚С‹ РґР»СЏ Message РјРѕРґРµР»Рё
+// рџЋЇ Core function: РўРµСЃС‚РёСЂРѕРІР°РЅРёРµ СЃРµСЂРёР°Р»РёР·Р°С†РёРё/РґРµСЃРµСЂРёР°Р»РёР·Р°С†РёРё Message
+// рџ”— Key dependencies: Max.Bot.Types, Max.Bot.Networking, Max.Bot.Types.Enums, FluentAssertions, xUnit
+// рџ’Ў Usage: Unit С‚РµСЃС‚С‹ РґР»СЏ РїСЂРѕРІРµСЂРєРё РєРѕСЂСЂРµРєС‚РЅРѕСЃС‚Рё СЂР°Р±РѕС‚С‹ Message
 
 using FluentAssertions;
 using Max.Bot.Networking;

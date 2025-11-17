@@ -1,7 +1,7 @@
-// 📁 [MaxApiRequest] - Модель запроса к Max Bot API
-// 🎯 Core function: Представляет запрос к API с методом, эндпоинтом, телом, query параметрами и headers
-// 🔗 Key dependencies: System.Net.Http, System.Text
-// 💡 Usage: Используется MaxHttpClient для построения и отправки запросов
+// рџ“Ѓ [MaxApiRequest] - РњРѕРґРµР»СЊ Р·Р°РїСЂРѕСЃР° Рє Max Bot API
+// рџЋЇ Core function: РџСЂРµРґСЃС‚Р°РІР»СЏРµС‚ Р·Р°РїСЂРѕСЃ Рє API СЃ РјРµС‚РѕРґРѕРј, СЌРЅРґРїРѕРёРЅС‚РѕРј, С‚РµР»РѕРј, query РїР°СЂР°РјРµС‚СЂР°РјРё Рё headers
+// рџ”— Key dependencies: System.Net.Http, System.Text
+// рџ’Ў Usage: РСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ MaxHttpClient РґР»СЏ РїРѕСЃС‚СЂРѕРµРЅРёСЏ Рё РѕС‚РїСЂР°РІРєРё Р·Р°РїСЂРѕСЃРѕРІ
 
 using System.Net.Http;
 using System.Text;

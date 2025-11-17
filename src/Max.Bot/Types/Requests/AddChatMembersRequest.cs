@@ -1,4 +1,4 @@
-﻿// рџ“Ѓ [AddChatMembersRequest] - Р—Р°РїСЂРѕСЃ РЅР° РґРѕР±Р°РІР»РµРЅРёРµ СѓС‡Р°СЃС‚РЅРёРєРѕРІ РІ С‡Р°С‚
+// рџ“Ѓ [AddChatMembersRequest] - Р—Р°РїСЂРѕСЃ РЅР° РґРѕР±Р°РІР»РµРЅРёРµ СѓС‡Р°СЃС‚РЅРёРєРѕРІ РІ С‡Р°С‚
 // рџЋЇ Core function: РџСЂРµРґСЃС‚Р°РІР»СЏРµС‚ Р·Р°РїСЂРѕСЃ РґР»СЏ РґРѕР±Р°РІР»РµРЅРёСЏ СѓС‡Р°СЃС‚РЅРёРєРѕРІ РІ С‡Р°С‚
 // рџ”— Key dependencies: System.Text.Json.Serialization, System.ComponentModel.DataAnnotations
 // рџ’Ў Usage: РСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РІ ChatsApi.AddChatMembersAsync РґР»СЏ РґРѕР±Р°РІР»РµРЅРёСЏ СѓС‡Р°СЃС‚РЅРёРєРѕРІ

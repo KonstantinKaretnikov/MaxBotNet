@@ -1,7 +1,7 @@
-// 📁 [UsersApi] - Реализация методов работы с пользователями
-// 🎯 Core function: Реализация методов IUsersApi (GetUserAsync)
-// 🔗 Key dependencies: Max.Bot.Api, Max.Bot.Configuration, Max.Bot.Networking, Max.Bot.Types
-// 💡 Usage: Используется в MaxClient для предоставления методов работы с пользователями
+// рџ“Ѓ [UsersApi] - Р РµР°Р»РёР·Р°С†РёСЏ РјРµС‚РѕРґРѕРІ СЂР°Р±РѕС‚С‹ СЃ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏРјРё
+// рџЋЇ Core function: Р РµР°Р»РёР·Р°С†РёСЏ РјРµС‚РѕРґРѕРІ IUsersApi (GetUserAsync)
+// рџ”— Key dependencies: Max.Bot.Api, Max.Bot.Configuration, Max.Bot.Networking, Max.Bot.Types
+// рџ’Ў Usage: РСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РІ MaxClient РґР»СЏ РїСЂРµРґРѕСЃС‚Р°РІР»РµРЅРёСЏ РјРµС‚РѕРґРѕРІ СЂР°Р±РѕС‚С‹ СЃ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏРјРё
 
 using System.Net.Http;
 using Max.Bot.Configuration;

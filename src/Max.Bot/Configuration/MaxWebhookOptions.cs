@@ -1,4 +1,4 @@
-﻿// рџ“Ѓ [MaxWebhookOptions] - РќР°СЃС‚СЂРѕР№РєРё Webhook РїРѕРґРїРёСЃРѕРє MAX
+// рџ“Ѓ [MaxWebhookOptions] - РќР°СЃС‚СЂРѕР№РєРё Webhook РїРѕРґРїРёСЃРѕРє MAX
 // рџЋЇ Core function: РЈРїСЂР°РІР»СЏРµС‚ POST/DELETE /subscriptions Рё Webhook РїСЂРѕРІРµСЂРєР°РјРё
 // рџ”— Key dependencies: System
 // рџ’Ў Usage: РљРѕРЅС„РёРіСѓСЂР°С†РёСЏ MaxClient webhook РѕР±СЂР°Р±РѕС‚РєРё Рё Р±РµР·РѕРїР°СЃРЅРѕСЃС‚Рё

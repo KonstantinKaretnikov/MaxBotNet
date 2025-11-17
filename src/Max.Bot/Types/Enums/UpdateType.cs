@@ -1,7 +1,7 @@
-// 📁 [UpdateType] - Тип обновления в Max Messenger
-// 🎯 Core function: Перечисление типов обновлений (message, callback_query)
-// 🔗 Key dependencies: System.Text.Json.Serialization
-// 💡 Usage: Используется в модели Update для определения типа обновления
+// рџ“Ѓ [UpdateType] - РўРёРї РѕР±РЅРѕРІР»РµРЅРёСЏ РІ Max Messenger
+// рџЋЇ Core function: РџРµСЂРµС‡РёСЃР»РµРЅРёРµ С‚РёРїРѕРІ РѕР±РЅРѕРІР»РµРЅРёР№ (message, callback_query)
+// рџ”— Key dependencies: System.Text.Json.Serialization
+// рџ’Ў Usage: РСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РІ РјРѕРґРµР»Рё Update РґР»СЏ РѕРїСЂРµРґРµР»РµРЅРёСЏ С‚РёРїР° РѕР±РЅРѕРІР»РµРЅРёСЏ
 
 using System.Text.Json.Serialization;
 

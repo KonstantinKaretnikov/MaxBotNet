@@ -1,7 +1,7 @@
-// 📁 [ErrorResponseTests] - Тесты для ErrorResponse модели
-// 🎯 Core function: Тестирование сериализации/десериализации ErrorResponse
-// 🔗 Key dependencies: Max.Bot.Types, Max.Bot.Networking, FluentAssertions, xUnit
-// 💡 Usage: Unit тесты для проверки корректности работы ErrorResponse
+// рџ“Ѓ [ErrorResponseTests] - РўРµСЃС‚С‹ РґР»СЏ ErrorResponse РјРѕРґРµР»Рё
+// рџЋЇ Core function: РўРµСЃС‚РёСЂРѕРІР°РЅРёРµ СЃРµСЂРёР°Р»РёР·Р°С†РёРё/РґРµСЃРµСЂРёР°Р»РёР·Р°С†РёРё ErrorResponse
+// рџ”— Key dependencies: Max.Bot.Types, Max.Bot.Networking, FluentAssertions, xUnit
+// рџ’Ў Usage: Unit С‚РµСЃС‚С‹ РґР»СЏ РїСЂРѕРІРµСЂРєРё РєРѕСЂСЂРµРєС‚РЅРѕСЃС‚Рё СЂР°Р±РѕС‚С‹ ErrorResponse
 
 using FluentAssertions;
 using Max.Bot.Networking;

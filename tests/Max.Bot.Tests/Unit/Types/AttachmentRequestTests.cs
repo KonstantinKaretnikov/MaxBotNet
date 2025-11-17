@@ -1,7 +1,7 @@
-// 📁 [AttachmentRequestTests] - Тесты для AttachmentRequest
-// 🎯 Core function: Проверка валидации и сериализации AttachmentRequest
-// 🔗 Key dependencies: xUnit, FluentAssertions, Max.Bot.Types.Requests
-// 💡 Usage: Unit тесты для типа AttachmentRequest
+// рџ“Ѓ [AttachmentRequestTests] - РўРµСЃС‚С‹ РґР»СЏ AttachmentRequest
+// рџЋЇ Core function: РџСЂРѕРІРµСЂРєР° РІР°Р»РёРґР°С†РёРё Рё СЃРµСЂРёР°Р»РёР·Р°С†РёРё AttachmentRequest
+// рџ”— Key dependencies: xUnit, FluentAssertions, Max.Bot.Types.Requests
+// рџ’Ў Usage: Unit С‚РµСЃС‚С‹ РґР»СЏ С‚РёРїР° AttachmentRequest
 
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json;

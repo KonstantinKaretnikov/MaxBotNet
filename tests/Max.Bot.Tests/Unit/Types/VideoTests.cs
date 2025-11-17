@@ -1,7 +1,7 @@
-// 📁 [VideoTests] - Тесты для модели Video
-// 🎯 Core function: Тестирование сериализации/десериализации Video
-// 🔗 Key dependencies: Max.Bot.Types, Max.Bot.Networking, FluentAssertions, xUnit
-// 💡 Usage: Unit тесты для проверки корректности работы модели Video
+// рџ“Ѓ [VideoTests] - РўРµСЃС‚С‹ РґР»СЏ РјРѕРґРµР»Рё Video
+// рџЋЇ Core function: РўРµСЃС‚РёСЂРѕРІР°РЅРёРµ СЃРµСЂРёР°Р»РёР·Р°С†РёРё/РґРµСЃРµСЂРёР°Р»РёР·Р°С†РёРё Video
+// рџ”— Key dependencies: Max.Bot.Types, Max.Bot.Networking, FluentAssertions, xUnit
+// рџ’Ў Usage: Unit С‚РµСЃС‚С‹ РґР»СЏ РїСЂРѕРІРµСЂРєРё РєРѕСЂСЂРµРєС‚РЅРѕСЃС‚Рё СЂР°Р±РѕС‚С‹ РјРѕРґРµР»Рё Video
 
 using FluentAssertions;
 using Max.Bot.Networking;
