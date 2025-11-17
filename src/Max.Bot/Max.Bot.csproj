@@ -6,13 +6,16 @@
     <Nullable>enable</Nullable>
     
     <PackageId>Max.Bot</PackageId>
-    <Version>0.1.0-alpha</Version>
+    <Version>0.2.0-alpha</Version>
     <Authors>MaxBotNet Contributors</Authors>
     <Description>C# library for Max Messenger Bot API (.NET 9)</Description>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/YOUR_REPO/MaxBotNet</PackageProjectUrl>
     <RepositoryUrl>https://github.com/YOUR_REPO/MaxBotNet</RepositoryUrl>
     <PackageTags>max;messenger;bot;api;csharp;dotnet;net9</PackageTags>
+    <PackageIconUrl>https://dev.max.ru/favicon.ico</PackageIconUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageReleaseNotes>See CHANGELOG.md for details.</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
@@ -22,6 +25,11 @@
 
   <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\README.md" Pack="true" PackagePath="" />
+    <None Include="..\..\CHANGELOG.md" Pack="true" PackagePath="" />
   </ItemGroup>
 
 </Project>

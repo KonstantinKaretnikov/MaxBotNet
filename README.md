@@ -1,61 +1,114 @@
-# Max.Bot - C# библиотека для Max Messenger Bot API
+# Max.Bot — C# библиотека для Max Messenger Bot API
 
 [![.NET](https://img.shields.io/badge/.NET-9.0-purple.svg)](https://dotnet.microsoft.com/)
+[![NuGet](https://img.shields.io/nuget/vpre/Max.Bot.svg)](https://www.nuget.org/packages/Max.Bot)
+[![Build](https://img.shields.io/github/actions/workflow/status/YOUR_REPO/MaxBotNet/ci.yml?label=CI)](https://github.com/YOUR_REPO/MaxBotNet/actions)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
 
-Полнофункциональная библиотека для работы с [Max Messenger Bot API](https://dev.max.ru/docs-api) на платформе .NET 9.
+Полнофункциональная библиотека для работы с [Max Messenger Bot API](https://dev.max.ru/docs-api) на .NET 9. Проект фокусируется на типобезопасности, удобстве интеграции и масштабируемости корпоративных ботов.
 
-## 📋 Статус проекта
+## 📌 Основные возможности
 
-**Статус:** 🚧 В разработке
+- Асинхронный `MaxClient` с полной реализацией REST-эндпоинтов Max Messenger.
+- Модульные API-клиенты (`BotApi`, `MessagesApi`, `ChatsApi`, `UsersApi`, `FilesApi`, `SubscriptionsApi`) и строгие модели данных.
+- Надёжный HTTP-стек c retry/backoff, логированием, обработкой rate-limit и ошибок сети.
+- Два механизма получения обновлений: long polling и безопасный webhook конвейер.
+- Полная XML-документация всех публичных типов + автотесты, проверяющие наличие комментариев.
 
-Библиотека находится на стадии планирования.
+## ⚡ Быстрый старт
 
-## 🎯 Цели проекта
+```powershell
+dotnet add package Max.Bot
+```
 
-Создать современную, типобезопасную и удобную в использовании библиотеку для работы с Max Messenger Bot API, следуя лучшим практикам из:
-- [Telegram.Bot](https://github.com/TelegramBots/Telegram.Bot) - опыт разработки .NET Bot API клиентов
-- [VkNet](https://github.com/vknet/vk) - опыт работы с VK API на .NET
+```csharp
+using Max.Bot;
+using Max.Bot.Configuration;
+using Max.Bot.Types.Enums;
 
-## 📚 Референсы
+var client = new MaxClient(new MaxBotOptions
+{
+    Token = Environment.GetEnvironmentVariable("MAX_BOT_TOKEN")!,
+    DispatchAllowedUpdateTypes = new[] { UpdateType.Message }
+});
 
-- **Официальная документация:** [dev.max.ru/docs-api](https://dev.max.ru/docs-api)
-- **TypeScript реализация:** [max-bot-api-client-ts](https://github.com/max-messenger/max-bot-api-client-ts)
-- **Go реализация:** [max-bot-api-client-go](https://github.com/max-messenger/max-bot-api-client-go)
+var me = await client.Bot.GetMeAsync();
+Console.WriteLine($"Hello from {me.Username}");
 
-## 🚀 План разработки
+await client.Messages.SendMessageAsync(
+    chatId: 1234567890,
+    text: "It works! ✅");
+```
 
-Подробный план поэтапной разработки библиотеки описан в файле [`DEVELOPMENT_PLAN.md`](DEVELOPMENT_PLAN.md).
+✅ Полноценные примеры (echo-бот, команды, кнопки, файлы) живут в `examples/Max.Bot.Examples` и доступны как `RunAsync()` сценарии.
 
-### Основные этапы:
+## 🧠 Архитектурные ориентиры
 
-1. ✅ **Подготовка инфраструктуры** - структура проекта, настройка .NET 9
-2. 🔄 **Базовый HTTP клиент** - реализация HTTP запросов с retry механизмом
-3. 📦 **Базовые модели данных** - User, Chat, Message, Update и другие
-4. 🔌 **API методы - Core** - основные методы (getMe, sendMessage, getChat)
-5. 📊 **Расширение моделей** - все остальные модели из документации
-6. 🔧 **Все остальные API методы** - полная реализация всех методов API
-7. 📡 **Обработка событий** - Long Polling и Webhook поддержка
-8. 📖 **Документация** - XML документация, примеры, README
-9. 🚢 **CI/CD и публикация** - автоматизация сборки и публикация в NuGet
+- [Telegram.Bot](https://github.com/TelegramBots/Telegram.Bot) — структура клиента, подход к документации и примерам.
+- [VkNet](https://github.com/vknet/vk) — богатые модели, расширяемые API и контроль ошибок.
 
-## 🛠 Технологии
+Полный roadmap находится в [`DEVELOPMENT_PLAN.md`](DEVELOPMENT_PLAN.md).
 
-- **.NET 9** - целевая платформа
-- **System.Text.Json** - сериализация/десериализация
-- **Microsoft.Extensions.Http** - HTTP клиент
-- **xUnit** - тестирование
-- **Moq** - моки для тестов
+## 🧪 Тесты и качество
+
+- `dotnet build -warnaserror` — проверяет, что все публичные API имеют XML-доки.
+- `dotnet test` — >400 модульных тестов, включая `DocumentationCoverageTests` и проверки сериализации.
+- Smoke-тесты для примеров гарантируют, что коды в README и `examples/` остаются рабочими.
+
+## 📚 Документация
+
+- Автогенерируемый XML-файл: `src/Max.Bot/bin/Debug/net9.0/Max.Bot.xml` (включён в NuGet).
+- Официальный Max Messenger API: [dev.max.ru/docs-api](https://dev.max.ru/docs-api) (локальная копия — `docs/max-api-docs/`).
+- Другие реализации для сравнения:
+  - TypeScript — [max-bot-api-client-ts](https://github.com/max-messenger/max-bot-api-client-ts)
+  - Go — [max-bot-api-client-go](https://github.com/max-messenger/max-bot-api-client-go)
+
+## 🧩 Примеры
+
+| Проект | Описание |
+| ------ | -------- |
+| `EchoBotExample` | Минимальный echo-бот, показывает базовый цикл обработки. |
+| `CommandBotExample` | Командный роутер (inspired by Telegram.Bot CommandHandlers). |
+| `KeyboardBotExample` | Reply/inline клавиатуры + работа с callback query. |
+| `FileBotExample` | Загрузка и отправка файлов, пересылка медиа. |
+
+Каждый пример конфигурируется через переменные окружения (`MAX_BOT_TOKEN`, `MAX_WEBHOOK_URL`, и т.д.) и не хранит секреты в исходниках.
+
+## 📦 Установка
+
+1. Установите .NET 9 SDK.
+2. В проекте выполните:
+   ```powershell
+   dotnet add package Max.Bot
+   ```
+3. Создайте `MaxClient` вручную или зарегистрируйте через DI (например, в ASP.NET Core).
+4. Токен и webhook URL держите в Secret Manager/Key Vault. Добавьте `.env`/секретные файлы в `.gitignore`.
+
+## 🧭 Дорожная карта
+
+1. ✅ Подготовка инфраструктуры  
+2. ✅ Базовый HTTP клиент  
+3. ✅ Базовые модели данных  
+4. ✅ Core API методы  
+5. ✅ Расширенные модели  
+6. ✅ Полный API Max  
+7. ✅ Обработка событий (polling + webhook)  
+8. 🚧 Документация, примеры, README  
+9. ⏳ CI/CD и публикация  
+
+## 🤝 Как внести вклад
+
+1. Форкните репозиторий и создайте ветку (`feature/awesome-bot`).
+2. Соберите и протестируйте (`dotnet build -warnaserror`, `dotnet test`).
+3. Обновите `CHANGELOG.md` + соответствующие разделы документации/примеров.
+4. Откройте PR, указав связанные задачи и изменения API.
 
 ## 📝 Лицензия
 
-Apache License 2.0 - см. файл [LICENSE](LICENSE)
-
-## 🤝 Вклад в проект
-
-План разработки находится в стадии формирования. После начала реализации будет добавлена информация о том, как можно поучаствовать в разработке.
+Apache License 2.0 — см. [LICENSE](LICENSE).
 
 ---
 
-**Версия:** 0.1.0-alpha (планирование)  
-**Последнее обновление:** 2025-01-XX
+**Версия:** 0.2.0-alpha (Phase 8)  
+**Статус:** Активная разработка  
+**Контакты:** issues/PR в репозитории

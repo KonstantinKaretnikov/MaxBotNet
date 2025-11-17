@@ -313,32 +313,37 @@ Max.Bot.Tests (Тесты)
 ### ФАЗА 8: Полировка и документация
 
 **Задачи:**
-- [ ] 8.1. Добавить XML документацию для всех публичных API:
+- [x] 8.1. Добавить XML документацию для всех публичных API:
   - Классы
   - Методы
   - Параметры
   - Возвращаемые значения
-  - Примеры использования
-- [ ] 8.2. Обновить `README.md`:
+  - Примеры использования  
+  *(Включен `GenerateDocumentationFile`, `CS1591` в `WarningsAsErrors`, а также тесты `DocumentationCoverageTests` в `tests/Max.Bot.Tests/Unit/Documentation`.)*
+- [x] 8.2. Обновить `README.md`:
   - Описание библиотеки
   - Установка через NuGet
   - Быстрый старт (Quick Start)
   - Примеры использования
   - Документация API (ссылка на XML docs)
-  - Contributing guidelines
-- [ ] 8.3. Создать примеры использования:
+  - Contributing guidelines  
+  *(README содержит разделы "Основные возможности", "Быстрый старт", "Примеры", "Документация", "Как внести вклад", а также NuGet/CI бейджи.)*
+- [x] 8.3. Создать примеры использования:
   - Простой echo бот
   - Бот с командами
   - Бот с кнопками
-  - Бот с файлами
-- [ ] 8.4. Создать `CHANGELOG.md`:
+  - Бот с файлами  
+  *(Проект `examples/Max.Bot.Examples` с `EchoBotSample`, `CommandBotSample`, `KeyboardBotSample`, `FileBotSample` + тесты `SampleBotsTests`.)*
+- [x] 8.4. Создать `CHANGELOG.md`:
   - Формат Keep a Changelog
-  - Версионирование (SemVer)
-- [ ] 8.5. Добавить NuGet метаданные:
+  - Версионирование (SemVer)  
+  *(Файл `CHANGELOG.md` описывает релизы 0.1.0-alpha / 0.2.0-alpha и ссылку на сравнения.)*
+- [x] 8.5. Добавить NuGet метаданные:
   - Иконка пакета
   - Tags
   - Project URL
-  - License
+  - License  
+  *(В `src/Max.Bot/Max.Bot.csproj` заданы `PackageId`, `Version`, `PackageLicenseExpression`, `PackageProjectUrl`, `PackageTags`, `PackageIconUrl`, упаковка README/CHANGELOG.)*
 
 **Результат:** Полная документация и примеры использования
 

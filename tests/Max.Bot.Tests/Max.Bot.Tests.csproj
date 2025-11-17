@@ -5,6 +5,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <IsPackable>false</IsPackable>
+    <NoWarn>$(NoWarn);CS1591</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
@@ -22,6 +23,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Max.Bot\Max.Bot.csproj" />
+    <ProjectReference Include="..\..\examples\Max.Bot.Examples\Max.Bot.Examples.csproj" />
   </ItemGroup>
 
 </Project>
