@@ -1,13 +1,24 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
+using Max.Bot.Types.Converters;
+using Max.Bot.Types.Enums;
 
 namespace Max.Bot.Types;
 
 /// <summary>
 /// Represents a button in an inline keyboard.
 /// </summary>
+[JsonConverter(typeof(InlineKeyboardButtonJsonConverter))]
 public class InlineKeyboardButton
 {
+    /// <summary>
+    /// Gets or sets the type of the button.
+    /// </summary>
+    /// <value>The button type (callback, link, message, etc.).</value>
+    [Required(ErrorMessage = "Button type is required.")]
+    [JsonPropertyName("type")]
+    public ButtonType Type { get; set; }
+
     /// <summary>
     /// Gets or sets the text displayed on the button.
     /// </summary>
@@ -18,20 +29,52 @@ public class InlineKeyboardButton
     public string Text { get; set; } = string.Empty;
 
     /// <summary>
-    /// Gets or sets the callback data sent when the button is pressed.
+    /// Gets or sets the payload data for callback or message buttons.
     /// </summary>
-    /// <value>The callback data, or null if not available.</value>
-    [StringLength(64, ErrorMessage = "Callback data must not exceed 64 characters.")]
-    [JsonPropertyName("callback_data")]
-    public string? CallbackData { get; set; }
+    /// <value>The payload data, or null if not applicable.</value>
+    [StringLength(64, ErrorMessage = "Payload must not exceed 64 characters.")]
+    [JsonPropertyName("payload")]
+    public string? Payload { get; set; }
 
     /// <summary>
-    /// Gets or sets the URL to open when the button is pressed.
+    /// Gets or sets the URL to open when the button is pressed (for link buttons).
     /// </summary>
-    /// <value>The URL, or null if not available.</value>
+    /// <value>The URL, or null if not applicable.</value>
     [Url(ErrorMessage = "URL must be a valid URL if provided.")]
     [StringLength(2048, ErrorMessage = "URL must not exceed 2048 characters.")]
     [JsonPropertyName("url")]
-    public string? Url { get; set; }
+    public string? Url
+    {
+        get => _url;
+        set
+        {
+            _url = value;
+            if (!string.IsNullOrEmpty(value) && Type == default(ButtonType))
+            {
+                Type = ButtonType.Link;
+            }
+        }
+    }
+
+    private string? _url;
+
+    /// <summary>
+    /// Gets or sets the callback data sent when the button is pressed.
+    /// This property is for backward compatibility and automatically sets Type to Callback and Payload.
+    /// </summary>
+    /// <value>The callback data, or null if not available.</value>
+    [JsonIgnore]
+    public string? CallbackData
+    {
+        get => Type == ButtonType.Callback ? Payload : null;
+        set
+        {
+            if (value != null)
+            {
+                Type = ButtonType.Callback;
+                Payload = value;
+            }
+        }
+    }
 }
 
