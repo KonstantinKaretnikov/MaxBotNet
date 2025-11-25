@@ -235,7 +235,33 @@ public class MessagesApiTests
     {
         // Arrange
         var messageId = "msg-123";
-        var response = new Response
+        var currentMessage = new Message
+        {
+            Id = 123,
+            Text = "Test message",
+            Chat = new Chat { Id = 456 },
+            Body = new MessageBody
+            {
+                Attachments = Array.Empty<Attachment>()
+            }
+        };
+
+        var getMessageResponse = new Response<Message>
+        {
+            Ok = true,
+            Result = currentMessage
+        };
+
+        var getMessageResponseJson = MaxJsonSerializer.Serialize(getMessageResponse);
+        _mockHttpClient
+            .Setup(x => x.SendAsyncRaw(
+                It.Is<MaxApiRequest>(req =>
+                    req.Method == HttpMethod.Get &&
+                    req.Endpoint == $"/messages/{messageId}"),
+                It.IsAny<CancellationToken>()))
+            .ReturnsAsync(getMessageResponseJson);
+
+        var editResponse = new Response
         {
             Success = true,
             Message = "Keyboard removed successfully"
@@ -251,7 +277,7 @@ public class MessagesApiTests
                     req.QueryParameters["message_id"] == messageId &&
                     req.Body != null),
                 It.IsAny<CancellationToken>()))
-            .ReturnsAsync(response);
+            .ReturnsAsync(editResponse);
 
         var messagesApi = new MessagesApi(_mockHttpClient.Object, _options);
 
@@ -276,7 +302,33 @@ public class MessagesApiTests
                 new InlineKeyboardButton { Text = "Button 1", Payload = "btn1", Type = ButtonType.Callback }
             }
         });
-        var response = new Response
+        var currentMessage = new Message
+        {
+            Id = 123,
+            Text = "Test message",
+            Chat = new Chat { Id = 456 },
+            Body = new MessageBody
+            {
+                Attachments = Array.Empty<Attachment>()
+            }
+        };
+
+        var getMessageResponse = new Response<Message>
+        {
+            Ok = true,
+            Result = currentMessage
+        };
+
+        var getMessageResponseJson = MaxJsonSerializer.Serialize(getMessageResponse);
+        _mockHttpClient
+            .Setup(x => x.SendAsyncRaw(
+                It.Is<MaxApiRequest>(req =>
+                    req.Method == HttpMethod.Get &&
+                    req.Endpoint == $"/messages/{messageId}"),
+                It.IsAny<CancellationToken>()))
+            .ReturnsAsync(getMessageResponseJson);
+
+        var editResponse = new Response
         {
             Success = true,
             Message = "Keyboard replaced successfully"
@@ -292,7 +344,7 @@ public class MessagesApiTests
                     req.QueryParameters["message_id"] == messageId &&
                     req.Body != null),
                 It.IsAny<CancellationToken>()))
-            .ReturnsAsync(response);
+            .ReturnsAsync(editResponse);
 
         var messagesApi = new MessagesApi(_mockHttpClient.Object, _options);
 
