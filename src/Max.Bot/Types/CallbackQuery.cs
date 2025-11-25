@@ -15,7 +15,7 @@ public class CallbackQuery
     /// This property maps to "callback_id" field from API.
     /// </summary>
     /// <value>The callback ID, or null if not available.</value>
-    [StringLength(64, ErrorMessage = "Callback ID must not exceed 64 characters.")]
+    [StringLength(512, ErrorMessage = "Callback ID must not exceed 512 characters.")]
     [JsonIgnore]
     public string? CallbackId { get; set; }
 
