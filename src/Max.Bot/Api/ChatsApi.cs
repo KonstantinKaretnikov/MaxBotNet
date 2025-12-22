@@ -163,7 +163,7 @@ internal class ChatsApi : BaseApi, IChatsApi
     public async Task<Response> RemoveChatAdminAsync(long chatId, long userId, CancellationToken cancellationToken = default)
     {
         ValidateChatId(chatId);
-        ValidateUserId(userId);
+        ValidateUserIdStrict(userId);
 
         var request = CreateRequest(HttpMethod.Delete, $"/chats/{chatId}/members/admins/{userId}");
         return await ExecuteRequestAsync<Response>(request, cancellationToken).ConfigureAwait(false);
@@ -202,7 +202,7 @@ internal class ChatsApi : BaseApi, IChatsApi
     public async Task<Response> RemoveChatMemberAsync(long chatId, long userId, CancellationToken cancellationToken = default)
     {
         ValidateChatId(chatId);
-        ValidateUserId(userId);
+        ValidateUserIdStrict(userId);
 
         var queryParams = new Dictionary<string, string?>
         {
@@ -213,4 +213,3 @@ internal class ChatsApi : BaseApi, IChatsApi
         return await ExecuteRequestAsync<Response>(request, cancellationToken).ConfigureAwait(false);
     }
 }
-

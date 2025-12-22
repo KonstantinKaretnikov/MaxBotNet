@@ -838,6 +838,7 @@ public class ChatsApiTests
     }
 
     [Theory]
+    [InlineData(0)]
     [InlineData(-1)]
     public async Task RemoveChatAdminAsync_ShouldThrowArgumentException_WhenUserIdIsInvalid(long userId)
     {
@@ -1062,6 +1063,7 @@ public class ChatsApiTests
     }
 
     [Theory]
+    [InlineData(0)]
     [InlineData(-1)]
     public async Task RemoveChatMemberAsync_ShouldThrowArgumentException_WhenUserIdIsInvalid(long userId)
     {

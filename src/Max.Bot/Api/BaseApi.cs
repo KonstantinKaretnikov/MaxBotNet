@@ -250,6 +250,21 @@ internal abstract class BaseApi
     }
 
     /// <summary>
+    /// Validates that a user ID is greater than zero (strict validation).
+    /// Use this for operations that require a specific user (e.g., removing admin/member).
+    /// </summary>
+    /// <param name="userId">The user ID to validate.</param>
+    /// <param name="paramName">The name of the parameter (default: "userId").</param>
+    /// <exception cref="ArgumentException">Thrown when userId is less than or equal to zero.</exception>
+    protected static void ValidateUserIdStrict(long userId, string paramName = "userId")
+    {
+        if (userId <= 0)
+        {
+            throw new ArgumentException("User ID must be greater than zero.", paramName);
+        }
+    }
+
+    /// <summary>
     /// Validates that a string parameter is not null or empty.
     /// </summary>
     /// <param name="value">The string value to validate.</param>
