@@ -88,6 +88,24 @@ public class AttachmentTests
     }
 
     [Fact]
+    public void LocationAttachment_ShouldDeserialize_FromJson()
+    {
+        // Arrange
+        var json = """{"type":"location","latitude":55.753460,"longitude":37.621602}""";
+
+        // Act
+        var attachment = MaxJsonSerializer.Deserialize<Attachment>(json);
+
+        // Assert
+        attachment.Should().NotBeNull();
+        attachment.Should().BeOfType<LocationAttachment>();
+        attachment.Type.Should().Be("location");
+        var documentAttachment = (LocationAttachment)attachment;
+        documentAttachment.Latitude.Should().Be(55.75346);
+        documentAttachment.Longitude.Should().Be(37.621602);
+    }
+
+    [Fact]
     public void PhotoAttachment_ShouldSerialize_ToJson()
     {
         // Arrange
@@ -133,6 +151,25 @@ public class AttachmentTests
         json.Should().Contain("\"type\":\"file\"");
         json.Should().Contain("\"video\"");
         json.Should().Contain("\"file_id\":\"video123\"");
+    }
+
+    [Fact]
+    public void LocationAttachment_ShouldSerialize_ToJson()
+    {
+        // Arrange
+        var attachment = new LocationAttachment
+        {
+            Latitude = 55.75346,
+            Longitude = 37.621602,
+        };
+
+        // Act
+        var json = MaxJsonSerializer.Serialize<Attachment>(attachment);
+
+        // Assert
+        json.Should().Contain("\"type\":\"location\"");
+        json.Should().Contain("\"latitude\":55.75346");
+        json.Should().Contain("\"longitude\":37.621602");
     }
 
     [Fact]

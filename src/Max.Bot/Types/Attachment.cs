@@ -91,6 +91,31 @@ public class DocumentAttachment : Attachment
 }
 
 /// <summary>
+/// Represents a document attachment.
+/// </summary>
+public class LocationAttachment : Attachment
+{
+    /// <summary>
+    /// Gets or sets the location's latitude.
+    /// </summary>
+    /// <value>The latitude value.</value>
+    [JsonPropertyName("latitude")]
+    public double Latitude { get; set; }
+
+    /// <summary>
+    /// Gets or sets the location's longitude.
+    /// </summary>
+    /// <value>The longitude value.</value>
+    [JsonPropertyName("longitude")]
+    public double Longitude { get; set; }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="LocationAttachment"/> class.
+    /// </summary>
+    public LocationAttachment() => Type = AttachmentTypeNames.Location;
+}
+
+/// <summary>
 /// Represents an inline keyboard attachment.
 /// </summary>
 public class InlineKeyboardAttachment : Attachment
@@ -120,5 +145,6 @@ internal static class AttachmentTypeNames
     public const string Image = "image";
     public const string File = "file";
     public const string InlineKeyboard = "inline_keyboard";
+    public const string Location = "location";
 }
 
