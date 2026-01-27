@@ -37,6 +37,24 @@ public class PhotoAttachment : Attachment
 }
 
 /// <summary>
+/// Represents an image attachment.
+/// </summary>
+public class ImageAttachment : Attachment
+{
+    /// <summary>
+    /// Gets or sets the image in this attachment.
+    /// </summary>
+    /// <value>The photo object.</value>
+    [JsonPropertyName("payload")]
+    public Image Payload { get; set; } = null!;
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="ImageAttachment"/> class.
+    /// </summary>
+    public ImageAttachment() => Type = AttachmentTypeNames.Image;
+}
+
+/// <summary>
 /// Represents a video attachment.
 /// </summary>
 public class VideoAttachment : Attachment

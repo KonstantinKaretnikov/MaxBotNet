@@ -61,7 +61,7 @@ public class AttachmentJsonConverter : JsonConverter<Attachment>
 
         if (IsType(typeString, AttachmentTypeNames.Image))
         {
-            return JsonSerializer.Deserialize<PhotoAttachment>(root.GetRawText(), options);
+            return JsonSerializer.Deserialize<ImageAttachment>(root.GetRawText(), options);
         }
 
         if (IsType(typeString, AttachmentTypeNames.File))
