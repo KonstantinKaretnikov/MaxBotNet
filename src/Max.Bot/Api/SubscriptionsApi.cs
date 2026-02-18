@@ -67,14 +67,19 @@ internal class SubscriptionsApi : BaseApi, ISubscriptionsApi
     }
 
     /// <inheritdoc />
-    public async Task<Response> DeleteWebhookAsync(DeleteWebhookRequest request, CancellationToken cancellationToken = default)
+    public async Task<Response> DeleteWebhookAsync(string url, CancellationToken cancellationToken = default)
     {
-        ArgumentNullException.ThrowIfNull(request);
+        ArgumentNullException.ThrowIfNull(url);
 
-        // DELETE /subscriptions expects JSON body with url parameter
-        var apiRequest = CreateRequest(HttpMethod.Delete, "/subscriptions", request);
+        var queryParams = new Dictionary<string, string?>
+        {
+            { "url", url }
+        };
+
+        var apiRequest = CreateRequest(HttpMethod.Delete, "/subscriptions", null, queryParams);
         return await ExecuteRequestAsync<Response>(apiRequest, cancellationToken).ConfigureAwait(false);
     }
+
 
     /// <inheritdoc />
     public async Task<GetUpdatesResponse> GetUpdatesAsync(GetUpdatesRequest request, CancellationToken cancellationToken = default)

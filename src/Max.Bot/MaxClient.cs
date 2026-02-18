@@ -224,9 +224,7 @@ public class MaxClient : IMaxBotApi, IUpdatePipeline
     public Task<Response> DeleteWebhookAsync(string url, CancellationToken cancellationToken = default)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(url);
-        return Subscriptions.DeleteWebhookAsync(
-            new DeleteWebhookRequest { Url = url },
-            cancellationToken);
+        return Subscriptions.DeleteWebhookAsync(url, cancellationToken);
     }
 }
 

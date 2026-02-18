@@ -172,11 +172,6 @@ public class SubscriptionsApiTests
     public async Task DeleteWebhookAsync_ShouldReturnResponse_WhenRequestSucceeds()
     {
         // Arrange
-        var request = new DeleteWebhookRequest
-        {
-            Url = "https://example.com/webhook"
-        };
-
         var response = new Response
         {
             Success = true,
@@ -188,15 +183,17 @@ public class SubscriptionsApiTests
                 It.Is<MaxApiRequest>(req =>
                     req.Method == HttpMethod.Delete &&
                     req.Endpoint == "/subscriptions" &&
-                    req.Body != null &&
-                    req.Body.GetType() == typeof(DeleteWebhookRequest)),
+                    req.Body == null &&
+                    req.QueryParameters != null &&
+                    req.QueryParameters.ContainsKey("url") &&
+                    req.QueryParameters["url"] == "https://example.com/webhook"),
                 It.IsAny<CancellationToken>()))
             .ReturnsAsync(response);
 
         var subscriptionsApi = new SubscriptionsApi(_mockHttpClient.Object, _options);
 
         // Act
-        var result = await subscriptionsApi.DeleteWebhookAsync(request);
+        var result = await subscriptionsApi.DeleteWebhookAsync("https://example.com/webhook");
 
         // Assert
         result.Should().NotBeNull();
@@ -205,36 +202,35 @@ public class SubscriptionsApiTests
     }
 
     [Fact]
-    public async Task DeleteWebhookAsync_ShouldSendUrlInBody_WhenRequestProvided()
+    public async Task DeleteWebhookAsync_ShouldSendUrlInQuery_WhenRequestProvided()
     {
         // Arrange
-        var request = new DeleteWebhookRequest
-        {
-            Url = "https://example.com/webhook"
-        };
-
         var response = new Response { Success = true };
 
         _mockHttpClient
             .Setup(x => x.SendAsync<Response>(
                 It.Is<MaxApiRequest>(req =>
                     req.Method == HttpMethod.Delete &&
-                    req.Body != null &&
-                    req.Body.GetType() == typeof(DeleteWebhookRequest)),
+                    req.Body == null &&
+                    req.QueryParameters != null &&
+                    req.QueryParameters.ContainsKey("url") &&
+                    req.QueryParameters["url"] == "https://example.com/webhook"),
                 It.IsAny<CancellationToken>()))
             .ReturnsAsync(response);
 
         var subscriptionsApi = new SubscriptionsApi(_mockHttpClient.Object, _options);
 
         // Act
-        await subscriptionsApi.DeleteWebhookAsync(request);
+        await subscriptionsApi.DeleteWebhookAsync("https://example.com/webhook");
 
         // Assert
         _mockHttpClient.Verify(x => x.SendAsync<Response>(
             It.Is<MaxApiRequest>(req =>
                 req.Method == HttpMethod.Delete &&
-                req.Body != null &&
-                req.Body.GetType() == typeof(DeleteWebhookRequest)),
+                req.Body == null &&
+                req.QueryParameters != null &&
+                req.QueryParameters.ContainsKey("url") &&
+                req.QueryParameters["url"] == "https://example.com/webhook"),
             It.IsAny<CancellationToken>()), Times.Once);
     }
 
