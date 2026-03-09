@@ -142,7 +142,25 @@ public class ContactAttachment : Attachment
     /// Gets or sets the contact in this attachment.
     /// </summary>
     [JsonPropertyName("payload")]
-    public Contact Payload { get; set; } = null!;
+    public Contact? Payload { get; set; }
+
+    /// <summary>
+    /// Gets the phone number from the contact.
+    /// Tries MaxInfo.PhoneNumber first, then parses from VcfInfo.
+    /// Returns null if Payload is null or no phone number is available.
+    /// </summary>
+    /// <value>The phone number, or null if not available.</value>
+    [JsonIgnore]
+    public string? PhoneNumber => ContactHelpers.GetPhoneNumber(Payload);
+
+    /// <summary>
+    /// Gets the full name from the contact.
+    /// Tries MaxInfo.FullName first, then parses from VcfInfo.
+    /// Returns null if Payload is null or no full name is available.
+    /// </summary>
+    /// <value>The full name, or null if not available.</value>
+    [JsonIgnore]
+    public string? FullName => ContactHelpers.GetFullName(Payload);
 }
 
 /// <summary>

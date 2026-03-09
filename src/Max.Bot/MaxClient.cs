@@ -183,7 +183,7 @@ public class MaxClient : IMaxBotApi, IUpdatePipeline
     /// <param name="cancellationToken">A cancellation token to cancel the operation.</param>
     /// <returns>A task that represents the asynchronous operation. The task result contains the response with success status.</returns>
     /// <exception cref="ArgumentException">Thrown when url is null, empty, or invalid.</exception>
-    public async Task<Response> ConfigureWebhookAsync(string url, List<string>? updateTypes = null, string? secret = null, CancellationToken cancellationToken = default)
+    public async Task<Response> ConfigureWebhookAsync(string url, List<UpdateType>? updateTypes = null, string? secret = null, CancellationToken cancellationToken = default)
     {
         if (string.IsNullOrWhiteSpace(url))
         {
@@ -225,6 +225,14 @@ public class MaxClient : IMaxBotApi, IUpdatePipeline
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(url);
         return Subscriptions.DeleteWebhookAsync(url, cancellationToken);
+    }
+
+    /// <summary>
+    /// Disposes the resources used by the MaxClient.
+    /// </summary>
+    public void Dispose()
+    {
+        _httpClient?.Dispose();
     }
 }
 

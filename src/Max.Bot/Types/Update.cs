@@ -2,6 +2,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 using Max.Bot.Types.Converters;
 using Max.Bot.Types.Enums;
+using Max.Bot.Types.Helpers;
 
 namespace Max.Bot.Types;
 
@@ -447,28 +448,6 @@ public class Update
     /// </summary>
     private static UpdateType ParseUpdateType(string? updateTypeRaw)
     {
-        if (string.IsNullOrEmpty(updateTypeRaw))
-            return UpdateType.Unknown;
-
-        return updateTypeRaw switch
-        {
-            "message_created" => UpdateType.MessageCreated,
-            "message_callback" => UpdateType.MessageCallback,
-            "message_edited" => UpdateType.MessageEdited,
-            "message_removed" => UpdateType.MessageRemoved,
-            "bot_added" => UpdateType.BotAdded,
-            "bot_removed" => UpdateType.BotRemoved,
-            "bot_started" => UpdateType.BotStarted,
-            "bot_stopped" => UpdateType.BotStopped,
-            "dialog_muted" => UpdateType.DialogMuted,
-            "dialog_unmuted" => UpdateType.DialogUnmuted,
-            "dialog_cleared" => UpdateType.DialogCleared,
-            "dialog_removed" => UpdateType.DialogRemoved,
-            "user_added" => UpdateType.UserAdded,
-            "user_removed" => UpdateType.UserRemoved,
-            "chat_title_changed" => UpdateType.ChatTitleChanged,
-            "message_chat_created" => UpdateType.MessageChatCreated,
-            _ => UpdateType.Unknown
-        };
+        return UpdateTypeHelper.FromString(updateTypeRaw);
     }
 }

@@ -14,7 +14,8 @@ public static class SampleRegistry
         ["echo"] = new EchoBotSample(),
         ["commands"] = new CommandBotSample(),
         ["keyboard"] = new KeyboardBotSample(),
-        ["files"] = new FileBotSample()
+        ["files"] = new FileBotSample(),
+        ["contact"] = new ContactBotSample()
     };
 
     /// <summary>

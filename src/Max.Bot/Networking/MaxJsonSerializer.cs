@@ -23,7 +23,8 @@ public static class MaxJsonSerializer
         {
             new JsonStringEnumConverter(JsonNamingPolicy.SnakeCaseLower),
             new UnixTimestampJsonConverter(),
-            new Types.Converters.AttachmentJsonConverter()
+            new Types.Converters.AttachmentJsonConverter(),
+            new Types.Converters.UpdateTypeJsonConverter()
         }
     };
 
@@ -61,13 +62,18 @@ public static class MaxJsonSerializer
 
         try
         {
-            return JsonSerializer.Deserialize<T>(json, Options) ?? throw new JsonException("Deserialization returned null.");
+            var result = JsonSerializer.Deserialize<T>(json, Options);
+            
+            // For nullable reference types (T?), null is valid. For non-nullable types, throw.
+            if (result == null && (!typeof(T).IsGenericType || 
+                (typeof(T).IsGenericType && typeof(T).GetGenericTypeDefinition() != typeof(Nullable<>))))
+            {
+                throw new JsonException("Deserialization returned null for non-nullable type.");
+            }
+            
+            return result!;
         }
-        catch (JsonException)
-        {
-            throw;
-        }
-        catch (Exception ex)
+        catch (JsonException ex)
         {
             throw new JsonException($"Error deserializing JSON: {ex.Message}", ex);
         }
@@ -90,13 +96,18 @@ public static class MaxJsonSerializer
 
         try
         {
-            return JsonSerializer.Deserialize<T>(stream, Options) ?? throw new JsonException("Deserialization returned null.");
+            var result = JsonSerializer.Deserialize<T>(stream, Options);
+            
+            // For nullable reference types (T?), null is valid. For non-nullable types, throw.
+            if (result == null && (!typeof(T).IsGenericType || 
+                (typeof(T).IsGenericType && typeof(T).GetGenericTypeDefinition() != typeof(Nullable<>))))
+            {
+                throw new JsonException("Deserialization returned null for non-nullable type.");
+            }
+            
+            return result!;
         }
-        catch (JsonException)
-        {
-            throw;
-        }
-        catch (Exception ex)
+        catch (JsonException ex)
         {
             throw new JsonException($"Error deserializing JSON from stream: {ex.Message}", ex);
         }

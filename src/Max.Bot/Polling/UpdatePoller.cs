@@ -27,7 +27,7 @@ public sealed class UpdatePoller : IAsyncDisposable
     private readonly object _lifecycleLock = new();
     private readonly List<Task> _inFlightHandlers = new();
     private readonly HashSet<UpdateType>? _handlingTypeFilter;
-    private readonly string[]? _typeQueryFilter;
+    private readonly List<UpdateType>? _typeQueryFilter;
     private readonly HashSet<string>? _allowedUsernames;
 
     private CancellationTokenSource? _cts;
@@ -147,6 +147,8 @@ public sealed class UpdatePoller : IAsyncDisposable
                 var response = await FetchUpdatesAsync(_marker, cancellationToken).ConfigureAwait(false);
                 _consecutiveErrors = 0;
 
+                long? lastProcessedUpdateId = null;
+
                 if (response.Updates?.Length > 0)
                 {
                     foreach (var update in response.Updates)
@@ -158,24 +160,34 @@ public sealed class UpdatePoller : IAsyncDisposable
 
                         if (!ShouldDispatch(update))
                         {
+                            lastProcessedUpdateId = update.UpdateId;
                             continue;
                         }
 
-                        await DispatchAsync(update, cancellationToken).ConfigureAwait(false);
+                        try
+                        {
+                            await DispatchAsync(update, cancellationToken).ConfigureAwait(false);
+                            lastProcessedUpdateId = update.UpdateId;
+                        }
+                        catch (Exception ex)
+                        {
+                            _logger?.LogError(ex, "Failed to dispatch update {UpdateId}. Skipping.", update.UpdateId);
+                            lastProcessedUpdateId = update.UpdateId;
+                        }
+                    }
+
+                    if (_options.Polling.PersistMarkers)
+                    {
+                        _marker = lastProcessedUpdateId ?? response.Marker ?? _marker;
+                    }
+                    else
+                    {
+                        _marker = lastProcessedUpdateId ?? response.Marker ?? _options.Polling.InitialMarker;
                     }
                 }
                 else
                 {
                     await Task.Delay(_options.Polling.IdleDelay, cancellationToken).ConfigureAwait(false);
-                }
-
-                if (_options.Polling.PersistMarkers)
-                {
-                    _marker = response.Marker ?? _marker;
-                }
-                else
-                {
-                    _marker = response.Marker ?? _options.Polling.InitialMarker;
                 }
             }
             catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested)
@@ -206,7 +218,7 @@ public sealed class UpdatePoller : IAsyncDisposable
             Limit = _options.Polling.BatchSize,
             Timeout = (int)Math.Round(_options.Polling.LongPollingTimeout.TotalSeconds),
             Marker = marker,
-            Types = _typeQueryFilter != null ? new List<string>(_typeQueryFilter) : null
+            Types = _typeQueryFilter
         };
 
         return await _subscriptionsApi.GetUpdatesAsync(request, cancellationToken).ConfigureAwait(false);
@@ -225,7 +237,15 @@ public sealed class UpdatePoller : IAsyncDisposable
             return;
         }
 
-        var handlerTask = HandleUpdateInternalAsync(update, cancellationToken);
+        var handlerTask = HandleUpdateInternalAsync(update, cancellationToken)
+            .ContinueWith(t =>
+            {
+                if (t.IsFaulted && t.Exception != null)
+                {
+                    _logger?.LogError(t.Exception, "Unhandled exception in update handler for update {UpdateId}.", update.UpdateId);
+                }
+            }, cancellationToken, TaskContinuationOptions.None, TaskScheduler.Default);
+
         _inFlightHandlers.Add(handlerTask);
 
         if (_inFlightHandlers.Count >= _options.Handling.MaxDegreeOfParallelism)
@@ -275,7 +295,7 @@ public sealed class UpdatePoller : IAsyncDisposable
         await Task.WhenAll(handlers.Select(task => task.WaitAsync(cancellationToken))).ConfigureAwait(false);
     }
 
-    private static string[]? BuildTypeQueryFilter(MaxBotOptions options)
+    private static List<UpdateType>? BuildTypeQueryFilter(MaxBotOptions options)
     {
         ICollection<UpdateType>? candidates = options.Polling.AllowedUpdateTypes is { Count: > 0 }
             ? options.Polling.AllowedUpdateTypes
@@ -286,10 +306,7 @@ public sealed class UpdatePoller : IAsyncDisposable
             return null;
         }
 
-        return candidates
-            .Select(value => ToSnakeCase(value.ToString()))
-            .Distinct(StringComparer.Ordinal)
-            .ToArray();
+        return candidates.Distinct().ToList();
     }
 
     private static string ToSnakeCase(string? value)

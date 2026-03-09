@@ -4,6 +4,7 @@
 // рџ’Ў Usage: Ensures chat endpoints follow API contract without legacy aliases.
 
 using System.Net.Http;
+using System.Text.Json;
 using FluentAssertions;
 using Max.Bot.Api;
 using Max.Bot.Configuration;
@@ -213,15 +214,16 @@ public class ChatsApiTests
             Ok = true,
             Result = expectedChat
         };
+        var responseJson = JsonSerializer.Serialize(response);
 
         _mockHttpClient
-            .Setup(x => x.SendAsync<Response<Chat>>(
+            .Setup(x => x.SendAsyncRaw(
                 It.Is<MaxApiRequest>(req =>
                     req.Method == HttpMethod.Patch &&
                     req.Endpoint == $"/chats/{chatId}" &&
                     req.Body != null),
                 It.IsAny<CancellationToken>()))
-            .ReturnsAsync(response);
+            .ReturnsAsync(responseJson);
 
         var chatsApi = new ChatsApi(_mockHttpClient.Object, _options);
 

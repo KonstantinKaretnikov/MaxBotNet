@@ -14,11 +14,12 @@ public class IMaxHttpClientTests
         // Arrange & Act
         var methods = typeof(IMaxHttpClient).GetMethods();
 
-        // Assert
-        methods.Should().HaveCount(3);
+        // Assert - Now includes Dispose from IDisposable
+        methods.Should().HaveCount(4);
         methods.Should().Contain(m => m.Name == "SendAsync" && m.IsGenericMethod);
         methods.Should().Contain(m => m.Name == "SendAsync" && !m.IsGenericMethod);
         methods.Should().Contain(m => m.Name == "SendAsyncRaw");
+        methods.Should().Contain(m => m.Name == "Dispose");
     }
 
     [Fact]

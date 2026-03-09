@@ -120,7 +120,7 @@ public class AttachmentTests
         attachment.Type.Should().Be("contact");
         var contactAttachment = (ContactAttachment)attachment;
         contactAttachment.Payload.Should().NotBeNull();
-        contactAttachment.Payload.VcfInfo.Should().Be("vcf contact here");
+        contactAttachment.Payload!.VcfInfo!.Should().Be("vcf contact here");
         contactAttachment.Payload.MaxInfo.Should().NotBeNull();
         contactAttachment.Payload.MaxInfo!.Id.Should().Be(123);
         contactAttachment.Payload.MaxInfo.Username.Should().Be("username here");
@@ -128,6 +128,104 @@ public class AttachmentTests
         contactAttachment.Payload.MaxInfo.LastName.Should().Be("last name here");
         contactAttachment.Payload.MaxInfo.IsBot.Should().Be(false);
         contactAttachment.Payload.MaxInfo.LastActivityTime.Should().Be(1769505660);
+    }
+
+    [Fact]
+    public void ContactAttachment_WithVcfPhoneNumber_ShouldExtractPhoneNumber()
+    {
+        // Arrange
+        var vcf = "BEGIN:VCARD\nVERSION:3.0\nFN:John Doe\nTEL:+1234567890\nEND:VCARD";
+        var json = "{\"type\":\"contact\",\"payload\":{\"vcf_info\":\"" + vcf + "\",\"max_info\":{\"user_id\":123}}}";
+
+        // Act
+        var attachment = MaxJsonSerializer.Deserialize<Attachment>(json);
+
+        // Assert
+        attachment.Should().NotBeNull();
+        attachment.Should().BeOfType<ContactAttachment>();
+        var contactAttachment = (ContactAttachment)attachment;
+        contactAttachment.PhoneNumber.Should().Be("+1234567890");
+        contactAttachment.FullName.Should().Be("John Doe");
+    }
+
+    [Fact]
+    public void ContactAttachment_WithMaxInfoPhoneNumber_ShouldUseMaxInfoPhoneNumber()
+    {
+        // Arrange
+        var json = """{"type":"contact","payload":{"vcf_info":"BEGIN:VCARD\nTEL:+9999999999\nEND:VCARD","max_info":{"user_id":123,"phone_number":"+1234567890","full_name":"John Doe"}}}""";
+
+        // Act
+        var attachment = MaxJsonSerializer.Deserialize<Attachment>(json);
+
+        // Assert
+        attachment.Should().NotBeNull();
+        attachment.Should().BeOfType<ContactAttachment>();
+        var contactAttachment = (ContactAttachment)attachment;
+        contactAttachment.PhoneNumber.Should().Be("+1234567890");
+        contactAttachment.FullName.Should().Be("John Doe");
+    }
+
+    [Fact]
+    public void ContactAttachment_WithNullPayload_ShouldReturnNullForPhoneNumber()
+    {
+        // Arrange
+        var attachment = new ContactAttachment
+        {
+            Payload = null
+        };
+
+        // Act & Assert
+        attachment.PhoneNumber.Should().BeNull();
+        attachment.FullName.Should().BeNull();
+    }
+
+    [Fact]
+    public void ContactAttachment_WithEmptyVcf_ShouldReturnNullForPhoneNumber()
+    {
+        // Arrange
+        var json = """{"type":"contact","payload":{"vcf_info":"BEGIN:VCARD\nVERSION:3.0\nEND:VCARD"}}""";
+
+        // Act
+        var attachment = MaxJsonSerializer.Deserialize<Attachment>(json);
+
+        // Assert
+        attachment.Should().NotBeNull();
+        var contactAttachment = (ContactAttachment)attachment;
+        contactAttachment.PhoneNumber.Should().BeNull();
+        contactAttachment.FullName.Should().BeNull();
+    }
+
+    [Fact]
+    public void ContactAttachment_WithFnParameters_ShouldExtractFullName()
+    {
+        // Arrange
+        var vcf = "BEGIN:VCARD\nVERSION:3.0\nFN;CHARSET=UTF-8:John Doe\nTEL:+1234567890\nEND:VCARD";
+        var json = "{\"type\":\"contact\",\"payload\":{\"vcf_info\":\"" + vcf + "\"}}";
+
+        // Act
+        var attachment = MaxJsonSerializer.Deserialize<Attachment>(json);
+
+        // Assert
+        attachment.Should().NotBeNull();
+        var contactAttachment = (ContactAttachment)attachment;
+        contactAttachment.FullName.Should().Be("John Doe");
+        contactAttachment.PhoneNumber.Should().Be("+1234567890");
+    }
+
+    [Fact]
+    public void ContactAttachment_WithEscapedCharacters_ShouldUnescape()
+    {
+        // Arrange
+        var vcf = "BEGIN:VCARD\nVERSION:3.0\nFN:John\\; Jr. Doe\nTEL:+1234567890\nEND:VCARD";
+        var json = "{\"type\":\"contact\",\"payload\":{\"vcf_info\":\"" + vcf + "\"}}";
+
+        // Act
+        var attachment = MaxJsonSerializer.Deserialize<Attachment>(json);
+
+        // Assert
+        attachment.Should().NotBeNull();
+        var contactAttachment = (ContactAttachment)attachment;
+        contactAttachment.FullName.Should().Be("John; Jr. Doe");
     }
 
     [Fact]

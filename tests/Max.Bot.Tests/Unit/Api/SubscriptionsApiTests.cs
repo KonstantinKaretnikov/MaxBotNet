@@ -90,7 +90,7 @@ public class SubscriptionsApiTests
         var request = new SetWebhookRequest
         {
             Url = "https://example.com/webhook",
-            UpdateTypes = new List<string> { "message_created" },
+            UpdateTypes = new List<UpdateType> { UpdateType.MessageCreated },
             Secret = "my-secret-123"
         };
 
@@ -243,7 +243,7 @@ public class SubscriptionsApiTests
             Limit = 50,
             Timeout = 30,
             Marker = 12345,
-            Types = new List<string> { "message_created", "message_callback" }
+            Types = new List<UpdateType> { UpdateType.MessageCreated, UpdateType.MessageCallback }
         };
 
         var expectedUpdates = new[]
@@ -343,6 +343,94 @@ public class SubscriptionsApiTests
                     req.Method == HttpMethod.Get &&
                     req.Endpoint == "/updates" &&
                     (req.QueryParameters == null || req.QueryParameters.Count == 0)),
+                It.IsAny<CancellationToken>()))
+            .ReturnsAsync(responseJson);
+
+        var subscriptionsApi = new SubscriptionsApi(_mockHttpClient.Object, _options);
+
+        // Act
+        await subscriptionsApi.GetUpdatesAsync(request);
+
+        // Assert
+        _mockHttpClient.Verify(x => x.SendAsyncRaw(
+            It.IsAny<MaxApiRequest>(),
+            It.IsAny<CancellationToken>()), Times.Once);
+    }
+
+    [Fact]
+    public async Task GetUpdatesAsync_ShouldSendSingleTypeInQueryParams()
+    {
+        // Arrange
+        var request = new GetUpdatesRequest
+        {
+            Limit = 10,
+            Types = new List<UpdateType> { UpdateType.MessageCreated }
+        };
+
+        var expectedResponse = new GetUpdatesResponse
+        {
+            Updates = Array.Empty<Update>(),
+            Marker = null
+        };
+
+        var wrappedResponse = new Response<GetUpdatesResponse>
+        {
+            Ok = true,
+            Result = expectedResponse
+        };
+
+        var responseJson = MaxJsonSerializer.Serialize(wrappedResponse);
+        _mockHttpClient
+            .Setup(x => x.SendAsyncRaw(
+                It.Is<MaxApiRequest>(req =>
+                    req.Method == HttpMethod.Get &&
+                    req.Endpoint == "/updates" &&
+                    req.QueryParameters != null &&
+                    req.QueryParameters.ContainsKey("types") &&
+                    req.QueryParameters["types"] == "message_created"),
+                It.IsAny<CancellationToken>()))
+            .ReturnsAsync(responseJson);
+
+        var subscriptionsApi = new SubscriptionsApi(_mockHttpClient.Object, _options);
+
+        // Act
+        await subscriptionsApi.GetUpdatesAsync(request);
+
+        // Assert
+        _mockHttpClient.Verify(x => x.SendAsyncRaw(
+            It.IsAny<MaxApiRequest>(),
+            It.IsAny<CancellationToken>()), Times.Once);
+    }
+
+    [Fact]
+    public async Task GetUpdatesAsync_ShouldSendEmptyTypesList_WhenEmpty()
+    {
+        // Arrange
+        var request = new GetUpdatesRequest
+        {
+            Limit = 10,
+            Types = new List<UpdateType>()
+        };
+
+        var expectedResponse = new GetUpdatesResponse
+        {
+            Updates = Array.Empty<Update>(),
+            Marker = null
+        };
+
+        var wrappedResponse = new Response<GetUpdatesResponse>
+        {
+            Ok = true,
+            Result = expectedResponse
+        };
+
+        var responseJson = MaxJsonSerializer.Serialize(wrappedResponse);
+        _mockHttpClient
+            .Setup(x => x.SendAsyncRaw(
+                It.Is<MaxApiRequest>(req =>
+                    req.Method == HttpMethod.Get &&
+                    req.Endpoint == "/updates" &&
+                    (req.QueryParameters == null || !req.QueryParameters.ContainsKey("types"))),
                 It.IsAny<CancellationToken>()))
             .ReturnsAsync(responseJson);
 

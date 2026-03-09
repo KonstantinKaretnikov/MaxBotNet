@@ -36,9 +36,9 @@ public class GetUpdatesRequest
     /// <summary>
     /// Gets or sets the list of update types to filter.
     /// </summary>
-    /// <value>The list of update types (e.g., "message_created", "message_callback"), or null to get all types.</value>
+    /// <value>The list of update types (e.g., <see cref="UpdateType.MessageCreated"/>, <see cref="UpdateType.MessageCallback"/>), or null to get all types.</value>
     [JsonPropertyName("types")]
-    public List<string>? Types { get; set; }
+    public List<UpdateType>? Types { get; set; }
 }
 
 

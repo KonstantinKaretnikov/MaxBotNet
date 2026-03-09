@@ -1,10 +1,12 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using Max.Bot.Configuration;
 using Max.Bot.Networking;
 using Max.Bot.Types;
+using Max.Bot.Types.Helpers;
 using Max.Bot.Types.Requests;
 
 namespace Max.Bot.Api;
@@ -45,7 +47,7 @@ internal class SubscriptionsApi : BaseApi, ISubscriptionsApi
 
         var response = MaxJsonSerializer.Deserialize<SubscriptionsResponse>(responseBody);
 
-        if (response == null || response.Subscriptions == null)
+        if (response == null)
         {
             throw new Exceptions.MaxApiException(
                 "API request failed. The response indicates an error or contains no data.",
@@ -53,7 +55,8 @@ internal class SubscriptionsApi : BaseApi, ISubscriptionsApi
                 System.Net.HttpStatusCode.BadRequest);
         }
 
-        return response.Subscriptions;
+        // Empty array is valid (no subscriptions), null means error
+        return response.Subscriptions ?? [];
     }
 
     /// <inheritdoc />
@@ -105,7 +108,7 @@ internal class SubscriptionsApi : BaseApi, ISubscriptionsApi
 
         if (request.Types != null && request.Types.Count > 0)
         {
-            queryParams["types"] = string.Join(",", request.Types);
+            queryParams["types"] = string.Join(",", request.Types.Select(UpdateTypeHelper.ToStringValue));
         }
 
         var apiRequest = CreateRequest(HttpMethod.Get, "/updates", null, queryParams.Count > 0 ? queryParams : null);

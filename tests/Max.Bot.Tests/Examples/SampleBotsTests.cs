@@ -113,7 +113,7 @@ public class SampleBotsTests
                 harness.FilesMock.Setup(f => f.UploadFileAsync(UploadType.File, It.IsAny<CancellationToken>()))
                     .ReturnsAsync(new UploadResponse { Url = "https://upload" });
                 harness.FilesMock.Setup(f => f.UploadFileDataAsync("https://upload", It.IsAny<Stream>(), It.IsAny<string>(), It.IsAny<CancellationToken>()))
-                    .ReturnsAsync(new { token = "file-token" });
+                    .ReturnsAsync(new FileUploadResult { Token = "file-token" });
 
                 harness.MessagesMock.Setup(m => m.SendMessageWithAttachmentAsync(It.IsAny<AttachmentRequest>(), It.IsAny<long?>(), It.IsAny<long?>(), It.IsAny<string?>(), It.IsAny<bool?>(), It.IsAny<bool?>(), It.IsAny<TextFormat?>(), It.IsAny<CancellationToken>()))
                     .ReturnsAsync(new Message());

@@ -2,6 +2,7 @@ using System.Text.Json;
 using FluentAssertions;
 using Max.Bot.Networking;
 using Max.Bot.Types;
+using Max.Bot.Types.Enums;
 using Max.Bot.Types.Requests;
 using Xunit;
 
@@ -19,7 +20,7 @@ public class WebhookSerializationTests
         var request = new SetWebhookRequest
         {
             Url = "https://example.com/webhook",
-            UpdateTypes = new List<string> { "message_created", "bot_started" },
+            UpdateTypes = new List<UpdateType> { UpdateType.MessageCreated, UpdateType.BotStarted },
             Secret = "my-secret-123"
         };
 
@@ -47,7 +48,7 @@ public class WebhookSerializationTests
         request.Should().NotBeNull();
         request!.Url.Should().Be("https://example.com/webhook");
         request.UpdateTypes.Should().NotBeNull();
-        request.UpdateTypes!.Should().Contain("message_created");
+        request.UpdateTypes!.Should().Contain(UpdateType.MessageCreated);
         request.Secret.Should().Be("my-secret");
     }
 
@@ -94,7 +95,7 @@ public class WebhookSerializationTests
         subscription.Should().NotBeNull();
         subscription!.Url.Should().Be("https://example.com/webhook");
         subscription.UpdateTypes.Should().NotBeNull();
-        subscription.UpdateTypes!.Should().Contain("message_created");
+        subscription.UpdateTypes!.Should().Contain(UpdateType.MessageCreated);
         subscription.Secret.Should().Be("my-secret");
         subscription.CreatedAt.Should().NotBeNull();
         subscription.UpdatedAt.Should().NotBeNull();
@@ -107,7 +108,7 @@ public class WebhookSerializationTests
         var subscription = new Subscription
         {
             Url = "https://example.com/webhook",
-            UpdateTypes = new List<string> { "message_created" },
+            UpdateTypes = new List<UpdateType> { UpdateType.MessageCreated },
             Secret = "my-secret",
             CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc),
             UpdatedAt = new DateTime(2024, 1, 2, 0, 0, 0, DateTimeKind.Utc)
@@ -122,6 +123,89 @@ public class WebhookSerializationTests
         json.Should().Contain("\"secret\":\"my-secret\"");
         json.Should().Contain("\"created_at\"");
         json.Should().Contain("\"updated_at\"");
+    }
+
+    [Fact]
+    public void SetWebhookRequest_ShouldHandle_NullUpdateTypes()
+    {
+        // Arrange
+        var request = new SetWebhookRequest
+        {
+            Url = "https://example.com/webhook",
+            UpdateTypes = null,
+            Secret = "my-secret"
+        };
+
+        // Act
+        var json = MaxJsonSerializer.Serialize(request);
+
+        // Assert
+        json.Should().Contain("\"url\":\"https://example.com/webhook\"");
+        json.Should().Contain("\"secret\":\"my-secret\"");
+        // update_types should be omitted when null
+        json.Should().NotContain("update_types");
+    }
+
+    [Fact]
+    public void SetWebhookRequest_ShouldHandle_EmptyUpdateTypes()
+    {
+        // Arrange
+        var request = new SetWebhookRequest
+        {
+            Url = "https://example.com/webhook",
+            UpdateTypes = new List<UpdateType>(),
+            Secret = "my-secret"
+        };
+
+        // Act
+        var json = MaxJsonSerializer.Serialize(request);
+
+        // Assert
+        json.Should().Contain("\"url\":\"https://example.com/webhook\"");
+        json.Should().Contain("\"update_types\":[]");
+    }
+
+    [Fact]
+    public void Subscription_RoundTrip_AllUpdateTypes()
+    {
+        // Arrange
+        var allUpdateTypes = Enum.GetValues<UpdateType>().Where(x => x != UpdateType.Unknown).ToList();
+        var subscription = new Subscription
+        {
+            Url = "https://example.com/webhook",
+            UpdateTypes = allUpdateTypes,
+            Secret = "my-secret"
+        };
+
+        // Act
+        var json = MaxJsonSerializer.Serialize(subscription);
+        var deserialized = MaxJsonSerializer.Deserialize<Subscription>(json);
+
+        // Assert
+        deserialized.Should().NotBeNull();
+        deserialized!.UpdateTypes.Should().HaveCount(allUpdateTypes.Count);
+        deserialized.UpdateTypes!.Should().BeEquivalentTo(allUpdateTypes);
+    }
+
+    [Fact]
+    public void SetWebhookRequest_RoundTrip_AllUpdateTypes()
+    {
+        // Arrange
+        var allUpdateTypes = Enum.GetValues<UpdateType>().Where(x => x != UpdateType.Unknown).ToList();
+        var request = new SetWebhookRequest
+        {
+            Url = "https://example.com/webhook",
+            UpdateTypes = allUpdateTypes
+        };
+
+        // Act
+        var json = MaxJsonSerializer.Serialize(request);
+        var deserialized = MaxJsonSerializer.Deserialize<SetWebhookRequest>(json);
+
+        // Assert
+        deserialized.Should().NotBeNull();
+        deserialized!.UpdateTypes.Should().HaveCount(allUpdateTypes.Count);
+        deserialized.UpdateTypes!.Should().BeEquivalentTo(allUpdateTypes);
     }
 }
 

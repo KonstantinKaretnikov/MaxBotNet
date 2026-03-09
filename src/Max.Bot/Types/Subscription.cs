@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using Max.Bot.Types.Enums;
 
 namespace Max.Bot.Types;
 
@@ -21,7 +22,7 @@ public class Subscription
     /// </summary>
     /// <value>List of update types.</value>
     [JsonPropertyName("update_types")]
-    public List<string>? UpdateTypes { get; set; }
+    public List<UpdateType>? UpdateTypes { get; set; }
 
     /// <summary>
     /// Gets or sets the secret that is sent in the X-Max-Bot-Api-Secret header.

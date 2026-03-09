@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
+using Max.Bot.Types.Enums;
 
 namespace Max.Bot.Types.Requests;
 
@@ -21,9 +22,9 @@ public class SetWebhookRequest
     /// <summary>
     /// Gets or sets the list of update types to receive.
     /// </summary>
-    /// <value>List of update types (e.g., "message_created", "bot_started").</value>
+    /// <value>List of update types (e.g., <see cref="UpdateType.MessageCreated"/>, <see cref="UpdateType.BotStarted"/>).</value>
     [JsonPropertyName("update_types")]
-    public List<string>? UpdateTypes { get; set; }
+    public List<UpdateType>? UpdateTypes { get; set; }
 
     /// <summary>
     /// Gets or sets the secret that will be sent in the X-Max-Bot-Api-Secret header.

@@ -1,3 +1,4 @@
+using System.Text.Json;
 using System.Net;
 using System.Net.Http;
 using FluentAssertions;
@@ -238,8 +239,10 @@ public class BotApiTests
             Result = expectedUser
         };
 
+        var responseJson = JsonSerializer.Serialize(response);
+
         _mockHttpClient
-            .Setup(x => x.SendAsync<Response<User>>(
+            .Setup(x => x.SendAsyncRaw(
                 It.Is<MaxApiRequest>(req =>
                     req.Method == HttpMethod.Patch &&
                     req.Endpoint == "/me" &&
@@ -248,7 +251,7 @@ public class BotApiTests
                     req.Headers["Authorization"] == "test-token-123" &&
                     req.Body != null),
                 It.IsAny<CancellationToken>()))
-            .ReturnsAsync(response);
+            .ReturnsAsync(responseJson);
 
         var botApi = new BotApi(_mockHttpClient.Object, _options);
 
@@ -261,7 +264,7 @@ public class BotApiTests
         result.Username.Should().Be(expectedUser.Username);
 
         _mockHttpClient.Verify(
-            x => x.SendAsync<Response<User>>(
+            x => x.SendAsyncRaw(
                 It.Is<MaxApiRequest>(req =>
                     req.Method == HttpMethod.Patch &&
                     req.Endpoint == "/me"),
@@ -294,18 +297,19 @@ public class BotApiTests
 
         var expectedUser = new User { Id = 123456 };
         var response = new Response<User> { Ok = true, Result = expectedUser };
+        var responseJson = JsonSerializer.Serialize(response);
 
         UpdateBotInfoRequest? capturedRequest = null;
 
         _mockHttpClient
-            .Setup(x => x.SendAsync<Response<User>>(
+            .Setup(x => x.SendAsyncRaw(
                 It.IsAny<MaxApiRequest>(),
                 It.IsAny<CancellationToken>()))
             .Callback<MaxApiRequest, CancellationToken>((req, _) =>
             {
                 capturedRequest = req.Body as UpdateBotInfoRequest;
             })
-            .ReturnsAsync(response);
+            .ReturnsAsync(responseJson);
 
         var botApi = new BotApi(_mockHttpClient.Object, _options);
 
@@ -329,12 +333,13 @@ public class BotApiTests
 
         var expectedUser = new User { Id = 123456 };
         var response = new Response<User> { Ok = true, Result = expectedUser };
+        var responseJson = JsonSerializer.Serialize(response);
 
         _mockHttpClient
-            .Setup(x => x.SendAsync<Response<User>>(
+            .Setup(x => x.SendAsyncRaw(
                 It.IsAny<MaxApiRequest>(),
                 It.IsAny<CancellationToken>()))
-            .ReturnsAsync(response);
+            .ReturnsAsync(responseJson);
 
         var botApi = new BotApi(_mockHttpClient.Object, _options);
 

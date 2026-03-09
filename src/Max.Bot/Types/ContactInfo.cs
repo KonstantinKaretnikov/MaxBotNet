@@ -48,4 +48,35 @@ public class ContactInfo
     /// <value>The timestamp of the user's last activity.</value>
     [JsonPropertyName("last_activity_time")]
     public long? LastActivityTime { get; set; }
+
+    /// <summary>
+    /// Gets or sets the phone number of the contact.
+    /// Note: This field may not be directly returned by the API.
+    /// Use <see cref="ContactHelpers.GetPhoneNumber"/> to extract from vcf_info if needed.
+    /// </summary>
+    /// <value>The phone number of the contact, or null if not available.</value>
+    [JsonPropertyName("phone_number")]
+    public string? PhoneNumber { get; set; }
+
+    /// <summary>
+    /// Gets or sets the full name of the contact.
+    /// Note: This field may not be directly returned by the API.
+    /// Use <see cref="ContactHelpers.GetFullName"/> to extract from vcf_info if needed.
+    /// </summary>
+    /// <value>The full name of the contact, or null if not available.</value>
+    [JsonPropertyName("full_name")]
+    public string? FullName { get; set; }
+
+    /// <summary>
+    /// Gets or sets the name of the contact (alternative to full_name).
+    /// This is an alias for <see cref="FullName"/> to support different API response formats.
+    /// </summary>
+    /// <value>The name of the contact, or null if not available.</value>
+    [JsonPropertyName("name")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public string? Name
+    {
+        get => FullName;
+        set => FullName = value;
+    }
 }

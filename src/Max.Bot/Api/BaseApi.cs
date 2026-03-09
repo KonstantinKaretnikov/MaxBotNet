@@ -1,5 +1,6 @@
 using System.Net;
 using System.Net.Http;
+using System.Text.Json;
 using Max.Bot.Configuration;
 using Max.Bot.Exceptions;
 using Max.Bot.Networking;
@@ -95,8 +96,8 @@ internal abstract class BaseApi
         MaxApiRequest request,
         CancellationToken cancellationToken = default)
     {
-        // Special case: if T is Response, deserialize directly without Response<T> wrapper
-        if (typeof(T) == typeof(Response) || typeof(T).IsAssignableFrom(typeof(Response)))
+        // Special case: if T is Response (simple response without Result wrapper), deserialize directly
+        if (typeof(T) == typeof(Response))
         {
             var simpleResponse = await HttpClient.SendAsync<Response>(request, cancellationToken).ConfigureAwait(false);
             if (simpleResponse == null)
@@ -109,9 +110,8 @@ internal abstract class BaseApi
             return (T)(object)simpleResponse;
         }
 
-        // * For GET requests: use SendAsyncRaw to get the response body once, then try both deserialization strategies
-        // This prevents making multiple HTTP calls and losing updates (especially important for /updates endpoint)
-        // For POST/PUT/PATCH: use normal SendAsync to avoid duplicate actions
+        // For all requests: use SendAsyncRaw to get the response body once, then try both deserialization strategies.
+        // This prevents making duplicate HTTP calls (which could cause duplicate actions for POST/PUT/PATCH).
         if (request.Method == HttpMethod.Get)
         {
             // Get raw response body once
@@ -128,13 +128,13 @@ internal abstract class BaseApi
             // Try deserializing as Response<T> first
             try
             {
-                var wrappedResponse = MaxJsonSerializer.Deserialize<Response<T>>(responseBody);
-                if (wrappedResponse != null && wrappedResponse.Ok && wrappedResponse.Result != null)
+                var wrappedApiResponse = MaxJsonSerializer.Deserialize<Response<T>>(responseBody);
+                if (wrappedApiResponse != null && wrappedApiResponse.Ok && wrappedApiResponse.Result != null)
                 {
-                    return wrappedResponse.Result;
+                    return wrappedApiResponse.Result;
                 }
             }
-            catch
+            catch (JsonException)
             {
                 // Response<T> format doesn't match, try direct deserialization
             }
@@ -148,12 +148,13 @@ internal abstract class BaseApi
                     return directResponse;
                 }
             }
-            catch
+            catch (JsonException ex)
             {
                 throw new MaxApiException(
                     $"API request failed. The response could not be deserialized as Response<T> or T. Response body: {responseBody}",
                     null,
-                    HttpStatusCode.BadRequest);
+                    HttpStatusCode.BadRequest,
+                    ex);
             }
 
             throw new MaxApiException(
@@ -162,61 +163,54 @@ internal abstract class BaseApi
                 HttpStatusCode.BadRequest);
         }
 
-        // For POST/PUT/PATCH: use normal SendAsync (only one attempt to avoid duplicate actions)
+        // For POST/PUT/PATCH: use SendAsyncRaw to get response body once, then try both strategies (same as GET).
+        // This avoids duplicate HTTP calls that could cause duplicate actions.
+        var postResponseBody = await HttpClient.SendAsyncRaw(request, cancellationToken).ConfigureAwait(false);
+
+        if (string.IsNullOrWhiteSpace(postResponseBody))
+        {
+            throw new MaxApiException(
+                "API request returned empty response body.",
+                null,
+                HttpStatusCode.BadRequest);
+        }
+
+        // Try deserializing as Response<T> first
         try
         {
-            // First try: deserialize as Response<T>
-            var wrappedResponse = await HttpClient.SendAsync<Response<T>>(request, cancellationToken).ConfigureAwait(false);
-            if (wrappedResponse == null)
+            var wrappedApiResponse = MaxJsonSerializer.Deserialize<Response<T>>(postResponseBody);
+            if (wrappedApiResponse != null && wrappedApiResponse.Ok && wrappedApiResponse.Result != null)
             {
-                throw new MaxApiException(
-                    "API request returned null response.",
-                    null,
-                    HttpStatusCode.BadRequest);
+                return wrappedApiResponse.Result;
             }
-            if (wrappedResponse.Ok && wrappedResponse.Result != null)
-            {
-                return wrappedResponse.Result;
-            }
-
-            // If Response<T> deserialized but ok=false or result=null, this is an API error
-            throw new MaxApiException(
-                $"API request returned unsuccessful response. Ok={wrappedResponse.Ok}, Result is null.",
-                null,
-                HttpStatusCode.BadRequest);
         }
-        catch (Exceptions.MaxNetworkException ex) when (ex.Message.Contains("Failed to deserialize"))
+        catch (JsonException)
         {
-            // For POST/PUT/PATCH, if Response<T> format doesn't match, try direct deserialization
-            // But only if we can extract the response body from the exception
-            // This is a fallback for endpoints that return data directly (like POST /messages)
-            try
-            {
-                var directResponse = await HttpClient.SendAsync<T>(request, cancellationToken).ConfigureAwait(false);
-                if (directResponse != null)
-                {
-                    return directResponse;
-                }
-            }
-            catch
-            {
-                // If direct deserialization also fails, rethrow original exception
-                throw new MaxApiException(
-                    "API request failed. The response could not be deserialized as Response<T> or T.",
-                    null,
-                    HttpStatusCode.BadRequest);
-            }
+            // Response<T> format doesn't match, try direct deserialization
+        }
 
-            throw new MaxApiException(
-                "API request failed. The response could not be deserialized as Response<T> or T.",
-                null,
-                HttpStatusCode.BadRequest);
-        }
-        catch (Exceptions.MaxApiException)
+        // Try direct deserialization as T (for endpoints that return data directly without Response<T> wrapper)
+        try
         {
-            // Re-throw API exceptions as-is
-            throw;
+            var directResponse = MaxJsonSerializer.Deserialize<T>(postResponseBody);
+            if (directResponse != null)
+            {
+                return directResponse;
+            }
         }
+        catch (JsonException ex)
+        {
+            throw new MaxApiException(
+                $"API request failed. The response could not be deserialized as Response<T> or T. Response body: {postResponseBody}",
+                null,
+                HttpStatusCode.BadRequest,
+                ex);
+        }
+
+        throw new MaxApiException(
+            "API request failed. The response could not be deserialized as Response<T> or T.",
+            null,
+            HttpStatusCode.BadRequest);
     }
 
     /// <summary>

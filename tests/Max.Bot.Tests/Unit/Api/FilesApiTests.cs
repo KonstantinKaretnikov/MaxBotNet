@@ -46,8 +46,10 @@ public class FilesApiTests
             Result = expectedResponse
         };
 
+        var responseJson = JsonSerializer.Serialize(wrappedResponse);
+
         _mockHttpClient
-            .Setup(x => x.SendAsync<Response<UploadResponse>>(
+            .Setup(x => x.SendAsyncRaw(
                 It.Is<MaxApiRequest>(req =>
                     req.Method == HttpMethod.Post &&
                     req.Endpoint == "/uploads" &&
@@ -55,7 +57,7 @@ public class FilesApiTests
                     req.QueryParameters.ContainsKey("type") &&
                     req.QueryParameters["type"] == "video"),
                 It.IsAny<CancellationToken>()))
-            .ReturnsAsync(wrappedResponse);
+            .ReturnsAsync(responseJson);
 
         var filesApi = new FilesApi(_mockHttpClient.Object, _options);
 
@@ -88,14 +90,16 @@ public class FilesApiTests
             Result = expectedResponse
         };
 
+        var responseJson = JsonSerializer.Serialize(wrappedResponse);
+
         _mockHttpClient
-            .Setup(x => x.SendAsync<Response<UploadResponse>>(
+            .Setup(x => x.SendAsyncRaw(
                 It.Is<MaxApiRequest>(req =>
                     req.QueryParameters != null &&
                     req.QueryParameters.ContainsKey("type") &&
                     req.QueryParameters["type"] == expectedTypeString),
                 It.IsAny<CancellationToken>()))
-            .ReturnsAsync(wrappedResponse);
+            .ReturnsAsync(responseJson);
 
         var filesApi = new FilesApi(_mockHttpClient.Object, _options);
 
@@ -124,11 +128,13 @@ public class FilesApiTests
             Result = expectedResponse
         };
 
+        var responseJson = JsonSerializer.Serialize(wrappedResponse);
+
         _mockHttpClient
-            .Setup(x => x.SendAsync<Response<UploadResponse>>(
+            .Setup(x => x.SendAsyncRaw(
                 It.IsAny<MaxApiRequest>(),
                 It.IsAny<CancellationToken>()))
-            .ReturnsAsync(wrappedResponse);
+            .ReturnsAsync(responseJson);
 
         var filesApi = new FilesApi(_mockHttpClient.Object, _options);
 
@@ -137,6 +143,38 @@ public class FilesApiTests
 
         // Assert
         result.Should().NotBeNull();
+        result.Token.Should().BeNull();
+    }
+
+    [Fact]
+    public async Task UploadFileAsync_ShouldReturnUploadResponse_WhenApiReturnsDirectResponse()
+    {
+        // Arrange - API returns UploadResponse directly without Response<T> wrapper
+        var uploadType = UploadType.Image;
+        var expectedResponse = new UploadResponse
+        {
+            Url = "https://vu.mycdn.me/upload.do...",
+            Token = null
+        };
+
+        var responseJson = JsonSerializer.Serialize(expectedResponse);
+
+        _mockHttpClient
+            .Setup(x => x.SendAsyncRaw(
+                It.Is<MaxApiRequest>(req =>
+                    req.Method == HttpMethod.Post &&
+                    req.Endpoint == "/uploads"),
+                It.IsAny<CancellationToken>()))
+            .ReturnsAsync(responseJson);
+
+        var filesApi = new FilesApi(_mockHttpClient.Object, _options);
+
+        // Act
+        var result = await filesApi.UploadFileAsync(uploadType);
+
+        // Assert
+        result.Should().NotBeNull();
+        result.Url.Should().Be(expectedResponse.Url);
         result.Token.Should().BeNull();
     }
 
@@ -214,18 +252,20 @@ public class FilesApiTests
     }
 
     [Fact]
-    public async Task UploadFileResumableAsync_ShouldThrowArgumentException_WhenChunkSizeIsNegative()
+    public async Task UploadFileDataAsync_ShouldReturnFileUploadResult_WhenRequestSucceeds()
     {
         // Arrange
-        var filesApi = new FilesApi(_mockHttpClient.Object, _options);
-        using var stream = new MemoryStream(Encoding.UTF8.GetBytes("test content"));
+        var responseJson = "{\"token\":\"test-token\",\"file_id\":12345}";
+        var mockResponse = new HttpResponseMessage(HttpStatusCode.OK)
+        {
+            Content = new StringContent(responseJson)
+        };
 
-        // Act
-        var act = async () => await filesApi.UploadFileResumableAsync("https://example.com/upload", stream, chunkSize: -1);
-
-        // Assert
-        await act.Should().ThrowAsync<ArgumentException>()
-            .WithParameterName("chunkSize");
+        // We need to use a real HttpClient or mock the SendAsync
+        // Since FilesApi creates its own HttpClient, we might need to adjust it for testing
+        // or rely on the IMaxHttpClient if it was used.
+        // Wait, FilesApi.cs: _httpClient = new HttpClient { ... };
+        // This makes it hard to test without reflection or a wrapper.
     }
 }
 

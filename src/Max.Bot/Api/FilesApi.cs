@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
 using System.Threading;
@@ -17,43 +18,15 @@ namespace Max.Bot.Api;
 /// <summary>
 /// Implementation of file-related API methods.
 /// </summary>
-internal class FilesApi : BaseApi, IFilesApi, IDisposable
+internal class FilesApi : BaseApi, IFilesApi
 {
-    private readonly HttpClient _httpClient;
-    private bool _disposed;
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="FilesApi"/> class.
-    /// </summary>
-    /// <param name="httpClient">The HTTP client to use for requests.</param>
-    /// <param name="options">The bot options containing token and base URL.</param>
-    /// <exception cref="ArgumentNullException">Thrown when httpClient or options is null.</exception>
     public FilesApi(IMaxHttpClient httpClient, MaxBotOptions options)
         : base(httpClient, options)
     {
-        // Create a separate HttpClient for file uploads (may need to upload to external URLs)
-        _httpClient = new HttpClient
-        {
-            Timeout = TimeSpan.FromMinutes(10) // Longer timeout for file uploads
-        };
     }
 
-    /// <summary>
-    /// Disposes the resources used by this instance.
-    /// </summary>
-    public void Dispose()
-    {
-        if (!_disposed)
-        {
-            _httpClient?.Dispose();
-            _disposed = true;
-        }
-    }
-
-    /// <inheritdoc />
     public async Task<UploadResponse> UploadFileAsync(UploadType uploadType, CancellationToken cancellationToken = default)
     {
-        // Map enum to API string value
         var typeString = uploadType switch
         {
             UploadType.Image => "image",
@@ -63,152 +36,127 @@ internal class FilesApi : BaseApi, IFilesApi, IDisposable
             _ => throw new ArgumentException($"Unknown upload type: {uploadType}", nameof(uploadType))
         };
 
-        var queryParams = new Dictionary<string, string?>
-        {
-            { "type", typeString }
-        };
-
+        var queryParams = new Dictionary<string, string?> { { "type", typeString } };
         var request = CreateRequest(HttpMethod.Post, "/uploads", null, queryParams);
         return await ExecuteRequestAsync<UploadResponse>(request, cancellationToken).ConfigureAwait(false);
     }
 
-    /// <inheritdoc />
-    public async Task<object> UploadFileDataAsync(string uploadUrl, Stream fileStream, string? fileName = null, CancellationToken cancellationToken = default)
+    public async Task<FileUploadResult> UploadFileDataAsync(string uploadUrl, Stream fileStream, string? fileName = null, CancellationToken cancellationToken = default)
     {
-        if (string.IsNullOrWhiteSpace(uploadUrl))
-        {
-            throw new ArgumentException("Upload URL cannot be null or empty.", nameof(uploadUrl));
-        }
-
+        ValidateNotEmpty(uploadUrl, nameof(uploadUrl));
         ArgumentNullException.ThrowIfNull(fileStream);
 
-        if (!fileStream.CanRead)
+        // Factory to create content for retries
+        HttpContent CreateContent()
         {
-            throw new ArgumentException("File stream must be readable.", nameof(fileStream));
+            var content = new MultipartFormDataContent();
+            var streamContent = new StreamContent(new NonDisposingStreamWrapper(fileStream));
+            streamContent.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
+            content.Add(streamContent, "data", fileName ?? "file");
+            return content;
         }
 
-        using var content = new MultipartFormDataContent();
-        var streamContent = new StreamContent(fileStream);
+        var responseBody = await HttpClient.SendAsyncRaw(uploadUrl, CreateContent, cancellationToken).ConfigureAwait(false);
+        return ParseUploadResponse(responseBody);
+    }
 
-        // Set content type if not already set
-        if (string.IsNullOrEmpty(streamContent.Headers.ContentType?.MediaType))
+    public async Task<FileUploadResult> UploadFileResumableAsync(string uploadUrl, Stream fileStream, long chunkSize = 1024 * 1024, string? fileName = null, CancellationToken cancellationToken = default)
+    {
+        ValidateNotEmpty(uploadUrl, nameof(uploadUrl));
+        ArgumentNullException.ThrowIfNull(fileStream);
+        if (chunkSize <= 0) throw new ArgumentException("Chunk size must be greater than zero.", nameof(chunkSize));
+
+        var buffer = new byte[chunkSize];
+        long totalBytesRead = 0;
+        long fileLength = fileStream.CanSeek ? fileStream.Length : -1;
+
+        while (true)
         {
-            streamContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/octet-stream");
+            var bytesRead = await fileStream.ReadAsync(buffer, 0, (int)chunkSize, cancellationToken).ConfigureAwait(false);
+            if (bytesRead == 0) break;
+
+            var currentOffset = totalBytesRead;
+            var currentBytesRead = bytesRead;
+
+            HttpContent CreateChunkContent()
+            {
+                var content = new ByteArrayContent(buffer, 0, currentBytesRead);
+                content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
+                // Always send Content-Range. If length unknown, use '*'
+                content.Headers.ContentRange = fileLength > 0 
+                    ? new ContentRangeHeaderValue(currentOffset, currentOffset + currentBytesRead - 1, fileLength)
+                    : new ContentRangeHeaderValue(currentOffset, currentOffset + currentBytesRead - 1);
+                return content;
+            }
+
+            var responseBody = await HttpClient.SendAsyncRaw(uploadUrl, CreateChunkContent, cancellationToken).ConfigureAwait(false);
+            
+            totalBytesRead += bytesRead;
+
+            // Check if this chunk's response already contains the token/result
+            var result = ParseUploadResponse(responseBody);
+            if (result.Token != null || result.FileId != null || (result.Photos != null && result.Photos.Count > 0))
+            {
+                return result;
+            }
+
+            if (fileLength > 0 && totalBytesRead >= fileLength) break;
         }
 
-        content.Add(streamContent, "data", fileName ?? "file");
+        // Finalize: If we reached here without a token, try a final GET
+        var finalResponseBody = await HttpClient.SendAsyncRaw(uploadUrl, null, cancellationToken, HttpMethod.Get).ConfigureAwait(false);
+        return ParseUploadResponse(finalResponseBody);
+    }
 
-        using var request = new HttpRequestMessage(HttpMethod.Post, uploadUrl)
-        {
-            Content = content
-        };
-
-        using var response = await _httpClient.SendAsync(request, cancellationToken).ConfigureAwait(false);
-
-        if (!response.IsSuccessStatusCode)
-        {
-            var errorBody = await response.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
-            throw new MaxApiException(
-                $"File upload failed with status {response.StatusCode}: {errorBody}",
-                null,
-                response.StatusCode);
-        }
-
-        var responseBody = await response.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
-
-        // Try to deserialize as JSON (for video/audio token or image/file response)
+    private static FileUploadResult ParseUploadResponse(string responseBody)
+    {
+        if (string.IsNullOrWhiteSpace(responseBody)) return new FileUploadResult();
         try
         {
-            return JsonSerializer.Deserialize<object>(responseBody) ?? new { };
+            return JsonSerializer.Deserialize<FileUploadResult>(responseBody, MaxJsonSerializer.Options) ?? new FileUploadResult();
         }
         catch (JsonException)
         {
-            // If not JSON, return as string
-            return responseBody;
+            // Fallback for raw token strings
+            return new FileUploadResult { Token = responseBody };
         }
     }
 
-    /// <inheritdoc />
-    public async Task<object> UploadFileResumableAsync(string uploadUrl, Stream fileStream, long chunkSize = 1024 * 1024, string? fileName = null, CancellationToken cancellationToken = default)
+    private sealed class NonDisposingStreamWrapper : Stream
     {
-        if (string.IsNullOrWhiteSpace(uploadUrl))
-        {
-            throw new ArgumentException("Upload URL cannot be null or empty.", nameof(uploadUrl));
-        }
+        private readonly Stream _inner;
+        public NonDisposingStreamWrapper(Stream inner) => _inner = inner ?? throw new ArgumentNullException(nameof(inner));
 
-        ArgumentNullException.ThrowIfNull(fileStream);
+        public override bool CanRead => _inner.CanRead;
+        public override bool CanSeek => _inner.CanSeek;
+        public override bool CanWrite => _inner.CanWrite;
+        public override bool CanTimeout => _inner.CanTimeout;
+        public override long Length => _inner.Length;
+        public override long Position { get => _inner.Position; set => _inner.Position = value; }
+        public override int ReadTimeout { get => _inner.ReadTimeout; set => _inner.ReadTimeout = value; }
+        public override int WriteTimeout { get => _inner.WriteTimeout; set => _inner.WriteTimeout = value; }
 
-        if (!fileStream.CanRead)
-        {
-            throw new ArgumentException("File stream must be readable.", nameof(fileStream));
-        }
+        public override void Flush() => _inner.Flush();
+        public override Task FlushAsync(CancellationToken cancellationToken) => _inner.FlushAsync(cancellationToken);
 
-        if (chunkSize <= 0)
-        {
-            throw new ArgumentException("Chunk size must be greater than zero.", nameof(chunkSize));
-        }
+        public override int Read(byte[] buffer, int offset, int count) => _inner.Read(buffer, offset, count);
+        public override int Read(Span<byte> buffer) => _inner.Read(buffer);
+        public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken) => _inner.ReadAsync(buffer, offset, count, cancellationToken);
+        public override ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken = default) => _inner.ReadAsync(buffer, cancellationToken);
+        public override int ReadByte() => _inner.ReadByte();
 
-        // For resumable upload, we need to upload in chunks
-        // This is a simplified implementation - full resumable upload would require
-        // tracking upload progress and resuming from last successful chunk
-        var buffer = new byte[chunkSize];
-        long totalBytesRead = 0;
-        var fileLength = fileStream.Length;
+        public override long Seek(long offset, SeekOrigin origin) => _inner.Seek(offset, origin);
+        public override void SetLength(long value) => _inner.SetLength(value);
 
-        while (totalBytesRead < fileLength)
-        {
-            var bytesRead = await fileStream.ReadAsync(buffer, 0, (int)Math.Min(chunkSize, fileLength - totalBytesRead), cancellationToken).ConfigureAwait(false);
+        public override void Write(byte[] buffer, int offset, int count) => _inner.Write(buffer, offset, count);
+        public override void Write(ReadOnlySpan<byte> buffer) => _inner.Write(buffer);
+        public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken) => _inner.WriteAsync(buffer, offset, count, cancellationToken);
+        public override ValueTask WriteAsync(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken = default) => _inner.WriteAsync(buffer, cancellationToken);
+        public override void WriteByte(byte value) => _inner.WriteByte(value);
 
-            if (bytesRead == 0)
-            {
-                break;
-            }
+        public override Task CopyToAsync(Stream destination, int bufferSize, CancellationToken cancellationToken) => _inner.CopyToAsync(destination, bufferSize, cancellationToken);
 
-            using var chunkStream = new MemoryStream(buffer, 0, bytesRead);
-            using var content = new MultipartFormDataContent();
-            var streamContent = new StreamContent(chunkStream);
-
-            streamContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/octet-stream");
-            content.Add(streamContent, "data", fileName ?? "file");
-
-            // Add range headers for resumable upload
-            using var request = new HttpRequestMessage(HttpMethod.Post, uploadUrl)
-            {
-                Content = content
-            };
-
-            request.Headers.Add("Content-Range", $"bytes {totalBytesRead}-{totalBytesRead + bytesRead - 1}/{fileLength}");
-
-            using var response = await _httpClient.SendAsync(request, cancellationToken).ConfigureAwait(false);
-
-            if (!response.IsSuccessStatusCode)
-            {
-                var errorBody = await response.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
-                throw new MaxApiException(
-                    $"File upload chunk failed with status {response.StatusCode}: {errorBody}",
-                    null,
-                    response.StatusCode);
-            }
-
-            totalBytesRead += bytesRead;
-        }
-
-        // Read final response (should contain token for video/audio or result for image/file)
-        var finalResponse = await _httpClient.GetAsync(uploadUrl, cancellationToken).ConfigureAwait(false);
-        if (finalResponse.IsSuccessStatusCode)
-        {
-            var responseBody = await finalResponse.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
-            try
-            {
-                return JsonSerializer.Deserialize<object>(responseBody) ?? new { };
-            }
-            catch (JsonException)
-            {
-                return responseBody;
-            }
-        }
-
-        return new { };
+        protected override void Dispose(bool disposing) { base.Dispose(disposing); }
+        public override ValueTask DisposeAsync() => ValueTask.CompletedTask;
     }
 }
-

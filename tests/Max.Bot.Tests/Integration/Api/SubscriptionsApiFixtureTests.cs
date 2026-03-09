@@ -42,7 +42,7 @@ public class SubscriptionsApiFixtureTests
             Limit = 25,
             Timeout = 30,
             Marker = 9001,
-            Types = new List<string> { "message_created", "message_callback" }
+            Types = new List<UpdateType> { UpdateType.MessageCreated, UpdateType.MessageCallback }
         };
 
         var response = await api.GetUpdatesAsync(request);

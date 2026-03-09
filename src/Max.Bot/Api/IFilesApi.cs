@@ -29,12 +29,12 @@ public interface IFilesApi
     /// <param name="fileStream">The stream containing the file data to upload.</param>
     /// <param name="fileName">The name of the file. Optional.</param>
     /// <param name="cancellationToken">A cancellation token to cancel the operation.</param>
-    /// <returns>A task that represents the asynchronous operation. The task result contains the upload result (token for video/audio or JSON object for image/file).</returns>
+    /// <returns>A task that represents the asynchronous operation. The task result contains the upload result with token or file identifier.</returns>
     /// <exception cref="ArgumentException">Thrown when uploadUrl is null or empty, or fileStream is not readable.</exception>
     /// <exception cref="ArgumentNullException">Thrown when fileStream is null.</exception>
     /// <exception cref="Max.Bot.Exceptions.MaxApiException">Thrown when the upload fails.</exception>
     /// <exception cref="Max.Bot.Exceptions.MaxNetworkException">Thrown when a network error occurs.</exception>
-    Task<object> UploadFileDataAsync(string uploadUrl, Stream fileStream, string? fileName = null, CancellationToken cancellationToken = default);
+    Task<FileUploadResult> UploadFileDataAsync(string uploadUrl, Stream fileStream, string? fileName = null, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Uploads file data in chunks using resumable upload method.
@@ -44,11 +44,11 @@ public interface IFilesApi
     /// <param name="chunkSize">The size of each chunk in bytes. Default is 1 MB.</param>
     /// <param name="fileName">The name of the file. Optional.</param>
     /// <param name="cancellationToken">A cancellation token to cancel the operation.</param>
-    /// <returns>A task that represents the asynchronous operation. The task result contains the upload result (token for video/audio or JSON object for image/file).</returns>
+    /// <returns>A task that represents the asynchronous operation. The task result contains the upload result with token or file identifier.</returns>
     /// <exception cref="ArgumentException">Thrown when uploadUrl is null or empty, fileStream is not readable, or chunkSize is less than or equal to zero.</exception>
     /// <exception cref="ArgumentNullException">Thrown when fileStream is null.</exception>
     /// <exception cref="Max.Bot.Exceptions.MaxApiException">Thrown when the upload fails.</exception>
     /// <exception cref="Max.Bot.Exceptions.MaxNetworkException">Thrown when a network error occurs.</exception>
-    Task<object> UploadFileResumableAsync(string uploadUrl, Stream fileStream, long chunkSize = 1024 * 1024, string? fileName = null, CancellationToken cancellationToken = default);
+    Task<FileUploadResult> UploadFileResumableAsync(string uploadUrl, Stream fileStream, long chunkSize = 1024 * 1024, string? fileName = null, CancellationToken cancellationToken = default);
 }
 
